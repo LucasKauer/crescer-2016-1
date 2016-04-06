@@ -7,7 +7,7 @@ public class Elfo {
     }
     
     public Elfo(String nome, int flechas) {
-        this.nome = nome;
+        this(nome);
         this.flechas = flechas;
     }
 
