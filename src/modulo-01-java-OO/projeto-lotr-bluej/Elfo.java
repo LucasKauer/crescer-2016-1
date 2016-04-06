@@ -6,6 +6,18 @@ public class Elfo {
         this.nome = nome;
     }
     
+    public int getFlechas() {
+        return this.flechas;
+    }
+    
+    public int getExperiencia() {
+        return this.experiencia;
+    }
+    
+    public String getNome() {
+        return this.nome;
+    }
+    
     public void atirarFlecha(Dwarf dwarf) {
         experiencia++;
         flechas--;

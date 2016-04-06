@@ -20,6 +20,10 @@ public class Dwarf {
         return nome;
     }
     
+    public int getVida() {
+        return this.vida;
+    }
+    
     // Declarar um objeto:
     // Dwarf gimli = null;
     
