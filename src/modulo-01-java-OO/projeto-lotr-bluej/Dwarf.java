@@ -28,6 +28,11 @@ public class Dwarf {
     public Status getStatus() {
         return this.status;
     }
+    
+    /*private void tirarVida() {
+        this.vida -= 10;
+    }*/
+    
     // Declarar um objeto:
     // Dwarf gimli = null;
     
