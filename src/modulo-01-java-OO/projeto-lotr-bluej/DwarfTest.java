@@ -59,13 +59,33 @@ public class DwarfTest
         d1.perderVida();
         d1.perderVida();
         d1.perderVida();
-        assertEquals(-10, d1.getVida());
+        assertEquals(0, d1.getVida());
         assertEquals(Status.MORTO, d1.getStatus());
     }
     
     @Test
     public void dwarfPerde110() {
         Dwarf d1 = new Dwarf("Balin");
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        d1.perderVida();
+        assertEquals(0, d1.getVida());
+        assertEquals(Status.MORTO, d1.getStatus());
+    }
+    
+    @Test
+    public void dwarfPerde130() {
+        Dwarf d1 = new Dwarf("Balin");
+        d1.perderVida();
+        d1.perderVida();
         d1.perderVida();
         d1.perderVida();
         d1.perderVida();
