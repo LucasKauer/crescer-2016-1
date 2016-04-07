@@ -29,16 +29,28 @@ public class ElfoTest {
 
     @Test
     public void elfoAtiraFlechaEmSeteDwarves() {
+        // Arrange
         Elfo arwen = new Elfo("Arwen");
-        arwen.atirarFlecha(new Dwarf("Soneca"));
-        arwen.atirarFlecha(new Dwarf("Dengoso"));
-        arwen.atirarFlecha(new Dwarf("Feliz"));
-        arwen.atirarFlecha(new Dwarf("Atchim"));
-        arwen.atirarFlecha(new Dwarf("Mestre"));
-        arwen.atirarFlecha(new Dwarf("Zangado"));
-        arwen.atirarFlecha(new Dwarf("Dunga"));
-        assertEquals(35, arwen.getFlechas());
-        assertEquals(7, arwen.getExperiencia());
+        Dwarf d1 = new Dwarf("Soneca");
+        Dwarf d2 = new Dwarf("Dengoso");
+        Dwarf d3 = new Dwarf("Feliz");
+        Dwarf d4 = new Dwarf("Atchim");
+        Dwarf d5 = new Dwarf("Mestre");
+        Dwarf d6 = new Dwarf("Zangado");
+        Dwarf d7 = new Dwarf("Dunga");
+        int flechasEsperadas = 35;
+        int experienciaEsperada = 7;
+        // Act
+        arwen.atirarFlecha(d1);
+        arwen.atirarFlecha(d2);
+        arwen.atirarFlecha(d3);
+        arwen.atirarFlecha(d4);
+        arwen.atirarFlecha(d5);
+        arwen.atirarFlecha(d6);
+        arwen.atirarFlecha(d7);
+        // Assert
+        assertEquals(flechasEsperadas, arwen.getFlechas());
+        assertEquals(experienciaEsperada, arwen.getExperiencia());
     }
 
     @Test
