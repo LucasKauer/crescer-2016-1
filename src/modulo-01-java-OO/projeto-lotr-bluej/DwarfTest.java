@@ -61,4 +61,10 @@ public class DwarfTest
         d1.perderVida();
         assertEquals(-10, d1.getVida());
     }
+    
+    @Test
+    public void dwarfNasceVivo() {
+        Dwarf dwarf = new Dwarf("Balin");
+        assertEquals(Status.VIVO, dwarf.getStatus());
+    }
 }

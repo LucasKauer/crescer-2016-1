@@ -1,6 +1,7 @@
 public class Dwarf {
     private int vida = 110;
     private String nome;
+    private Status status = Status.VIVO;
     
     public Dwarf(String nome) {
         this.vida = 110;
@@ -24,6 +25,9 @@ public class Dwarf {
         return this.vida;
     }
     
+    public Status getStatus() {
+        return this.status;
+    }
     // Declarar um objeto:
     // Dwarf gimli = null;
     
