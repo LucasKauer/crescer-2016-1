@@ -52,6 +52,28 @@ public class InventarioTest {
         assertEquals(1001, inventario.getItens().get(0).getQuantidade());
         assertEquals(1001, inventario.getItens().get(1).getQuantidade());
     }
+    
+    @Test
+    public void getItemComMaiorQuantidadeComInventarioVazio() {
+        Inventario inventario = new Inventario();
+        assertNull(inventario.getItemComMaiorQuantidade());
+    }
+    
+    @Test
+    public void getItemComMaiorQuantidadeComApenasUmItem() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(2, "Semente dos Deuses"));
+        assertEquals(2, inventario.getItemComMaiorQuantidade().getQuantidade());
+    }
+    
+    @Test
+    public void getItemComMaiorQuantidadeComTresItens() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(15, "Flechas de gelo"));
+        inventario.adicionarItem(new Item(20, "Lembas"));
+        inventario.adicionarItem(new Item(2, "Semente dos Deuses"));
+        assertEquals(20, inventario.getItemComMaiorQuantidade().getQuantidade());
+    }
 }
 
 

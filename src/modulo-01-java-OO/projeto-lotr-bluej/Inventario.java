@@ -50,6 +50,19 @@ public class Inventario {
             item.aumentar1000Unidades();
         }
     }
+    
+    public Item getItemComMaiorQuantidade() {
+        int indice = 0, maiorQtdAteEntao = 0;
+        for (int i = 0; i < this.itens.size(); i++) {
+            int qtdAtual = this.itens.get(i).getQuantidade();
+            if (qtdAtual > maiorQtdAteEntao) {
+                indice = i;
+                maiorQtdAteEntao = qtdAtual;
+            }
+        }
+        
+        return !this.itens.isEmpty() ? this.itens.get(indice) : null;
+    }
 }
 
 
