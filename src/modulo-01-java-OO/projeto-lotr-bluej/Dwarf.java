@@ -60,6 +60,22 @@ public class Dwarf {
     public void perderItem(Item item) {
         this.inventario.removerItem(item);
     }
+    
+    public double getNumeroSorte() {
+        double resultado = 101.;
+
+        if (dataNascimento.ehBissexto() && this.vida >= 80 && this.vida <= 90) {
+            resultado *= -33.0;
+        }
+
+        if (!dataNascimento.ehBissexto() &&
+        this.nome != null &&
+        (this.nome.equals("Seixas") || this.nome.equals("Meireles"))) {
+            resultado = resultado * 33 % 100;
+        }
+
+        return resultado;
+    }
 
     /*private void tirarVida() {
     this.vida -= 10;

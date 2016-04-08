@@ -159,5 +159,38 @@ public class DwarfTest
         Dwarf dwarf = new Dwarf("André Nunin", null);
         assertNull(dwarf.getDataNascimento());
     }
+    
+    @Test
+    public void gerarNumeroAnoBissextoVidaEntre80e90() {
+        // Arrange
+        Dwarf fabricin = new Dwarf("Fabricin", new DataTerceiraEra(01, 01, 2016));
+        fabricin.perderVida();
+        fabricin.perderVida();
+        fabricin.perderVida();
+        // Act
+        double resultado = fabricin.getNumeroSorte();
+        // Assert
+        assertEquals(-3333.0, resultado, 0.00001);
+    }
+    
+    @Test
+    public void gerarNumeroAnoNaoBissextoNomeSeixas() {
+        // Arrange
+        Dwarf seixas = new Dwarf("Seixas", new DataTerceiraEra(01, 01, 2015));
+        // Act
+        double resultado = seixas.getNumeroSorte();
+        // Assert
+        assertEquals(33.0, resultado, 0.00001);
+    }
+    
+    @Test
+    public void gerarNumeroSemEntrarNasCondicoes() {
+        // Arrange
+        Dwarf balin = new Dwarf("Balin");
+        // Act
+        double resultado = balin.getNumeroSorte();
+        // Assert
+        assertEquals(101.0, resultado, 0.00001);
+    }
 
 }
