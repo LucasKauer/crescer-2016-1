@@ -44,6 +44,12 @@ public class Inventario {
         
         return !this.itens.isEmpty() ? descricao.substring(0, descricao.length() - 1) : descricao;
     }
+    
+    public void aumentar1000UnidadesPorItem() {
+        for (Item item : this.itens) {
+            item.aumentar1000Unidades();
+        }
+    }
 }
 
 

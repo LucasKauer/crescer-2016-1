@@ -27,6 +27,31 @@ public class InventarioTest {
         String obtido = inventario.getDescricoesItens();
         assertEquals("Espada,Escudo", obtido);
     }
+    
+    @Test
+    public void aumentar1000UnidadesComInventarioVazio() {
+        Inventario inventario = new Inventario();
+        inventario.aumentar1000UnidadesPorItem();
+        assertTrue(inventario.getItens().isEmpty());
+    }
+    
+    @Test
+    public void aumentar1000UnidadesComApenasUmItem() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(1, "Espada"));
+        inventario.aumentar1000UnidadesPorItem();
+        assertEquals(1001, inventario.getItens().get(0).getQuantidade());
+    }
+    
+    @Test
+    public void aumentar1000UnidadesComApenasDoisItens() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(1, "Espada Z"));
+        inventario.adicionarItem(new Item(1, "Nuvem voadora"));
+        inventario.aumentar1000UnidadesPorItem();
+        assertEquals(1001, inventario.getItens().get(0).getQuantidade());
+        assertEquals(1001, inventario.getItens().get(1).getQuantidade());
+    }
 }
 
 
