@@ -1,5 +1,7 @@
 ## Projeto CRESCER 2016/1
 
+[Página com informações sobre o projeto](http://www.cwi.com.br/empresa/crescer)
+
 #### Índice de conteúdos
 
 1. [Ementa](https://github.com/CWISoftware/crescer-2016-1/wiki/Ementa)
