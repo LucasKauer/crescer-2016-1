@@ -221,5 +221,27 @@ public class DwarfTest
         assertEquals(100, dwarf.getVida(), 0.0);
         assertEquals(0, dwarf.getExperiencia());
     }
+    
+    @Test
+    public void dwarfLeprechaunComSorte() {
+        Dwarf dwarf = new Dwarf("Pete 'O Murphy", new DataTerceiraEra(1, 1, 2000));
+        dwarf.adicionarItem(new Item(5, "Pint de Guinness"));
+        dwarf.perderVida();
+        dwarf.perderVida();
+        dwarf.perderVida();
+        dwarf.tentarSorte();
+        assertEquals(1005, dwarf.getInventario().getItens().get(0).getQuantidade());
+    }
+    
+    @Test
+    public void dwarfLeprechaunSemSorte() {
+        Dwarf dwarf = new Dwarf("Pete 'O Murphy");
+        dwarf.adicionarItem(new Item(5, "Pint de Guinness"));
+        dwarf.perderVida();
+        dwarf.perderVida();
+        dwarf.perderVida();
+        dwarf.tentarSorte();
+        assertEquals(5, dwarf.getInventario().getItens().get(0).getQuantidade());
+    }
 
 }

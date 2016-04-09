@@ -86,6 +86,14 @@ public class Dwarf {
 
         return resultado;
     }
+    
+    public void tentarSorte() {
+        double numero = getNumeroSorte();
+        
+        if (numero == -3333.0) {
+            this.inventario.aumentar1000UnidadesPorItem();
+        }
+    }
 
     /*private void tirarVida() {
     this.vida -= 10;
