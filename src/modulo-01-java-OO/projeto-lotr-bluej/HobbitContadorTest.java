@@ -45,4 +45,25 @@ public class HobbitContadorTest {
         HobbitContador contador = new HobbitContador();
         assertEquals(0, contador.calcularDiferenca(arrayDePares));
     }
+    
+    @Test
+    public void obterMaiorMultiploDeTresAte10() {
+        assertEquals(9, new HobbitContador().obterMaiorMultiploDeTresAte(10));
+    }
+    
+    @Test
+    public void obterMaiorMultiploDeTresAte12() {
+        assertEquals(12, new HobbitContador().obterMaiorMultiploDeTresAte(12));
+    }
+    
+    @Test
+    public void obterMaiorMultiploDeTresAte1() {
+        assertEquals(0, new HobbitContador().obterMaiorMultiploDeTresAte(1));
+    }
+    
+    @Test
+    public void obterMaiorMultiploDeTresAte0() {
+        assertEquals(0, new HobbitContador().obterMaiorMultiploDeTresAte(0));
+    }
+    
 }

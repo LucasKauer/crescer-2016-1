@@ -13,6 +13,20 @@ public class HobbitContador {
         return somaProdutos - somaMmc;
     }
 
+    public int obterMaiorMultiploDeTresAte(int numero) {
+
+        int maior = 0;
+        
+        for (int i = numero; i >= 0; i--) {
+            if (i % 3 == 0) {
+                maior = i;
+                break;
+            }
+        }
+
+        return maior;
+    }
+
     private class CalculadorMmc {
         private int a, b;
         private CalculadorMmc(int a, int b) {
