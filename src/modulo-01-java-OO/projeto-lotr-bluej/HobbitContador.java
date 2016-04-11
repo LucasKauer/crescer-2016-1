@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class HobbitContador {
     public int calcularDiferenca(ArrayList<ArrayList<Integer>> pares) {
@@ -28,6 +28,20 @@ public class HobbitContador {
         }
 
         return maior;
+    }
+
+    // ao chegar no break o algoritmo parava de adicionar números na lista.
+    // na verdade nenhum múltiplo de 3 era adicionado na lista.
+    public ArrayList<Integer> obterMultiplosDeTresAte(int numero) {
+        ArrayList<Integer> multiplos = new ArrayList<>(Arrays.asList(0));
+
+        for (int i = 1; i <= numero; i++) {
+            if (i % 3 == 0) {
+                multiplos.add(i);
+            }
+        }
+
+        return multiplos;
     }
 
     private class CalculadorMmc {
