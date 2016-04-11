@@ -20,10 +20,12 @@ public class Item {
     }
     
     public void aumentarProporcionalQuantidade() {
-        int resultado = 0;
+        /*int resultado = 0;
         for (int i = 1; i <= this.quantidade; i++) {
             resultado += i;
-        }
+        }*/
+        // Usando PA:
+        int resultado = this.quantidade * (this.quantidade + 1) / 2;
         this.quantidade += (resultado * 1000);
     }
 }
