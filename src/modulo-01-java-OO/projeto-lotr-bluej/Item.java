@@ -1,3 +1,4 @@
+// Define classe Item
 public class Item {
     private int quantidade;
     private String descricao;
