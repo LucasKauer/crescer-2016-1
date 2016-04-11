@@ -9,6 +9,9 @@ public class HobbitContador {
             somaProdutos += a * b;
             somaMmc += new CalculadorMmc(a, b).calcular();
         }
+        
+        // Fluent APIs
+        // crieUmHobbit().depoisCalculeMmc().depoisEnviePorEmail();
 
         return somaProdutos - somaMmc;
     }
