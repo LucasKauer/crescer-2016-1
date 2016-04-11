@@ -120,6 +120,31 @@ public class InventarioTest {
         // Assert
         assertEquals(0, mochila.getItens().size());
     }
+    
+    @Test
+    public void aumentarUnidadesProporcionalComInventarioVazio() {
+        Inventario inventario = new Inventario();
+        inventario.aumentarUnidadesProporcionalQuantidadePorItem();
+        assertTrue(inventario.getItens().isEmpty());
+    }
+
+    @Test
+    public void aumentarUnidadesProporcionalComApenasUmItem() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(1, "Espada"));
+        inventario.aumentarUnidadesProporcionalQuantidadePorItem();
+        assertEquals(1001, inventario.getItens().get(0).getQuantidade());
+    }
+
+    @Test
+    public void aumentarUnidadesProporcionalComApenasDoisItens() {
+        Inventario inventario = new Inventario();
+        inventario.adicionarItem(new Item(2, "Balas .44"));
+        inventario.adicionarItem(new Item(3, "Balas .12"));
+        inventario.aumentarUnidadesProporcionalQuantidadePorItem();
+        assertEquals(3002, inventario.getItens().get(0).getQuantidade());
+        assertEquals(6003, inventario.getItens().get(1).getQuantidade());
+    }
 }
 
 

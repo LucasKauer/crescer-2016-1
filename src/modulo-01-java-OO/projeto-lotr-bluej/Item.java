@@ -18,4 +18,12 @@ public class Item {
     public void aumentar1000Unidades() {
         this.quantidade += 1000;
     }
+    
+    public void aumentarProporcionalQuantidade() {
+        int resultado = 0;
+        for (int i = 1; i <= this.quantidade; i++) {
+            resultado += i;
+        }
+        this.quantidade += (resultado * 1000);
+    }
 }

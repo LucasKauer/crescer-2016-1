@@ -50,6 +50,12 @@ public class Inventario {
             item.aumentar1000Unidades();
         }
     }
+    
+    public void aumentarUnidadesProporcionalQuantidadePorItem() {
+        for (Item item : this.itens) {
+            item.aumentarProporcionalQuantidade();
+        }
+    }
 
     public Item getItemComMaiorQuantidade() {
         int indice = 0, maiorQtdAteEntao = 0;
@@ -86,9 +92,3 @@ public class Inventario {
         } while (posicoesSendoTrocadas);
     }
 }
-
-
-
-
-
-
