@@ -13,10 +13,13 @@ public class HobbitContador {
         return somaProdutos - somaMmc;
     }
 
+    // o exercício pedia APENAS o maior múltiplo de 3, então o mais correto é utilizar break invés de continue
+    // melhoria: como queremos o maior, vale mais a pena começar a procurá-lo do fim para o início.
+    // obs: não era necessário o ArrayList, o Hobbit estava um pouco louco quando escreveu o código.
     public int obterMaiorMultiploDeTresAte(int numero) {
 
         int maior = 0;
-        
+
         for (int i = numero; i >= 0; i--) {
             if (i % 3 == 0) {
                 maior = i;
