@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Inventario {
     private ArrayList<Item> itens = new ArrayList<>();
@@ -73,7 +73,7 @@ public class Inventario {
     public void ordenarItens() {
         // Versão mais estável do Bubblesort - Melhor caso O(n), Pior caso O(n^2)
         // homenagem ao do-while: para forçar entrada na lógica
-        boolean posicoesSendoTrocadas;
+        /*boolean posicoesSendoTrocadas;
         do {
             posicoesSendoTrocadas = false;
             for (int j = 0; j < this.itens.size() - 1; j++) {
@@ -89,6 +89,22 @@ public class Inventario {
                     posicoesSendoTrocadas = true;
                 }
             }
-        } while (posicoesSendoTrocadas);
+        } while (posicoesSendoTrocadas);*/
+        
+        Collections.sort(this.itens, new Comparator<Item>() {
+            public int compare(Item item1, Item item2) {
+                return Integer.compare(item1.getQuantidade(), item2.getQuantidade());
+            }
+        });
+        
+        // C#
+        // this.itens.OrderByDescending(x => x.getQuantidade());
     }
 }
+
+
+
+
+
+
+
