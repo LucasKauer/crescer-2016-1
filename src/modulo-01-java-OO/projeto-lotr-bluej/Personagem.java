@@ -3,7 +3,7 @@ public class Personagem {
     protected int experiencia;
     protected Inventario inventario = new Inventario();
 
-    public Personagem(String nome) {
+    protected Personagem(String nome) {
         this.nome = nome;
     }
 
