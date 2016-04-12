@@ -53,4 +53,18 @@ public class ItemTest {
         item.aumentarProporcionalQuantidade();
         assertEquals(210020, item.getQuantidade());
     }
+    
+    @Test
+    public void umItemIgualAoOutro() {
+        Item item1 = new Item(1, "Espada");
+        Item item2 = new Item(1, "Espada");
+        assertEquals(item1, item2);
+    }
+    
+    @Test
+    public void umItemNaoEhIgualAoOutro() {
+        Item item1 = new Item(1, "Espada");
+        Item item2 = new Item(2, "Espada");
+        assertTrue(!item1.equals(item2));
+    }
 }
