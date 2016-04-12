@@ -4,6 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ElfoTest {
+
+    @After
+    public void gc() {
+        System.gc();
+    }
+
     @Test
     public void elfoNasceCom42Flechas() {
         Elfo arwen = new Elfo("Arwen");
@@ -75,14 +81,40 @@ public class ElfoTest {
         String textoEsperado = "null possui 41 flechas e 1 nível de experiência.";
         assertEquals(textoEsperado, elfo1.toString());
     }
-    
+
     @Test
     public void elfoNasceVivo() {
         assertEquals(Status.VIVO, new Elfo("Celeborn").getStatus());
     }
-    
+
     @Test
     public void elfoNasceCom100DeVida() {
         assertEquals(100, new Elfo("Celeborn").getVida(), 0.0);
+    }
+
+    @Test
+    public void criarNenhumElfoNaoIncrementaContador() {
+        assertEquals(0, Elfo.getNumeroDeObjetos());
+    }
+    
+    @Test
+    public void criar1ElfoIncrementaContador() {
+        Elfo elfo1 = new Elfo("Legolas 1");
+        assertEquals(1, Elfo.getNumeroDeObjetos());
+    }
+    
+    @Test
+    public void criar2ElfosIncrementaContador() {
+        Elfo elfo1 = new Elfo("Legolas 1");
+        Elfo elfo2 = new Elfo("Legolas 2");
+        assertEquals(2, Elfo.getNumeroDeObjetos());
+    }
+    
+    @Test
+    public void criar3ElfosIncrementaContador() {
+        Elfo elfo1 = new Elfo("Legolas 1");
+        Elfo elfo2 = new ElfoVerde("Legolas 2");
+        Elfo elfo3 = new ElfoNoturno("Legolas 3");
+        assertEquals(3, Elfo.getNumeroDeObjetos());
     }
 }
