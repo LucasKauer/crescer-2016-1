@@ -75,4 +75,14 @@ public class ElfoTest {
         String textoEsperado = "null possui 41 flechas e 1 nível de experiência.";
         assertEquals(textoEsperado, elfo1.toString());
     }
+    
+    @Test
+    public void elfoNasceVivo() {
+        assertEquals(Status.VIVO, new Elfo("Celeborn").getStatus());
+    }
+    
+    @Test
+    public void elfoNasceCom100DeVida() {
+        assertEquals(100, new Elfo("Celeborn").getVida());
+    }
 }

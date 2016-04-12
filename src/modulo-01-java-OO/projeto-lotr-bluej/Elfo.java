@@ -3,6 +3,7 @@ public class Elfo extends Personagem {
 
     public Elfo(String nome) {
         super(nome);
+        this.vida = 100;
     }
     
     public Elfo(String nome, int flechas) {

@@ -1,6 +1,4 @@
 public class Dwarf extends Personagem {
-    private int vida = 110;
-    private Status status = Status.VIVO;
     private DataTerceiraEra dataNascimento;
 
     public Dwarf(String nome) {
@@ -31,14 +29,6 @@ public class Dwarf extends Personagem {
                 vida = vidaAposFlechada;
             }
         }
-    }
-
-    public int getVida() {
-        return this.vida;
-    }
-
-    public Status getStatus() {
-        return this.status;
     }
 
     public DataTerceiraEra getDataNascimento() {
