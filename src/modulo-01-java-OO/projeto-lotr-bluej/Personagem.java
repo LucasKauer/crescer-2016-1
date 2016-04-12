@@ -2,7 +2,7 @@ public class Personagem {
     protected String nome;
     protected int experiencia;
     protected Inventario inventario = new Inventario();
-    protected int vida;
+    protected double vida;
     protected Status status = Status.VIVO;
 
     protected Personagem(String nome) {
@@ -29,7 +29,7 @@ public class Personagem {
         this.inventario.removerItem(item);
     }
 
-    public int getVida() {
+    public double getVida() {
         return this.vida;
     }
 

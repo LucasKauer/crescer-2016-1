@@ -83,6 +83,6 @@ public class ElfoTest {
     
     @Test
     public void elfoNasceCom100DeVida() {
-        assertEquals(100, new Elfo("Celeborn").getVida());
+        assertEquals(100, new Elfo("Celeborn").getVida(), 0.0);
     }
 }
