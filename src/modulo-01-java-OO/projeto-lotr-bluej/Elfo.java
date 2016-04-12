@@ -7,13 +7,13 @@ public class Elfo extends Personagem {
         this.vida = 100;
         Elfo.numeroDeObjetos++;
     }
-    
+
     // "Destrutor" http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#finalize%28%29
     protected void finalize() throws Throwable {
         Elfo.numeroDeObjetos--;
         super.finalize();
     }
-    
+
     public Elfo(String nome, int flechas) {
         this(nome);
         this.flechas = flechas;
@@ -41,7 +41,7 @@ public class Elfo extends Personagem {
             this.experiencia,
             experienciaNoSingular ? "nível" : "níveis");
     }
-    
+
     public static int getNumeroDeObjetos() {
         return numeroDeObjetos;
     }
