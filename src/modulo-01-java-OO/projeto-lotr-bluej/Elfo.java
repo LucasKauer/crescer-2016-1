@@ -1,6 +1,7 @@
 public class Elfo {
     private String nome;
     private int experiencia, flechas = 42;
+    private Inventario inventario = new Inventario();
 
     public Elfo(String nome) {
         this.nome = nome;
@@ -40,5 +41,9 @@ public class Elfo {
             flechaNoSingular ? "flecha" : "flechas",
             this.experiencia,
             experienciaNoSingular ? "nível" : "níveis");
+    }
+    
+    public Inventario getInventario() {
+        return this.inventario;
     }
 }
