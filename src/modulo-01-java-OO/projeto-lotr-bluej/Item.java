@@ -29,7 +29,7 @@ public class Item {
         int resultado = this.quantidade * (this.quantidade + 1) / 2;
         this.quantidade += (resultado * 1000);
     }
-}    
+
     public boolean equals(Object obj) {
         Item outro = (Item)obj;
         return this.quantidade == outro.quantidade && 
