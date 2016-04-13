@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ElfoTest {
 
     @After
-    public void gc() {
+    public void tearDown() {
         System.gc();
     }
 
