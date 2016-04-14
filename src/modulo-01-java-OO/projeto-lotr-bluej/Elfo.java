@@ -45,4 +45,8 @@ public class Elfo extends Personagem {
     public static int getNumeroDeObjetos() {
         return numeroDeObjetos;
     }
+    
+    public void tentarSorte() {
+        System.out.println("Elfo tentou a sorte!");
+    }
 }
