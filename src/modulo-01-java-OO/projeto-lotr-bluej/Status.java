@@ -1,6 +1,6 @@
 public enum Status
 {
     VIVO,
-    INCOSCIENTE,
+    INCONSCIENTE,
     MORTO
 }
