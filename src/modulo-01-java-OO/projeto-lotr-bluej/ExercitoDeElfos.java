@@ -14,4 +14,8 @@ public class ExercitoDeElfos {
     public HashMap<String, Elfo> getExercito() {
         return this.exercito;
     }
+    
+    public Elfo buscar(String nome) {
+        return this.exercito.get(nome);
+    }
 }

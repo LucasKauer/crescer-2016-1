@@ -102,4 +102,34 @@ public class ExercitoDeElfosTest {
         HashMap<String, Elfo> obtido = exercito.getExercito();
         assertEquals(exercitoEsperado, obtido);
     }
+
+    @Test
+    public void buscarElfoPorNome() {
+        Elfo elfo = new ElfoNoturno("Night Legolas");
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        exercito.alistar(elfo);
+        assertEquals(elfo, exercito.buscar("Night Legolas"));
+    }
+
+    @Test
+    public void buscarElfoPorNomeInexistente() {
+        Elfo elfo = new ElfoNoturno("Night Legolas");
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        exercito.alistar(elfo);
+        assertNull(exercito.buscar("Birinight Legolas"));
+    }
+
+    @Test
+    public void buscarElfoPorNomeInexistenteExercitoVazio() {
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        assertNull(exercito.buscar("Birinight Legolas"));
+    }
+
+    @Test
+    public void buscarElfoNomeValidoTipoInvalido() {
+        Elfo elfo = new Elfo("Night Legolas");
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        exercito.alistar(elfo);
+        assertNull(exercito.buscar("Night Legolas"));
+    }
 }
