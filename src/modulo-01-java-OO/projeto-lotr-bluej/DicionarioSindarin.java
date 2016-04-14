@@ -2,6 +2,10 @@ import java.util.*;
 
 public class DicionarioSindarin {
     public static void main(String[] args) {
+        // rodarExemplosHashMap();
+    }
+
+    private static void rodarExemplosHashMap() {
         HashMap<String, String> dicionarioSindarin = new HashMap<>();
         // Inserir chave-valor no hashmap
         dicionarioSindarin.put("terra", "amar");
