@@ -176,6 +176,32 @@ public class ExercitoDeElfosTest {
         assertNull(exercito.buscar(Status.INCONSCIENTE));
     }
 
+    @Test
+    public void agrupaPorStatusDuasVezes(){
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        Elfo e1 = new ElfoNoturno("Ranger");
+        Elfo e2 = new ElfoNoturno("Nopturne");
+        Elfo e3 = new ElfoNoturno("Legolas");
+        Elfo e4 = criarElfoEMataLo("Night One");
+        exercito.alistar(e1);
+        exercito.alistar(e2);
+        exercito.alistar(e3);
+        exercito.alistar(e4);
+        exercito.agruparPorStatus();
+        ArrayList<Elfo> mortos = exercito.buscar(Status.MORTO);
+        ArrayList<Elfo> vivos = exercito.buscar(Status.VIVO);
+        assertTrue(mortos.contains(e4));
+        assertTrue(vivos.contains(e2));
+        e1 = criarElfoEMataLo("Ranger");
+        e2 = criarElfoEMataLo("Nopturne");
+        exercito.agruparPorStatus();
+        mortos = exercito.buscar(Status.MORTO);
+        vivos = exercito.buscar(Status.VIVO);
+        assertFalse(mortos.contains(e3));
+        assertFalse(vivos.contains(e1));
+        assertFalse(vivos.contains(e2));
+    }
+
     private ExercitoDeElfos criarExercitoDeMortosEVivos() {
         ElfoVerde elfoVivo1 = new ElfoVerde("Green 1");
         ElfoNoturno elfoVivo2 = new ElfoNoturno("Aa");

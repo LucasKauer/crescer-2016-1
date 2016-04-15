@@ -23,16 +23,16 @@ public class ExercitoDeElfos {
     }
 
     public void agruparPorStatus() {
+        porStatus.clear();
         for (Map.Entry<String, Elfo> chaveValor : this.exercito.entrySet()) {
             Elfo elfo = chaveValor.getValue();
             ArrayList<Elfo> statusNoAgrupamento = porStatus.get(elfo.getStatus());
             boolean aindaNaoTenhoStatusNoAgrupamento = statusNoAgrupamento == null;
 
             if (aindaNaoTenhoStatusNoAgrupamento) {
-                statusNoAgrupamento = new ArrayList<Elfo>(Arrays.asList(elfo));
+                statusNoAgrupamento = new ArrayList<Elfo>();
                 porStatus.put(elfo.getStatus(), statusNoAgrupamento);
             }
-
             statusNoAgrupamento.add(elfo);
         }
     }

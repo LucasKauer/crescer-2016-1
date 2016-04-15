@@ -2,6 +2,25 @@ import java.util.*;
 
 public class DicionarioSindarin {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bem vindo ao tradutor Sindarin! Escolha a linguagem: ");
+        System.out.println("[P]ortuguês [I]nglês");
+        String idioma = scanner.nextLine();
+        TradutorSindarin tradutor = criarTradutor(idioma);
+        System.out.println("Naur significa " + tradutor.traduzir("naur"));
+        // rodarExemplosHashMap();
+    }
+    
+    private static TradutorSindarin criarTradutor(String idioma) {
+        switch (idioma.toLowerCase()) {
+            case "i":
+                return new SindarinParaIngles();
+            default:
+                return new SindarinParaPortugues();
+        }
+    }
+
+    private static void rodarExemplosHashMap() {
         HashMap<String, String> dicionarioSindarin = new HashMap<>();
         // Inserir chave-valor no hashmap
         dicionarioSindarin.put("terra", "amar");

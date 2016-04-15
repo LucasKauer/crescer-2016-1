@@ -36,4 +36,6 @@ public abstract class Personagem {
     public Status getStatus() {
         return this.status;
     }
+    
+    public abstract void tentarSorte();
 }
