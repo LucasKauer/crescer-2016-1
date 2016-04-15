@@ -3,6 +3,8 @@ import java.util.*;
 public class ExercitoDeElfos {
     private HashMap<String, Elfo> exercito = new HashMap<>();
     private HashMap<Status, ArrayList<Elfo>> porStatus = new HashMap<>();
+    // Estratégia inicial, método mudarEstrategia permite alterá-la após a criação do exército.
+    private EstrategiaDeAtaque estrategia = new EstrategiaAntiNoturnos();
 
     public void alistar(Elfo elfo) {
         boolean podeAlistar = elfo instanceof ElfoVerde || elfo instanceof ElfoNoturno;
@@ -37,5 +39,20 @@ public class ExercitoDeElfos {
 
     public ArrayList<Elfo> buscar(Status status) {
         return this.porStatus.get(status);
+    }
+
+    public void atacar(ArrayList<Dwarf> alvos) {
+        this.estrategia.atacar(
+            new ArrayList<Elfo>(exercito.values()),
+            alvos
+        );
+    }
+
+    public ArrayList<Elfo> getOrdemDoUltimoAtaque() {
+        return this.estrategia.getOrdemDoUltimoAtaque();
+    }
+
+    public void mudarEstrategia(EstrategiaDeAtaque estrategia) {
+        this.estrategia = estrategia;
     }
 }
