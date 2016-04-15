@@ -5,6 +5,12 @@ import org.junit.Test;
 import java.util.*;
 
 public class ExercitoDeElfosTest {
+
+    @After
+    public void tearDown() {
+        System.gc();
+    }
+
     @Test
     public void alistarElfoBaseNãoAlista() {
         // Arrange
@@ -12,14 +18,18 @@ public class ExercitoDeElfosTest {
         HashMap<String, Elfo> exercitoEsperado = new HashMap<>();
         ExercitoDeElfos exercito = new ExercitoDeElfos();
         // Act
-        exercito.alistar(elfo);
-        // Assert
-        HashMap<String, Elfo> obtido = exercito.getExercito();
-        assertEquals(exercitoEsperado, obtido);
+        try {
+            exercito.alistar(elfo);
+            // Assert
+            HashMap<String, Elfo> obtido = exercito.getExercito();
+            assertEquals(exercitoEsperado, obtido);
+        } catch (NaoPodeAlistarException npae) {
+            System.out.println(npae);
+        }
     }
 
-    @Test
-    public void alistarDoisElfosBaseNãoAlistaNenhum() {
+    @Test(expected=NaoPodeAlistarException.class)
+    public void alistarDoisElfosBaseNãoAlistaNenhum() throws NaoPodeAlistarException {
         // Arrange
         Elfo elfo = new Elfo("Legolas");
         Elfo elfo2 = new Elfo("Arwen");
@@ -34,7 +44,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void alistarElfoVerdeAlista() {
+    public void alistarElfoVerdeAlista() throws NaoPodeAlistarException {
         // Arrange
         Elfo elfo = new ElfoVerde("Green Legolas");
         HashMap<String, Elfo> exercitoEsperado = new HashMap<>();
@@ -48,7 +58,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void alistarElfoNoturnoAlista() {
+    public void alistarElfoNoturnoAlista() throws NaoPodeAlistarException {
         // Arrange
         Elfo elfo = new ElfoNoturno("Night Legolas");
         HashMap<String, Elfo> exercitoEsperado = new HashMap<>();
@@ -62,7 +72,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void alistarElfosVerdesENoturnosAlistaTodos() {
+    public void alistarElfosVerdesENoturnosAlistaTodos() throws NaoPodeAlistarException {
         // Arrange
         Elfo elfo = new ElfoNoturno("Night Legolas");
         Elfo elfo2 = new ElfoNoturno("Night Legolas 2");
@@ -81,8 +91,8 @@ public class ExercitoDeElfosTest {
         assertEquals(exercitoEsperado, obtido);
     }
 
-    @Test
-    public void alistarElfosVerdesENoturnosAlistaTodosMenosBase() {
+    @Test(expected=NaoPodeAlistarException.class)
+    public void alistarElfosVerdesENoturnosAlistaTodosMenosBase() throws NaoPodeAlistarException {
         // Arrange
         Elfo elfo = new ElfoNoturno("Night Legolas");
         Elfo elfo2 = new ElfoNoturno("Night Legolas 2");
@@ -104,7 +114,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void buscarElfoPorNome() {
+    public void buscarElfoPorNome() throws NaoPodeAlistarException {
         Elfo elfo = new ElfoNoturno("Night Legolas");
         ExercitoDeElfos exercito = new ExercitoDeElfos();
         exercito.alistar(elfo);
@@ -112,7 +122,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void buscarElfoPorNomeInexistente() {
+    public void buscarElfoPorNomeInexistente() throws NaoPodeAlistarException {
         Elfo elfo = new ElfoNoturno("Night Legolas");
         ExercitoDeElfos exercito = new ExercitoDeElfos();
         exercito.alistar(elfo);
@@ -125,8 +135,8 @@ public class ExercitoDeElfosTest {
         assertNull(exercito.buscar("Birinight Legolas"));
     }
 
-    @Test
-    public void buscarElfoNomeValidoTipoInvalido() {
+    @Test(expected=NaoPodeAlistarException.class)
+    public void buscarElfoNomeValidoTipoInvalido() throws NaoPodeAlistarException {
         Elfo elfo = new Elfo("Night Legolas");
         ExercitoDeElfos exercito = new ExercitoDeElfos();
         exercito.alistar(elfo);
@@ -134,7 +144,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void buscaElfosVivos() {
+    public void buscaElfosVivos() throws NaoPodeAlistarException {
         // Arrange
         ElfoVerde elfoVivo1 = new ElfoVerde("Green 1");
         ElfoNoturno elfoVivo2 = new ElfoNoturno("Aa");
@@ -157,7 +167,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void buscaElfosMortos() {
+    public void buscaElfosMortos() throws NaoPodeAlistarException {
         // Arrange
         ExercitoDeElfos exercito = criarExercitoDeMortosEVivos();
         exercito.agruparPorStatus();
@@ -168,7 +178,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void buscaElfosInconsciente() {
+    public void buscaElfosInconsciente() throws NaoPodeAlistarException {
         // Arrange
         ExercitoDeElfos exercito = criarExercitoDeMortosEVivos();
         exercito.agruparPorStatus();
@@ -177,7 +187,7 @@ public class ExercitoDeElfosTest {
     }
 
     @Test
-    public void agrupaPorStatusDuasVezes(){
+    public void agrupaPorStatusDuasVezes() throws NaoPodeAlistarException {
         ExercitoDeElfos exercito = new ExercitoDeElfos();
         Elfo e1 = new ElfoNoturno("Ranger");
         Elfo e2 = new ElfoNoturno("Nopturne");
@@ -202,7 +212,7 @@ public class ExercitoDeElfosTest {
         assertFalse(vivos.contains(e2));
     }
 
-    private ExercitoDeElfos criarExercitoDeMortosEVivos() {
+    private ExercitoDeElfos criarExercitoDeMortosEVivos() throws NaoPodeAlistarException {
         ElfoVerde elfoVivo1 = new ElfoVerde("Green 1");
         ElfoNoturno elfoVivo2 = new ElfoNoturno("Aa");
         ElfoVerde elfoVivo3 = new ElfoVerde("BB");

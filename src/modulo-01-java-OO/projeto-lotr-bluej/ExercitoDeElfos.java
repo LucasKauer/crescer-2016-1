@@ -6,12 +6,14 @@ public class ExercitoDeElfos {
     // Estratégia inicial, método mudarEstrategia permite alterá-la após a criação do exército.
     private EstrategiaDeAtaque estrategia = new EstrategiaAntiNoturnos();
 
-    public void alistar(Elfo elfo) {
+    public void alistar(Elfo elfo) throws NaoPodeAlistarException {
         boolean podeAlistar = elfo instanceof ElfoVerde || elfo instanceof ElfoNoturno;
 
-        if (podeAlistar) {
-            exercito.put(elfo.getNome(), elfo);
+        if (!podeAlistar) {
+            throw new NaoPodeAlistarException();
         }
+        
+        exercito.put(elfo.getNome(), elfo);
     }
 
     public HashMap<String, Elfo> getExercito() {
