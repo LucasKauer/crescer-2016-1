@@ -2,21 +2,28 @@ import java.util.*;
 
 public class DicionarioSindarin {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try {
+            int resultado = 13/0;
+        } catch (ArithmeticException ae) {
+            System.out.println("Tipo ArithmeticException");
+        } catch (Exception e) {
+            System.out.println("Tipo Exception");
+        } 
+        /*Scanner scanner = new Scanner(System.in);
         System.out.println("Bem vindo ao tradutor Sindarin! Escolha a linguagem: ");
         System.out.println("[P]ortuguês [I]nglês");
         String idioma = scanner.nextLine();
         TradutorSindarin tradutor = criarTradutor(idioma);
-        System.out.println("Naur significa " + tradutor.traduzir("naur"));
+        System.out.println("Naur significa " + tradutor.traduzir("naur"));*/
         // rodarExemplosHashMap();
     }
-    
+
     private static TradutorSindarin criarTradutor(String idioma) {
         switch (idioma.toLowerCase()) {
             case "i":
-                return new SindarinParaIngles();
+            return new SindarinParaIngles();
             default:
-                return new SindarinParaPortugues();
+            return new SindarinParaPortugues();
         }
     }
 
@@ -75,11 +82,5 @@ public class DicionarioSindarin {
         }
     }
 }
-
-
-
-
-
-
 
 
