@@ -27,10 +27,12 @@ public class EstrategiaIntercalada implements EstrategiaDeAtaque {
         int contadorElfosVerdes = 0, contadorElfosNoturnos = 0;
 
         for (Elfo elfo : elfos) {
-            if (elfo instanceof ElfoVerde) {
-                contadorElfosVerdes++;
-            } else if (elfo instanceof ElfoNoturno) {
-                contadorElfosNoturnos++;
+            if (elfo.getStatus() == Status.VIVO) {
+                if (elfo instanceof ElfoVerde) {
+                    contadorElfosVerdes++;
+                } else if (elfo instanceof ElfoNoturno) {
+                    contadorElfosNoturnos++;
+                }
             }
         }
 
@@ -52,6 +54,8 @@ public class EstrategiaIntercalada implements EstrategiaDeAtaque {
                 if (estáIntercalado) {
                     ordemAtaque.add(elfoAtual);
                     classeDoUltimoAdicionado = elfoAtual.getClass();
+                }
+                if (estáIntercalado || elfoAtual.getStatus() == Status.MORTO) {
                     elfos.remove(elfoAtual);
                 }
             }
