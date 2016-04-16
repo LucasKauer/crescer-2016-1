@@ -24,6 +24,7 @@ public class EstrategiaAntiNoturnosTest {
         // para o hashmap deste exército, EN2 virá antes, depois EN1 e EN3.
         assertEquals(elfoNoturno2, ordemAtaque.get(2));
         assertEquals(elfoNoturno2, ordemAtaque.get(3));
+        assertEquals(4, ordemAtaque.size());
     }
 
     @Test
@@ -42,6 +43,7 @@ public class EstrategiaAntiNoturnosTest {
         assertEquals(elfoNoturno2, ordemAtaque.get(0));
         assertEquals(elfoNoturno2, ordemAtaque.get(1));
         assertEquals(elfoNoturno2, ordemAtaque.get(2));
+        assertEquals(3, ordemAtaque.size());
     }
 
     @Test
@@ -63,8 +65,9 @@ public class EstrategiaAntiNoturnosTest {
         assertEquals(elfoVerde1, ordemAtaque.get(3));
         assertEquals(elfoVerde3, ordemAtaque.get(4));
         assertEquals(elfoVerde3, ordemAtaque.get(5));
+        assertEquals(6, ordemAtaque.size());
     }
-    
+
     @Test
     public void ataqueComExercitoVazio() throws NaoPodeAlistarException {
         ExercitoDeElfos exercito = new ExercitoDeElfos();
@@ -72,5 +75,21 @@ public class EstrategiaAntiNoturnosTest {
         exercito.atacar(dwarves);
         List<Elfo> ordemAtaque = exercito.getOrdemDoUltimoAtaque();
         assertTrue(ordemAtaque.isEmpty());
+    }
+
+    @Test
+    public void ataque1VerdeOutroMorto() throws NaoPodeAlistarException {
+        ExercitoDeElfos exercito = new ExercitoDeElfos();
+        Elfo elfoVerde1 = new ElfoVerde("EV1");
+        Elfo en1 = new ElfoNoturno("EN1");
+        for (int i = 0; i < 90; i++) en1.atirarFlecha(new Dwarf("D1"));
+        exercito.alistar(elfoVerde1);
+        exercito.alistar(en1);
+        ArrayList<Dwarf> dwarves = new ArrayList<>(Arrays.asList(new Dwarf("D1"), new Dwarf("D2")));
+        exercito.atacar(dwarves);
+        List<Elfo> ordemAtaque = exercito.getOrdemDoUltimoAtaque();
+        assertEquals(elfoVerde1, ordemAtaque.get(0));
+        assertEquals(elfoVerde1, ordemAtaque.get(0));
+        assertEquals(2, ordemAtaque.size());
     }
 }
