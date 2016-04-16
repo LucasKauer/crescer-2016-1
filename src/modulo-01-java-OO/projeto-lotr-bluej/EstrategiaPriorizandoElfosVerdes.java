@@ -8,9 +8,11 @@ public class EstrategiaPriorizandoElfosVerdes implements EstrategiaDeAtaque {
         ordenaComCollectionSort(elfos);
 
         for (Elfo elfo : elfos) {
-            ordemAtaque.add(elfo);
-            for (Dwarf dwarf : dwarves) {
-                elfo.atirarFlecha(dwarf);
+            if (elfo.getStatus() == Status.VIVO) {
+                ordemAtaque.add(elfo);
+                for (Dwarf dwarf : dwarves) {
+                    elfo.atirarFlecha(dwarf);
+                }
             }
         }
     }
@@ -18,7 +20,7 @@ public class EstrategiaPriorizandoElfosVerdes implements EstrategiaDeAtaque {
     public ArrayList<Elfo> getOrdemDoUltimoAtaque() {
         return ordemAtaque;
     }
-    
+
     private void ordenaComCollectionSort(ArrayList<Elfo> elfos) {
         Collections.sort(elfos, new Comparator<Elfo>() {
                 public int compare(Elfo elfoAtual, Elfo proximoElfo) {
