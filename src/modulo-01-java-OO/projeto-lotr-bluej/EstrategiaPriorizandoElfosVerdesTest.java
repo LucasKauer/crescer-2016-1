@@ -5,6 +5,12 @@ import org.junit.Test;
 import java.util.*;
 
 public class EstrategiaPriorizandoElfosVerdesTest {
+
+    @After
+    public void tearDown() {
+        System.gc();
+    }
+
     @Test
     public void exercitoEmbaralhadoPriorizaAtaqueComElfosVerdes() throws NaoPodeAlistarException {
         // Arrange

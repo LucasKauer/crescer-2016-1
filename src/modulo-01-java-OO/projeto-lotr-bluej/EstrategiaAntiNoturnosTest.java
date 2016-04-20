@@ -5,6 +5,12 @@ import org.junit.Test;
 import java.util.*;
 
 public class EstrategiaAntiNoturnosTest {
+
+    @After
+    public void tearDown() {
+        System.gc();
+    }
+
     @Test
     public void ataqueCom3Noturnos1Verde2Dwarves() throws NaoPodeAlistarException {
         ExercitoDeElfos exercito = new ExercitoDeElfos();
