@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Float</title>
+	<style>
+		.container {
+			width: 200px;
+			height: 200px;
+			margin: 50px
+		}
+		
+		.relativo {
+			position: relative;
+			top:-10px;
+			left:-20px;
+		}
+		
+		.verde {			
+			background-color: green;		
+		}
+		
+		.vermelho {			
+			background-color: red;
+		}
+		
+		.absoluta {
+			position: absolute;
+			background-color: pink;
+			width: 50px;
+			height: 50px;
+			top: 0;
+			left: 250px;
+		}
+		
+		.nao-absoluta {
+			background-color: yellow;
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+</head>
+
+<body>    
+    <div class="container verde relativo">   
+		<div class="absoluta"></div>
+		<div class="nao-absoluta"></div>       
+    </div>
+	
+	<div class="container vermelho">        
+    </div>
+</body>
+
+</html>
