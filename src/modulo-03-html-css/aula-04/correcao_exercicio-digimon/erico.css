@@ -5,19 +5,19 @@
  * - .content > .personagens > ul:last-child = "Lista de digimons"
  * - .digiescolhidos = "Digiescolhidos"
  */
-​
-​
+
+
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: url("http://www.pageresource.com/wallpapers/wallpaper/digimon-adventure-group-graphics-code_184125.jpg") center 0;
 }
-​
+
 header {
     position: relative;
     width: 1000px;
     margin: 10px auto 30px;
 }
-​
+
     header > h1 {
         position: absolute;
         display: inline-block;
@@ -29,7 +29,7 @@ header {
         header > h1 > span {
             font-weight: bold;
         }
-​
+
     header > .imagem-fundo {
         background: url("http://www.infomegablog.com.br/wp-content/uploads/2012/05/digimon3.gif") no-repeat center 0;
         background-size: 246px 150px;
@@ -76,12 +76,12 @@ header {
             float: left;
             clear: both;
         }
-​
+
 .content {
     width: 1000px;
     margin: 0 auto;
 }
-​
+
     .content > .personagens {
         float: right;
         height: 360px;
@@ -178,7 +178,7 @@ body > header > h1 > span:last-child,
 .treinadores {
     display: none;
 }
-​
+
 @keyframes largar {
     0% {
         transform: translateY(-150px);
@@ -199,7 +199,7 @@ body > header > h1 > span:last-child,
         transform: translateY(0);
     }
 }
-​
+
 @keyframes carregarDaEsquerda {
     0% {
         transform: translateX(-300px);
@@ -208,7 +208,7 @@ body > header > h1 > span:last-child,
         transform: translateX(0);
     }
 }
-​
+
 @keyframes carregarDaDireita {
     0% {
         transform: translateX(700px);
@@ -217,7 +217,7 @@ body > header > h1 > span:last-child,
         transform: translateX(0);
     }
 }
-​
+
 @keyframes carregar {
     from {
         transform: translateX(500px) rotateY(45deg);
