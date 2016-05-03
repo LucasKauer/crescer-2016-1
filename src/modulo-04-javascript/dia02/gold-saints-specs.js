@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Ex 1. Doadores de sangue', function() {
-  it('quando informa 4 retorna \'Love me not\'', function() {
+  it('obterDoadores retorna array vazio', function() {
     expect(obterDoadores()).toEqual([]);
   });
 });
