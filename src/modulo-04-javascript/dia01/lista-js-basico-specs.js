@@ -79,3 +79,27 @@ describe('Ex 3. Instrutor querido', function() {
   });
 
 });
+
+describe('Ex 4. Soma diferentona', function() {
+  it('quando informa 3 e 4', function() {
+    expect(adicionar(3)(4)).toBe(7);
+  });
+  it('quando informa 5642 e 8749', function() {
+    expect(adicionar(5642)(8749)).toBe(14391);
+  });
+  it('quando informa 0 e 0', function() {
+    expect(adicionar(0)(0)).toBe(0);
+  });
+  it('quando não informa parcela alguma', function() {
+    expect(adicionar()()).toBeNaN();
+  });
+  it('quando não informa primeira parcela', function() {
+    expect(adicionar()(1)).toBeNaN();
+  });
+  it('quando não informa segunda parcela', function() {
+    expect(adicionar(1)()).toBeNaN();
+  });
+  it('quando informa -3 e 2.5', function() {
+    expect(adicionar(-3)(2.5)).toBe(-0.5);
+  });
+});

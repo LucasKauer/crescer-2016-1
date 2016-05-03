@@ -20,3 +20,10 @@ function imprime(instrutores, fn) {
     if (typeof fn === 'function') fn(instrutor);
   });
 };
+
+// Ex 4
+function adicionar(parcela1) {
+  return function(parcela2) {
+    return parcela1 + parcela2;
+  }
+};
