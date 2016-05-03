@@ -15,7 +15,7 @@ describe('Ex 1. Daisy Game!', function() {
   });
 });
 
-describe('Ex 2. maiorTexto', function() {
+describe('Ex 2. Maior texto', function() {
   it('quando informa array vazio retorna vazio', function() {
     expect(maiorTexto([])).toBe('');
   });
@@ -33,7 +33,7 @@ describe('Ex 2. maiorTexto', function() {
   });
 });
 
-describe('Ex 3. imprime', function() {
+describe('Ex 3. Instrutor querido', function() {
   window.imprimeNoConsole = function(instrutor) {
    console.log('olá querido instrutor:', instrutor)
   }
