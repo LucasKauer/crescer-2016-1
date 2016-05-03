@@ -2,7 +2,7 @@
 
 // Ex 1
 function daisyGame(numero) {
-  return numero % 2 === 0 ? 'Love me not' : 'Love me';
+  return 'Love me' + (numero % 2 === 0 ? ' not' : '');
 };
 
 // Ex 2
