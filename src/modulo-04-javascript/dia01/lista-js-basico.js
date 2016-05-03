@@ -38,13 +38,16 @@ var fibonacci = function(n) {
 
 // Ex 5
 var fiboSum = function(n, usarRecursao) {
-  
+
   if (usarRecursao) {
     if (n === 1) return 1;
     return fibonacci(n, true) + fiboSum(n-1, true);
   }
-  
-  var calcularIterativo = function() {
+
+  // IIFE
+  // http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+  return (function(texto) {
+    console.log(texto);
     var anterior = 0, atual = 1, soma = 0, prox;
     for (var i = 0; i < n; i++) {
       prox = anterior + atual;
@@ -53,9 +56,7 @@ var fiboSum = function(n, usarRecursao) {
       atual = prox;
     }
     return soma;
-  };
-
-  return calcularIterativo();
+  })('Teste');
 
 };
 
@@ -90,7 +91,7 @@ function contarPorTipo (objeto, tipo) {
 // Variáveis globais:
 var gohan = 'gohan', goku = 'Goku';
 function revelarSaiyaman() {
-  /* 
+  /*
     JavaScript faz hasteamento de variáveis (Hoisting, veja https://developer.mozilla.org/pt-BR/docs/Glossario/Hoisting),
     Ou seja, quando o interpretador carrega o script ele reorganiza o código
     deixando todas declarações de variáveis ANTES do restante do código.
