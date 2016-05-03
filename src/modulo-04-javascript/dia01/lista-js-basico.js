@@ -28,12 +28,12 @@ function adicionar(parcela1) {
   }
 };
 
-// Ex 5
 var fibonacci = function(n) {
   if (n === 1 || n === 2) return 1;
   return fibonacci(n-1)+fibonacci(n-2);
 };
 
+// Ex 5
 var fiboSum = function(n, usarRecursao) {
   
   if (usarRecursao) {
@@ -54,4 +54,13 @@ var fiboSum = function(n, usarRecursao) {
 
   return calcularIterativo();
 
+};
+
+// Ex 6
+var queroCafe = function(mascada, precos) {
+  var precosValidos = [];
+  for (var i = 0; i < precos.length; i++) {
+    if (precos[i] <= mascada) precosValidos.push(precos[i]);
+  }
+  return precosValidos.sort().toString();
 };
