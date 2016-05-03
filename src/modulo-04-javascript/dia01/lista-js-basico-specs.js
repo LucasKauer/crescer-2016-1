@@ -23,7 +23,13 @@ describe('Ex 2. Maior texto', function() {
     expect(maiorTexto([ 'único' ])).toBe('único');
   });
   it('quando informa array com duas strings de mesmo tamanho retorna o primeiro', function() {
-    expect(maiorTexto([ 'm3sm0', 'mesmo' ])).toBe('m3sm0');
+    // Arrange
+    var arrayComDoisElementos = [ 'm3sm0', 'mesmo' ];
+    var esperado = 'm3sm0';
+    // Act
+    var obtido = maiorTexto(arrayComDoisElementos);
+    // Assert
+    expect(obtido).toBe(esperado);
   });
   it('quando informa array com duas strings diferentes', function() {
     expect(maiorTexto([ 'm3sm0', 'maior!!' ])).toBe('maior!!');
@@ -50,7 +56,7 @@ describe('Ex 3. Instrutor querido', function() {
     // Assert
     expect(imprimeNoConsole.calls.count()).toBe(5);
     instrutores.forEach(function(i) {
-      expect(imprimeNoConsole).toHaveBeenCalledWith(i);  
+      expect(imprimeNoConsole).toHaveBeenCalledWith(i);
     });
   });
 
