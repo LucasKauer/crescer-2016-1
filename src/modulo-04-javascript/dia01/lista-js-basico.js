@@ -66,18 +66,20 @@ var queroCafe = function(mascada, precos) {
 };
 
 // Ex 7
-function contarPorTipo(objeto, tipo) {
+function contarPorTipo (objeto, tipo) {
+
+  // inspirado em http://stackoverflow.com/a/13467007/5194966
+  function getType(v) {
+    return v === null ? 'null' : typeof v !== 'undefined' && v.constructor === Array ? 'array' : typeof v;
+  }
+
   var count = 0;
   for (var campo in objeto) {
-    if (
-      (tipo === 'array' && objeto[campo] && objeto[campo].constructor === Array) ||
-      (tipo === 'null' && objeto[campo] === null) ||
-      (typeof objeto[campo] === tipo)
-    )
-      count++;
+    if (getType(objeto[campo]) === tipo) count++;
   }
+
   return count;
-};
+}
 
 // Ex 8
 // Variáveis globais:

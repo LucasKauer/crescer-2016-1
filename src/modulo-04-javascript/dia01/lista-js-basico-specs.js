@@ -160,7 +160,7 @@ describe('Ex 7. Vários tipos', function() {
     expect(contarPorTipo(goku, 'boolean')).toBe(2);
   });
   it('quando informa object', function() {
-    var goku = { nome: 'Goku', classe: { descricao: 'Saiyajin' }, anoNascimento: new Date(1987, 1, 1), humano: false };
+    var goku = { nome: 'Goku', classe: { descricao: 'Saiyajin' }, anoNascimento: new Date(1987, 1, 1), humano: false, filhos: [ 'Gohan', 'Goten' ], golpes: [ 'Kamehameha', 'Genki-dama' ] };
     expect(contarPorTipo(goku, 'object')).toBe(2);
   });
   it('quando informa undefined', function() {
