@@ -64,3 +64,16 @@ var queroCafe = function(mascada, precos) {
   }
   return precosValidos.sort().toString();
 };
+
+// Ex 7
+function contarPorTipo(objeto, tipo) {
+  var count = 0;
+  for (var campo in objeto) {
+    if ((typeof objeto[campo] === tipo) ||
+      (tipo === 'null' && objeto[campo] === null) ||
+      (tipo === 'array' && objeto[campo] && objeto[campo].constructor === Array)
+    )
+      count++;
+  }
+  return count;
+};

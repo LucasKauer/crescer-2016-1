@@ -145,3 +145,38 @@ describe('Ex 6. Quero café', function() {
     expect(queroCafe(0.3, [ 0.3 ])).toBe('0.3');
   });
 });
+
+describe('Ex 7. Vários tipos', function() {
+  it('quando informa string', function() {
+    var goku = { nome: 'Goku', classe: 'Saiyajin', humano: false, saiyajin: true };
+    expect(contarPorTipo(goku, 'string')).toBe(2);
+  });
+  it('quando informa number', function() {
+    var goku = { nome: 'Goku', classe: 'Saiyajin', ki: 999500, humano: false, saiyajin: true };
+    expect(contarPorTipo(goku, 'number')).toBe(1);
+  });
+  it('quando informa boolean', function() {
+    var goku = { nome: 'Goku', classe: 'Saiyajin', humano: false, saiyajin: true };
+    expect(contarPorTipo(goku, 'boolean')).toBe(2);
+  });
+  it('quando informa object', function() {
+    var goku = { nome: 'Goku', classe: { descricao: 'Saiyajin' }, anoNascimento: new Date(1987, 1, 1), humano: false };
+    expect(contarPorTipo(goku, 'object')).toBe(2);
+  });
+  it('quando informa undefined', function() {
+    var goku = { nome: 'Goku', classe: undefined, anoNascimento: undefined, humano: undefined };
+    expect(contarPorTipo(goku, 'undefined')).toBe(3);
+  });
+  it('quando informa null', function() {
+    var goku = { nome: 'Goku', classe: null, anoNascimento: undefined, humano: undefined };
+    expect(contarPorTipo(goku, 'null')).toBe(1);
+  });
+  it('quando informa function', function() {
+    var goku = { nome: 'Goku', classe: null, anoNascimento: undefined, kamehameha: function() {} };
+    expect(contarPorTipo(goku, 'function')).toBe(1);
+  });
+  it('quando informa array', function() {
+    var goku = { nome: 'Goku', classe: null, anoNascimento: undefined, kamehameha: function() {}, filhos: [ 'Gohan', 'Goten' ], golpes: [ 'Kamehameha', 'Genki-dama' ] };
+    expect(contarPorTipo(goku, 'array')).toBe(2);
+  });
+});
