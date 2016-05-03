@@ -32,3 +32,50 @@ describe('Ex 2. maiorTexto', function() {
     expect(maiorTexto([ 'm3sm0', 'abacate', 'goku', 'yajirobe', 'freeza', 'kuririn' ])).toBe('yajirobe');
   });
 });
+
+describe('Ex 3. imprime', function() {
+  window.imprimeNoConsole = function(instrutor) {
+   console.log('olá querido instrutor:', instrutor)
+  }
+
+  beforeEach(function() {
+    spyOn(window, 'imprimeNoConsole');
+  });
+
+  it('quando informa função imprimir no console para todos instrutores', function() {
+    // Arrange
+    var instrutores = [ 'bernardo', 'nunes', 'fabrício', 'ben-hur', 'carlos' ];
+    // Act
+    imprime(instrutores, imprimeNoConsole);
+    // Assert
+    expect(imprimeNoConsole.calls.count()).toBe(5);
+    instrutores.forEach(function(i) {
+      expect(imprimeNoConsole).toHaveBeenCalledWith(i);  
+    });
+  });
+
+  it('quando informa função imprimir no console para array vazio', function() {
+    // Arrange
+    var instrutores = [];
+    // Act
+    imprime(instrutores, imprimeNoConsole);
+    // Assert
+    expect(imprimeNoConsole.calls.count()).toBe(0);
+  });
+
+  it('quando informa função imprimir no console para um instrutor', function() {
+    // Arrange
+    var instrutores = [ 'bernardo' ];
+    // Act
+    imprime(instrutores, imprimeNoConsole);
+    // Assert
+    expect(imprimeNoConsole.calls.count()).toBe(1);
+    expect(imprimeNoConsole).toHaveBeenCalledWith(instrutores[0]);
+  });
+
+  it('quando informa algo que não é função', function() {
+    imprime([ 'bernardo' ], 3.14);
+    expect(imprimeNoConsole.calls.count()).toBe(0);
+  });
+
+});

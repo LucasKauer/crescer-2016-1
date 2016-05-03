@@ -3,7 +3,7 @@
 // Ex 1
 function daisyGame(numero) {
   return numero % 2 === 0 ? 'Love me not' : 'Love me';
-}
+};
 
 // Ex 2
 function maiorTexto(arr) {
@@ -12,4 +12,11 @@ function maiorTexto(arr) {
     if (e.length > maior.length) maior = e;
   });
   return maior;
+};
+
+// Ex 3
+function imprime(instrutores, fn) {
+  instrutores.forEach(function(instrutor) {
+    if (typeof fn === 'function') fn(instrutor);
+  });
 };
