@@ -5,5 +5,7 @@ console.log(goldSaints);
 
 // Ex 1.
 function obterDoadores() {
-  return [];
+  return goldSaints.filter(function(e) {
+    return e.tipoSanguineo === 'O';
+  });
 }
