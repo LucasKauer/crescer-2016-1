@@ -58,11 +58,13 @@ var fiboSum = function(n, usarRecursao) {
 
 // Ex 6
 var queroCafe = function(mascada, precos) {
-  var precosValidos = [];
-  for (var i = 0; i < precos.length; i++) {
-    if (precos[i] <= mascada) precosValidos.push(precos[i]);
+  precos.sort(function(a, b) {
+    return a > b;
+  });
+  for (var i = precos.length - 1; precos[i] > mascada; i--) {
+    precos.pop(precos[i]);
   }
-  return precosValidos.sort().toString();
+  return precos.toString();
 };
 
 // Ex 7
