@@ -117,3 +117,24 @@ function revelarSaiyaman() {
 }
 console.log(revelarSaiyaman());
 console.log(goku);
+
+(function() {
+  var gohan = 'gohan', goku = 'Goku';
+  var revelarSaiyamanSemThis = (function () {
+    console.log(gohan);
+    goku = 'Son Goku';
+    var gohan = 'Son ' + this.gohan;
+    return gohan;
+  });
+  var revelarSaiyamanComThis = (function () {
+    console.log(gohan);
+    goku = 'Son Goku';
+    var gohan = 'Son ' + this.gohan;
+    return gohan;
+  }).bind(this);
+  setTimeout(function() {
+    console.log(revelarSaiyamanSemThis());
+    console.log(revelarSaiyamanComThis());
+  }, 1000);
+  console.log(goku);
+})();
