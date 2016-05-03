@@ -22,6 +22,9 @@ function imprime(instrutores, fn) {
 };
 
 // Ex 4
+// adicionar(3)(4);
+// ES2015:
+// var adicionar = (parcela1) => (parcela2) => parcela1+parcela2
 function adicionar(parcela1) {
   return function(parcela2) {
     return parcela1 + parcela2;
