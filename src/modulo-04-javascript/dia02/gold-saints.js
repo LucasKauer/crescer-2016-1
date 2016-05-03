@@ -8,4 +8,15 @@ function obterDoadores() {
   return goldSaints.filter(function(e) {
     return e.tipoSanguineo === 'O';
   });
-}
+};
+
+// Ex 2.
+function obterCavaleiroComMaisGolpes() {
+  // concat: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+  // sort: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  return goldSaints.concat().sort(function(a, b) {
+    return b.golpes.length - a.golpes.length;
+    //return a.golpes.length < b.golpes.length ? 1 : -1;
+  })[0];
+};
+
