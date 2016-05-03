@@ -69,9 +69,10 @@ var queroCafe = function(mascada, precos) {
 function contarPorTipo(objeto, tipo) {
   var count = 0;
   for (var campo in objeto) {
-    if ((typeof objeto[campo] === tipo) ||
+    if (
+      (tipo === 'array' && objeto[campo] && objeto[campo].constructor === Array) ||
       (tipo === 'null' && objeto[campo] === null) ||
-      (tipo === 'array' && objeto[campo] && objeto[campo].constructor === Array)
+      (typeof objeto[campo] === tipo)
     )
       count++;
   }

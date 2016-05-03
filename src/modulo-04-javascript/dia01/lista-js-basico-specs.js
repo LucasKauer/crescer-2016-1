@@ -168,7 +168,7 @@ describe('Ex 7. Vários tipos', function() {
     expect(contarPorTipo(goku, 'undefined')).toBe(3);
   });
   it('quando informa null', function() {
-    var goku = { nome: 'Goku', classe: null, anoNascimento: undefined, humano: undefined };
+    var goku = { nome: 'Goku', classe: null, anoNascimento: new Date(1987, 1, 1), humano: undefined };
     expect(contarPorTipo(goku, 'null')).toBe(1);
   });
   it('quando informa function', function() {
@@ -176,7 +176,7 @@ describe('Ex 7. Vários tipos', function() {
     expect(contarPorTipo(goku, 'function')).toBe(1);
   });
   it('quando informa array', function() {
-    var goku = { nome: 'Goku', classe: null, anoNascimento: undefined, kamehameha: function() {}, filhos: [ 'Gohan', 'Goten' ], golpes: [ 'Kamehameha', 'Genki-dama' ] };
+    var goku = { nome: 'Goku', kaioken: undefined, classe: null, anoNascimento: new Date(1987, 1, 1), kamehameha: function() {}, filhos: [ 'Gohan', 'Goten' ], golpes: [ 'Kamehameha', 'Genki-dama' ] };
     expect(contarPorTipo(goku, 'array')).toBe(2);
   });
 });
