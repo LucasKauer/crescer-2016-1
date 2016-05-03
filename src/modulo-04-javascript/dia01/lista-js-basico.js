@@ -77,3 +77,34 @@ function contarPorTipo(objeto, tipo) {
   }
   return count;
 };
+
+// Ex 8
+// Variáveis globais:
+var gohan = 'gohan', goku = 'Goku';
+function revelarSaiyaman() {
+  /* 
+    JavaScript faz hasteamento de variáveis (Hoisting, veja https://developer.mozilla.org/pt-BR/docs/Glossario/Hoisting),
+    Ou seja, quando o interpretador carrega o script ele reorganiza o código
+    deixando todas declarações de variáveis ANTES do restante do código.
+    Portanto, o `var gohan` abaixo é hasteado para o início desta function, anulando a variável global e ficando undefined no console.log.
+    Código após hasteamento:
+      var gohan;
+      console.log(gohan);
+      goku = 'Son Goku';
+      gohan = 'Son ' + gohan;
+      return gohan;
+
+    Poderíamos evitar o hasteamento se retornássemos direto e sem declarar variável local:
+
+      console.log(gohan);
+      goku = 'Son Goku';
+      return 'Son ' + gohan;
+  */
+  console.log(gohan);
+  // alterando variável global, alteração vai refletir após sair deste método.
+  goku = 'Son Goku';
+  var gohan = 'Son ' + gohan;
+  return gohan;
+}
+console.log(revelarSaiyaman());
+console.log(goku);
