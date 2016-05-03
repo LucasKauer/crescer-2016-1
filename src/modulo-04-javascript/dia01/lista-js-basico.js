@@ -27,3 +27,31 @@ function adicionar(parcela1) {
     return parcela1 + parcela2;
   }
 };
+
+// Ex 5
+var fibonacci = function(n) {
+  if (n === 1 || n === 2) return 1;
+  return fibonacci(n-1)+fibonacci(n-2);
+};
+
+var fiboSum = function(n, usarRecursao) {
+  
+  if (usarRecursao) {
+    if (n === 1) return 1;
+    return fibonacci(n, true) + fiboSum(n-1, true);
+  }
+  
+  var calcularIterativo = function() {
+    var anterior = 0, atual = 1, soma = 0, prox;
+    for (var i = 0; i < n; i++) {
+      prox = anterior + atual;
+      soma += atual;
+      anterior = atual;
+      atual = prox;
+    }
+    return soma;
+  };
+
+  return calcularIterativo();
+
+};

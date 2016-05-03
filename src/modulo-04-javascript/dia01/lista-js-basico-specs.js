@@ -103,3 +103,27 @@ describe('Ex 4. Soma diferentona', function() {
     expect(adicionar(-3)(2.5)).toBe(-0.5);
   });
 });
+
+describe('Ex 5. Fibona', function() {
+  it('quando informa 1 = 1', function() {
+    expect(fiboSum(1)).toBe(1);
+  });
+  it('quando informa 2 = 1+1', function() {
+    expect(fiboSum(2)).toBe(2);
+  });
+  it('quando informa 3 = 1+1+2', function() {
+    expect(fiboSum(3)).toBe(4);
+  });
+  it('quando informa 4 = 1+1+2+3', function() {
+    expect(fiboSum(4)).toBe(7);
+  });
+  it('quando informa 5 = 1+1+2+3+5', function() {
+    expect(fiboSum(5)).toBe(12);
+  });
+  it('quando informa 6 = 1+1+2+3+5+8', function() {
+    expect(fiboSum(6)).toBe(20);
+  });
+  it('quando informa 7 = 1+1+2+3+5+8+13', function() {
+    expect(fiboSum(7)).toBe(33);
+  });
+});
