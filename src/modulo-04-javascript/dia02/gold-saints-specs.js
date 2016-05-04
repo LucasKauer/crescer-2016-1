@@ -9,7 +9,6 @@ describe('Ex 1. Doadores de sangue', function() {
 
 describe('Ex 2. Canivete suíço', function() {
   it('obterCavaleiroComMaisGolpes retorna Shaka', function() {
-    console.log(JSON.stringify(goldSaints[5]));
     var cavaleiroComMaisGolpes = JSON.parse('{"id":6,"nome":"Shaka","dataNascimento":"1967-09-19T03:00:00.000Z","alturaCm":182,"pesoLb":149.914338,"signo":"Virgem","tipoSanguineo":"AB","localNascimento":"Índia","localTreinamento":"Ganges, Índia","golpes":["Rendição Divina","Ciclo das 6 Existências","Tesouro do Céu","Invocação dos Espíritos","Ohm!","Kahn!"],"imagens":[{"url":"https://cloud.githubusercontent.com/assets/526075/14900695/4a5675dc-0d68-11e6-8396-2a775a2b0c39.png","isThumb":true}]}');
     expect(cavaleiroComMaisGolpes).toEqual(obterCavaleiroComMaisGolpes());
   });
