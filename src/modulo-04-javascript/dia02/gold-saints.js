@@ -16,7 +16,7 @@ var cmParaMetros = function(cm) {
 };
 
 var lbParaKilos = function(lb) {
-  return lb / 2.2046;
+  return lb / 2.2046; // 2.20462262
 };
 
 var apenasComPesoDefinido = function(e) {
@@ -124,4 +124,13 @@ function obterIMC() {
       var imc = lbParaKilos(e.pesoLb) / Math.pow(cmParaMetros(e.alturaCm), 2);
       return formatarNumero(imc);
     });
+};
+
+// Ex 8.
+function obterSobrepeso() {
+  var imcs = obterIMC();
+  return goldSaints.filter(function(e, indice) {
+    var imc = imcs[indice];
+    return 25 <= imc && imc < 30;
+  });
 };

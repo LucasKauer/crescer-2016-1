@@ -52,3 +52,10 @@ describe('Ex 7. IMC', function() {
     expect(imcs).toEqual(obterIMC());
   });
 });
+
+describe('Ex 8. Sobrepeso', function() {
+  it('obterSobrepeso retorna array com Aldebaran apenas', function() {
+    var aldebaran = JSON.parse('{"id":2,"nome":"Aldebaran","dataNascimento":"1967-05-08T03:00:00.000Z","alturaCm":210,"pesoLb":286.600941,"signo":"Touro","tipoSanguineo":"B","localNascimento":"Brasil","localTreinamento":"Brasil","golpes":["Grande Chifre"],"imagens":[{"url":"https://cloud.githubusercontent.com/assets/526075/14900419/dca83616-0d66-11e6-9757-8d07311e6999.png","isThumb":true}]}');
+    expect([ aldebaran ]).toEqual(obterSobrepeso());
+  });
+});
