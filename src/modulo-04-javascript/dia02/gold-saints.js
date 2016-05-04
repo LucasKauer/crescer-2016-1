@@ -17,6 +17,9 @@ var lbParaKilos = function(lb) {
   return lb / 2.2046;
 };
 
+var apenasComPesoDefinido = function(e) {
+  return typeof e.pesoLb !== 'undefined';
+};
 // Ex 1.
 function obterDoadores() {
   return goldSaints.filter(function(e) {
@@ -79,9 +82,7 @@ function obterAlturaMediana() {
 function obterPesoMedio() {
   var cavaleirosComPeso = 0;
   var mediaPeso = goldSaints
-    .filter(function(e) {
-      return typeof e.pesoLb !== 'undefined';
-    })
+    .filter(apenasComPesoDefinido)
     .map(function(e) {
       cavaleirosComPeso++;
       return e.pesoLb;
@@ -97,9 +98,7 @@ function obterPesoMedio() {
 function obterPesoMedioDoadores() {
   var cavaleirosComPeso = 0;
   var mediaPeso = obterDoadores()
-    .filter(function(e) {
-      return typeof e.pesoLb !== 'undefined';
-    })
+    .filter(apenasComPesoDefinido)
     .map(function(e) {
       cavaleirosComPeso++;
       return e.pesoLb;
