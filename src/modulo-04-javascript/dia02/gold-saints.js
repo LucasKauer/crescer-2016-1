@@ -6,7 +6,7 @@ console.log(goldSaints);
 /* Funções utilitárias para re-aproveitar código */
 
 var formatarNumero = function(n) {
-  // Cuidado com toFixed, ex:
+  // Cuidado com toFixed e toPrecision, ex:
   // parseFloat((184.5 / 100).toFixed(2))
   return Math.round(n * 100) / 100;
 };
