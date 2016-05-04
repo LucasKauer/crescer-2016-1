@@ -87,9 +87,9 @@ function obterAlturaMediana() {
 };
 
 // Ex 6a.
-function obterPesoMedio() {
+function obterPesoMedio(cavaleiros) {
   var cavaleirosComPeso = 0;
-  var mediaPeso = goldSaints
+  var mediaPeso = (cavaleiros || goldSaints)
     .filter(apenasComPesoDefinido)
     .map(function(e) {
       cavaleirosComPeso++;
@@ -104,18 +104,8 @@ function obterPesoMedio() {
 
 // Ex 6b.
 function obterPesoMedioDoadores() {
-  var cavaleirosComPeso = 0;
-  var mediaPeso = obterDoadores()
-    .filter(apenasComPesoDefinido)
-    .map(function(e) {
-      cavaleirosComPeso++;
-      return e.pesoLb;
-    })
-    .reduce(function(acc, e) {
-      return acc + e;
-    }, 0) / cavaleirosComPeso;
-
-  return formatarNumero(lbParaKilos(mediaPeso));
+  var doadores = obterDoadores();
+  return obterPesoMedio(doadores);
 };
 
 // Ex 7.
