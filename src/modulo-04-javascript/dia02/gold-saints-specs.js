@@ -45,3 +45,10 @@ describe('Ex 6b. Peso médio doadores', function() {
     expect(80.67).toEqual(obterPesoMedioDoadores());
   });
 });
+
+describe('Ex 7. IMC', function() {
+  it('obterIMC retorna todos IMC dos cavaleiros com pesos definidos', function() {
+    var imcs = [ 22.64, 29.48, 24.62, 24.22, 24.84, 20.53, 24.54, 24.31, 23.99, 22.45, 21.5 ];
+    expect(imcs).toEqual(obterIMC());
+  });
+});

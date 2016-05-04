@@ -114,3 +114,14 @@ function obterPesoMedioDoadores() {
 
   return formatarNumero(lbParaKilos(mediaPeso));
 };
+
+// Ex 7.
+function obterIMC() {
+  return goldSaints
+    .filter(apenasComPesoDefinido)
+    .map(function(e) {
+      // IMC = pesoKilos + alturaMetros^2
+      var imc = lbParaKilos(e.pesoLb) / Math.pow(cmParaMetros(e.alturaCm), 2);
+      return formatarNumero(imc);
+    });
+};
