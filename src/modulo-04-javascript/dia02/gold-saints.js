@@ -12,6 +12,10 @@ var cmParaMetros = function(cm) {
   return cm / 100;
 };
 
+var lbParaKilos = function(lb) {
+  return lb / 2.2046;
+};
+
 // Ex 1.
 function obterDoadores() {
   return goldSaints.filter(function(e) {
@@ -68,4 +72,22 @@ function obterAlturaMediana() {
   var elementoCentral = goldSaints.length / 2;
   var medianaAltura = (goldSaints[elementoCentral].alturaCm + goldSaints[elementoCentral - 1].alturaCm) / 2;
   return cmParaMetros(medianaAltura);
+};
+
+// Ex 6a.
+function obterPesoMedio() {
+  var cavaleirosComPeso = 0;
+  var mediaPeso = goldSaints
+    .filter(function(e) {
+      return typeof e.pesoLb !== 'undefined';
+    })
+    .map(function(e) {
+      cavaleirosComPeso++;
+      return e.pesoLb;
+    })
+    .reduce(function(acc, e) {
+      return acc + e;
+    }, 0) / cavaleirosComPeso;
+
+  return formatarNumero(lbParaKilos(mediaPeso));
 };
