@@ -20,3 +20,26 @@ function obterCavaleiroComMaisGolpes() {
   })[0];
 };
 
+// Ex 3
+function obterMesesComMaisAniversarios() {
+  // 1. Calculando o número de aniversários por mês
+  var aniversariosPorMes = {};
+  goldSaints.forEach(function(e) {
+    var campo = new Date(e.dataNascimento).getMonth();
+    aniversariosPorMes[campo] = aniversariosPorMes[campo] ? ++aniversariosPorMes[campo] : 1;
+  });
+  // 2. Obtendo as quantidades dos meses que possuem aniversário e o maior número de aniversários em um mês
+  var mesesComAniversario = Object.keys(aniversariosPorMes);
+  var qtds = mesesComAniversario.map(function(i) { return aniversariosPorMes[i]; });
+  var max = Math.max.apply(this, qtds);
+  // 3. Filtrando apenas os meses que tem o maior número de aniversário e traduzindo para português.
+  var mesesPtBr = [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ];
+  return mesesComAniversario
+    .filter(function(i) {
+      return aniversariosPorMes[i] === max;
+    })
+    .map(function(e) {
+      // parseInt: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+      return mesesPtBr[parseInt(e)];
+    });
+};

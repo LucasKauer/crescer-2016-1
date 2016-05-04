@@ -14,3 +14,10 @@ describe('Ex 2. Canivete suíço', function() {
     expect(cavaleiroComMaisGolpes).toEqual(obterCavaleiroComMaisGolpes());
   });
 });
+
+describe('Ex 3. Aniversários', function() {
+  it('obterMesesComMaisAniversarios retorna Março, Maio e Novembro', function() {
+    var esperado = [ 'Março', 'Maio', 'Novembro' ];
+    expect(esperado).toEqual(obterMesesComMaisAniversarios());
+  });
+});
