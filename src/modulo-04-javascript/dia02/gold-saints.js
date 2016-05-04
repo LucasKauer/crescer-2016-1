@@ -78,9 +78,12 @@ function obterAlturaMedia() {
 // Ex 5.
 function obterAlturaMediana() {
   // Mediana de um conjunto par é a média dos elementos centrais
-  var elementoCentral = goldSaints.length / 2;
-  var medianaAltura = (goldSaints[elementoCentral].alturaCm + goldSaints[elementoCentral - 1].alturaCm) / 2;
-  return cmParaMetros(medianaAltura);
+  var goldSaintsOrdenados = goldSaints.concat().sort(function(a, b) {
+    return a.alturaCm - b.alturaCm;
+  });
+  var elementoCentral = goldSaintsOrdenados.length / 2;
+  var medianaAltura = (goldSaintsOrdenados[elementoCentral].alturaCm + goldSaintsOrdenados[elementoCentral - 1].alturaCm) / 2;
+  return formatarNumero(cmParaMetros(medianaAltura));
 };
 
 // Ex 6a.

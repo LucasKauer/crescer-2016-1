@@ -28,8 +28,8 @@ describe('Ex 4. Altura média', function() {
 });
 
 describe('Ex 5. Altura mediana', function() {
-  it('obterAlturaMediana retorna 1.76', function() {
-    expect(1.76).toEqual(obterAlturaMediana());
+  it('obterAlturaMediana retorna 1.85', function() {
+    expect(1.85).toEqual(obterAlturaMediana());
   });
 });
 
