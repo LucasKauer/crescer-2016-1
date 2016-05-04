@@ -61,3 +61,11 @@ function obterAlturaMedia() {
   }, 0) / goldSaints.length;
   return formatarNumero(cmParaMetros(mediaAltura));
 };
+
+// Ex 5.
+function obterAlturaMediana() {
+  // Mediana de um conjunto par é a média dos elementos centrais
+  var elementoCentral = goldSaints.length / 2;
+  var medianaAltura = (goldSaints[elementoCentral].alturaCm + goldSaints[elementoCentral - 1].alturaCm) / 2;
+  return cmParaMetros(medianaAltura);
+};
