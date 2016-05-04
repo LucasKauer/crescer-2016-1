@@ -16,7 +16,7 @@ var cmParaMetros = function(cm) {
 };
 
 var lbParaKilos = function(lb) {
-  return lb / 2.2046; // 2.20462262
+  return lb / 2.20462262;
 };
 
 var apenasComPesoDefinido = function(e) {
