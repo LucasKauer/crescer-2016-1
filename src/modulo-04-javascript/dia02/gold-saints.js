@@ -20,7 +20,7 @@ function obterCavaleiroComMaisGolpes() {
   })[0];
 };
 
-// Ex 3
+// Ex 3.
 function obterMesesComMaisAniversarios() {
   // 1. Calculando o número de aniversários por mês
   var aniversariosPorMes = {};
