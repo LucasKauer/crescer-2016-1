@@ -120,7 +120,7 @@ function obterIMC() {
   return goldSaints
     .filter(apenasComPesoDefinido)
     .map(function(e) {
-      // IMC = pesoKilos + alturaMetros^2
+      // IMC = pesoKilos / alturaMetros^2
       var imc = lbParaKilos(e.pesoLb) / Math.pow(cmParaMetros(e.alturaCm), 2);
       return formatarNumero(imc);
     });
