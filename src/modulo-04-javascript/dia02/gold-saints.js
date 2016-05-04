@@ -4,7 +4,8 @@ var goldSaints = JSON.parse('[{"id":1,"nome":"Mu","dataNascimento":"1967-03-27T0
 console.log(goldSaints);
 
 var formatarNumero = function(n) {
-  // Não surtem, parseFloat(n.toFixed(2)) também resolve, mas... (explicação em aula :))
+  // Cuidado com toFixed, ex:
+  // parseFloat((184.5 / 100).toFixed(2))
   return Math.round(n * 100) / 100;
 };
 
@@ -78,6 +79,24 @@ function obterAlturaMediana() {
 function obterPesoMedio() {
   var cavaleirosComPeso = 0;
   var mediaPeso = goldSaints
+    .filter(function(e) {
+      return typeof e.pesoLb !== 'undefined';
+    })
+    .map(function(e) {
+      cavaleirosComPeso++;
+      return e.pesoLb;
+    })
+    .reduce(function(acc, e) {
+      return acc + e;
+    }, 0) / cavaleirosComPeso;
+
+  return formatarNumero(lbParaKilos(mediaPeso));
+};
+
+// Ex 6b.
+function obterPesoMedioDoadores() {
+  var cavaleirosComPeso = 0;
+  var mediaPeso = obterDoadores()
     .filter(function(e) {
       return typeof e.pesoLb !== 'undefined';
     })

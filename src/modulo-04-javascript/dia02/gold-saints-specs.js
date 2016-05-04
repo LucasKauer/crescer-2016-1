@@ -39,3 +39,9 @@ describe('Ex 6a. Peso médio', function() {
     expect(84.27).toEqual(obterPesoMedio());
   });
 });
+
+describe('Ex 6b. Peso médio doadores', function() {
+  it('obterPesoMedioDoadores retorna 80.67', function() {
+    expect(80.67).toEqual(obterPesoMedioDoadores());
+  });
+});
