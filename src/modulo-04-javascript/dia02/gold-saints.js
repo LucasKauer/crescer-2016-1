@@ -11,8 +11,8 @@ var formatarNumero = function(n) {
   return Math.round(n * 100) / 100;
 };
 
-var cmParaMetros = function(cm) {
-  return cm / 100;
+Number.prototype.converterParaMetros = function() {
+  return this / 100;
 };
 
 var lbParaKilos = function(lb) {
@@ -72,7 +72,7 @@ function obterAlturaMedia() {
   var mediaAltura = goldSaints.reduce(function(acc, e) {
     return acc + e.alturaCm;
   }, 0) / goldSaints.length;
-  return formatarNumero(cmParaMetros(mediaAltura));
+  return formatarNumero(mediaAltura.converterParaMetros());
 };
 
 // Ex 5.
@@ -83,7 +83,7 @@ function obterAlturaMediana() {
   });
   var elementoCentral = goldSaintsOrdenados.length / 2;
   var medianaAltura = (goldSaintsOrdenados[elementoCentral].alturaCm + goldSaintsOrdenados[elementoCentral - 1].alturaCm) / 2;
-  return formatarNumero(cmParaMetros(medianaAltura));
+  return formatarNumero(medianaAltura.converterParaMetros());
 };
 
 // Ex 6a.
@@ -114,7 +114,7 @@ function obterIMC() {
     .filter(apenasComPesoDefinido)
     .map(function(e) {
       // IMC = pesoKilos / alturaMetros^2
-      var imc = lbParaKilos(e.pesoLb) / Math.pow(cmParaMetros(e.alturaCm), 2);
+      var imc = lbParaKilos(e.pesoLb) / Math.pow(e.alturaCm.converterParaMetros(), 2);
       return formatarNumero(imc);
     });
 };
