@@ -16,8 +16,9 @@ $(function() {
     var $imagensCavaleiros = $('#cavaleiros img');
     // detach: https://api.jquery.com/detach/
     // parent: https://api.jquery.com/parent/
+    // traversing: https://api.jquery.com/category/traversing/tree-traversal/
     // estamos sempre resetando os list-itens
-    $imagensCavaleiros.parent().detach();
+    //$imagensCavaleiros.parent().detach();
 
     // carregar imagens sem ordem (browser dispara requests em paralelo)
     /*goldSaints.forEach(function(e) {
