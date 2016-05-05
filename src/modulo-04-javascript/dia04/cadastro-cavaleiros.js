@@ -10,31 +10,12 @@ $(function() {
 
   var $frmNovoCavaleiro = $('#frmNovoCavaleiro');
   $frmNovoCavaleiro.submit(function(e) {
+    // console.log($frmNovoCavaleiro.serialize());
     
-    // FormData: https://developer.mozilla.org/en/docs/Web/API/FormData
-    var formData = new FormData($(this)[0]);
-    var cavaleiro = {};
-    for (var entry of formData.entries()) {
-      cavaleiro[entry[0]] = entry[1];
-    }
-    console.log($frmNovoCavaleiro.serialize());
-    var nome = formData.get('nome');
-    var urlImagem = formData.get('urlImagem');
-    $('#cavaleiros')
-      .append(
-        $('<li>').append(
-          $('<img>').attr('src', urlImagem).fadeIn()
-        )
-      );
-
-    goldSaints.push({
-      nome: nome,
-      imagens: [
-        { url: urlImagem, isThumb: true }
-      ]
-    });
-
+    var cavaleiro = converterFormParaCavaleiro($frmNovoCavaleiro);
+    goldSaints.push(cavaleiro);
     localStorage['cavaleiros'] = JSON.stringify(goldSaints);
+    renderizarCavaleiroNaTela(cavaleiro);
 
     return e.preventDefault();
   });
@@ -70,3 +51,37 @@ $(function() {
   })(0);    
 
 });
+
+function converterFormParaCavaleiro($form) {
+
+  // Obtém o objeto nativo Form através da posição 0 no objeto jQuery e cria um FormData a partir dele
+  var formData = new FormData($form[0]);
+
+  return {
+    nome: formData.get('nome'),
+    // solução sem FormData:
+    // tipoSanguineo: $('#slTipoSanguineo :selected').val()
+    tipoSanguineo: formData.get('tipoSanguineo'),
+    imagens: [
+      { url: formData.get('urlImagem'), isThumb: true }
+    ]
+  };
+
+  // FormData: https://developer.mozilla.org/en/docs/Web/API/FormData
+  /*
+  var $frmNovoCavaleiro = $('#frmNovoCavaleiro');
+  var formData = new FormData($frmNovoCavaleiro[0]);
+  var cavaleiro = {};
+  for (var entry of formData.entries()) {
+    cavaleiro[entry[0]] = entry[1];
+  }*/
+};
+
+function renderizarCavaleiroNaTela(cavaleiro) {
+  $('#cavaleiros')
+    .append(
+      $('<li>').append(
+        $('<img>').attr('src', cavaleiro.imagens[0].url).fadeIn()
+      )
+    );
+};
