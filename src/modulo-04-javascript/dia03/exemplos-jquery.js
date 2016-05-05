@@ -11,62 +11,60 @@ console.log(goldSaints);
 $(function() {
   // caiu aqui significa que montou todos objetos que representam o html
 
-    $('button[name=btnCarregaCavaleiros]').click(function() {
+  $('button[name=btnCarregaCavaleiros]').click(function() {
 
-      var $imagensCavaleiros = $('#cavaleiros img');
-      // detach: https://api.jquery.com/detach/
-      // parent: https://api.jquery.com/parent/
-      // estamos sempre resetando os list-itens
-      $imagensCavaleiros.parent().detach();
+    var $imagensCavaleiros = $('#cavaleiros img');
+    // detach: https://api.jquery.com/detach/
+    // parent: https://api.jquery.com/parent/
+    // estamos sempre resetando os list-itens
+    $imagensCavaleiros.parent().detach();
 
-      // carregar imagens sem ordem (browser dispara requests em paralelo)
-      /*goldSaints.forEach(function(e) {
-        var $imgMu = $('<img>')
-          .attr('src', e.imagens[0].url)
-          .attr('id', e.id)
-          .attr('alt', e.nome);
-        $('#cavaleiros').append( $('<li>').append($imgMu) );
-      });*/
+    // carregar imagens sem ordem (browser dispara requests em paralelo)
+    /*goldSaints.forEach(function(e) {
+      var $imgMu = $('<img>')
+        .attr('src', e.imagens[0].url)
+        .attr('id', e.id)
+        .attr('alt', e.nome);
+      $('#cavaleiros').append( $('<li>').append($imgMu) );
+    });*/
 
-      // carregar imagens sequencialmente um após o outro
-      // de forma recursiva, cada vez que o evento onload disparar, carregamos a imagem do índice atual e vamos para a próxima.
-      (function carregaImg(indice) {
-        var cavaleiro = goldSaints[indice];
-        var imgCavaleiro = new Image();
-        imgCavaleiro.src = cavaleiro.imagens[0].url;
-        imgCavaleiro.alt = cavaleiro.nome;
-        imgCavaleiro.id = cavaleiro.id;
-        imgCavaleiro.onload = function() {
-          // appendTo é o inverso do append, à esquerda o elemento que vai ser adicionado e à direita o elemento pai que o receberá
-          // neste caso o appendTo nos permite chamar o fadeIn ao final da cadeia de chamadas, ficando mais legível (vide caso abaixo).
-          $(imgCavaleiro).appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
-          // mas poderia ter sido com o append também, só que precisaríamos chamar o fadeIn dentro da cadeia de chamadas mas não significa que ele executaria antes do restante dos appends.
-          // $('#cavaleiros').append($('<li>').append($(imgCavaleiro).fadeIn()));
-          if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
-        };
-      })(0);
+    // carregar imagens sequencialmente um após o outro
+    // de forma recursiva, cada vez que o evento onload disparar, carregamos a imagem do índice atual e vamos para a próxima.
+    (function carregaImg(indice) {
+      var cavaleiro = goldSaints[indice];
+      var imgCavaleiro = new Image();
+      imgCavaleiro.src = cavaleiro.imagens[0].url;
+      imgCavaleiro.alt = cavaleiro.nome;
+      imgCavaleiro.id = cavaleiro.id;
+      imgCavaleiro.onload = function() {
+        // appendTo é o inverso do append, à esquerda o elemento que vai ser adicionado e à direita o elemento pai que o receberá
+        // neste caso o appendTo nos permite chamar o fadeIn ao final da cadeia de chamadas, ficando mais legível (vide caso abaixo).
+        $(imgCavaleiro).appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
+        // mas poderia ter sido com o append também, só que precisaríamos chamar o fadeIn dentro da cadeia de chamadas mas não significa que ele executaria antes do restante dos appends.
+        // $('#cavaleiros').append($('<li>').append($(imgCavaleiro).fadeIn()));
+        if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
+      };
+    })(0);
 
-      $imagensCavaleiros.each(function(i, elem) {
-        //console.log(i, elem);
-      });
-
-      $imagensCavaleiros.click(function(i) {
-        // Salvando o resultado da função $ com o this neste contexto.
-        var self = $(this);
-        var nome = self.attr('alt');
-        var altura = goldSaints.filter(function(elem) {
-          // como estamos usando ===, devemos fazer parseInt
-          // pois '2' === 2 é false
-          // Lembrando que '2' == 2 é true
-          return elem.id === parseInt(self.attr('id'));
-        })[0].alturaCm;
-        var $headers = $('#headers');
-        $headers.append($('<h1>').text( nome ));
-        $headers.append($('<h1>').text( altura / 100 ));
-      });
-
+    $imagensCavaleiros.each(function(i, elem) {
+      //console.log(i, elem);
     });
 
+    $imagensCavaleiros.click(function(i) {
+      // Salvando o resultado da função $ com o this neste contexto.
+      var self = $(this);
+      var nome = self.attr('alt');
+      var altura = goldSaints.filter(function(elem) {
+        // como estamos usando ===, devemos fazer parseInt
+        // pois '2' === 2 é false
+        // Lembrando que '2' == 2 é true
+        return elem.id === parseInt(self.attr('id'));
+      })[0].alturaCm;
+      var $headers = $('#headers');
+      $headers.append($('<h1>').text( nome ));
+      $headers.append($('<h1>').text( altura / 100 ));
+    });
 
+  });
 
 });
