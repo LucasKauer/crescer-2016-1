@@ -20,11 +20,13 @@ $(function() {
         $('#cavaleiros').append( $('<li>').append($imgMu) );
       });
 
-      $('#cavaleiros img').each(function(i, elem) {
+      var $imagensCavaleiros = $('#cavaleiros img');
+
+      $imagensCavaleiros.each(function(i, elem) {
         //console.log(i, elem);
       });
 
-      $('#cavaleiros img').click(function(i) {
+      $imagensCavaleiros.click(function(i) {
         var self = $(this);
         var nome = self.attr('alt');
         var altura = goldSaints.filter(function(elem) {
