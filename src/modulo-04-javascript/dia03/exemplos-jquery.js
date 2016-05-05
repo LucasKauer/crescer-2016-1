@@ -12,15 +12,39 @@ $(function() {
   // caiu aqui significa que montou todos objetos que representam o html
 
     $('button[name=btnCarregaCavaleiros]').click(function() {
-      goldSaints.forEach(function(e) {
+
+      var $imagensCavaleiros = $('#cavaleiros img');
+      // detach: https://api.jquery.com/detach/
+      // parent: https://api.jquery.com/parent/
+      // estamos sempre resetando os list-itens
+      $imagensCavaleiros.parent().detach();
+
+      // carregar imagens sem ordem (browser dispara requests em paralelo)
+      /*goldSaints.forEach(function(e) {
         var $imgMu = $('<img>')
           .attr('src', e.imagens[0].url)
           .attr('id', e.id)
           .attr('alt', e.nome);
         $('#cavaleiros').append( $('<li>').append($imgMu) );
-      });
+      });*/
 
-      var $imagensCavaleiros = $('#cavaleiros img');
+      // carregar imagens sequencialmente um após o outro
+      // de forma recursiva, cada vez que o evento onload disparar, carregamos a imagem do índice atual e vamos para a próxima.
+      (function carregaImg(indice) {
+        var cavaleiro = goldSaints[indice];
+        var imgCavaleiro = new Image();
+        imgCavaleiro.src = cavaleiro.imagens[0].url;
+        imgCavaleiro.alt = cavaleiro.nome;
+        imgCavaleiro.id = cavaleiro.id;
+        imgCavaleiro.onload = function() {
+          // appendTo é o inverso do append, à esquerda o elemento que vai ser adicionado e à direita o elemento pai que o receberá
+          // neste caso o appendTo nos permite chamar o fadeIn ao final da cadeia de chamadas, ficando mais legível (vide caso abaixo).
+          $(imgCavaleiro).appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
+          // mas poderia ter sido com o append também, só que precisaríamos chamar o fadeIn dentro da cadeia de chamadas mas não significa que ele executaria antes do restante dos appends.
+          // $('#cavaleiros').append($('<li>').append($(imgCavaleiro).fadeIn()));
+          if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
+        };
+      })(0);
 
       $imagensCavaleiros.each(function(i, elem) {
         //console.log(i, elem);
