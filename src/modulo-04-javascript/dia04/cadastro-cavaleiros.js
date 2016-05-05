@@ -18,7 +18,7 @@ $(function() {
     imgCavaleiro.onload = function() {
       var $img = $(imgCavaleiro);
       $img.appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
-      $img.click(function() {
+      $img.on('click mouseleave', function() {
         var self = $(this);
         var nome = self.attr('alt');
         var altura = goldSaints.filter(function(elem) {
@@ -28,6 +28,9 @@ $(function() {
         $detalhesCavaleiro.append($('<h3>').text( nome ));
         $detalhesCavaleiro.append($('<h3>').text( altura / 100 ));
       });
+      setTimeout(function() {
+        $img.off('mouseleave');
+      }, 5000);
       if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
     };
   })(0);    
