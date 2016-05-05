@@ -10,10 +10,16 @@ $(function() {
 
   var $frmNovoCavaleiro = $('#frmNovoCavaleiro');
   $frmNovoCavaleiro.submit(function(e) {
-    console.log($(this));
+    
+    // FormData: https://developer.mozilla.org/en/docs/Web/API/FormData
+    var formData = new FormData($(this)[0]);
+    var cavaleiro = {};
+    for (var entry of formData.entries()) {
+      cavaleiro[entry[0]] = entry[1];
+    }
     console.log($frmNovoCavaleiro.serialize());
-    var nome = $('#txtNomeCavaleiro').val();
-    var urlImagem = $('#txtUrlImagem').val();
+    var nome = formData.get('nome');
+    var urlImagem = formData.get('urlImagem');
     $('#cavaleiros')
       .append(
         $('<li>').append(
