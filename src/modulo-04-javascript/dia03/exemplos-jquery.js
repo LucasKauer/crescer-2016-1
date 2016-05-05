@@ -27,9 +27,13 @@ $(function() {
       });
 
       $imagensCavaleiros.click(function(i) {
+        // Salvando o resultado da função $ com o this neste contexto.
         var self = $(this);
         var nome = self.attr('alt');
         var altura = goldSaints.filter(function(elem) {
+          // como estamos usando ===, devemos fazer parseInt
+          // pois '2' === 2 é false
+          // Lembrando que '2' == 2 é true
           return elem.id === parseInt(self.attr('id'));
         })[0].alturaCm;
         var $headers = $('#headers');
