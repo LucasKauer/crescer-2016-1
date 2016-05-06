@@ -9,6 +9,11 @@ var ultimoIdInserido = parseInt(localStorage['ultimoIdInserido']) || goldSaints[
 
 $(function() {
 
+  // iniciando o plugin e informando a máscara.
+  $('#txtDtNascimento').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+
   var $frmNovoCavaleiro = $('#frmNovoCavaleiro');
   $frmNovoCavaleiro.submit(function(e) {
     // console.log($frmNovoCavaleiro.serialize());
@@ -87,7 +92,9 @@ function converterFormParaCavaleiro($form) {
 
   // Obtém o objeto nativo Form através da posição 0 no objeto jQuery e cria um FormData a partir dele
   var formData = new FormData($form[0]);
-  var partesData = formData.get('dataNascimento').split('/');
+
+  // obtendo objeto date a partir do que foi escolhido.
+  var data = $('#txtDtNascimento').datepicker('getDate');
 
   var novasImagens = [];
   $('#novasImagens li').each(function(i) {
@@ -108,9 +115,8 @@ function converterFormParaCavaleiro($form) {
     // tipoSanguineo: $('#slTipoSanguineo :selected').val()
     tipoSanguineo: formData.get('tipoSanguineo'),
     imagens: novasImagens,
-    // partesData[1] retorna o mês
-    // Date do JavaScript usa mês com índice zero.
-    dataNascimento: new Date(partesData[2], partesData[1] - 1, partesData[0]),
+    // toISOString: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+    dataNascimento: data.toISOString(),
     alturaCm: parseFloat(formData.get('alturaMetros')) * 100,
     pesoLb: parseFloat(formData.get('pesoKg')) * 2.20462262,
     signo: formData.get('signo'),
