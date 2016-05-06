@@ -1,0 +1,8 @@
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\obj\Debug\TerraMediaTest.csprojResolveAssemblyReference.cache
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\bin\Debug\TerraMediaTest.dll
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\bin\Debug\TerraMediaTest.pdb
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\bin\Debug\ConsoleApplication4.exe
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\bin\Debug\ConsoleApplication4.pdb
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\obj\Debug\TerraMediaTest.dll
+c:\users\bhr\documents\visual studio 2015\Projects\ConsoleApplication4\TerraMediaTest\obj\Debug\TerraMediaTest.pdb
