@@ -7,4 +7,5 @@
 
 ### Apostilas
 
-[Caelum](https://www.caelum.com.br/apostila-html-css-javascript/javascript-e-interatividade-na-web/)
+[JavaScript Caelum](https://www.caelum.com.br/apostila-html-css-javascript/javascript-e-interatividade-na-web/)
+[jQuery Caelum](https://www.caelum.com.br/apostila-html-css-javascript/jquery/)
