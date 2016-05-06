@@ -3,12 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Dia 04 - jQuery</title>
+    <link rel="stylesheet" type="text/css" href="http://code.divshot.com/geo-bootstrap/swatch/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="estilo.css">
   </head>
   <body>
+    <marquee>Preencha os campos abaixo para cadastrar um novo cavaleiro de Atena!</marquee>
     <form id="frmNovoCavaleiro" method="POST">
+      <!-- nome -->
       <label for="txtNomeCavaleiro">Nome</label>
       <input id="txtNomeCavaleiro" type="text" name="nome" placeholder="Ex: Shiryu">
+      <!-- tipoSanguineo -->
       <label for="slTipoSanguineo">Tipo Sanguíneo</label>
       <select id="slTipoSanguineo" name="tipoSanguineo">
         <option selected>Selecione</option>
@@ -17,16 +22,51 @@
         <option value="AB">AB</option>
         <option value="O">O</option>
       </select>
-      <label for="txtUrlImagem">URL Imagem</label>
-      <input id="txtUrlImagem" type="text" name="urlImagem" placeholder="Ex: bit.ly/shiryu.png">
-      <!--<input type="submit" value="Cadastrar!">-->
-      <button type="submit">Cadastrar!</button>
+      <!-- dataNascimento -->
+      <label for="txtDtNascimento">Data de nascimento</label>
+      <input id="txtDtNascimento" type="text" name="dataNascimento" placeholder="Ex: 4/11/2016">
+      <!-- altura em metros -->
+      <label for="nbAlturaMetros">Altura (metros)</label>
+      <input id="nbAlturaMetros" type="number" name="alturaMetros" placeholder="Ex: 1.76" min="0" step="0.01"> <!-- step: https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/Input -->
+      <!-- peso em kilos -->
+      <label for="nbPesoKilos">Peso (kilos)</label>
+      <input id="nbPesoKilos" type="number" name="pesoKg" placeholder="Ex: 73.5" min="0" step="0.01">
+      <!-- signo -->
+      <label for="slSigno">Signo</label>
+      <select id="slSigno" name="signo">
+        <option selected>Selecione</option>
+        <option value="Áries">Áries</option>
+        <option value="Touro">Touro</option>
+        <option value="Gêmeos">Gêmeos</option>
+        <option value="Câncer">Câncer</option>
+        <option value="Leão">Leão</option>
+        <option value="Virgem">Virgem</option>
+        <option value="Libra">Libra</option>
+        <option value="Escorpião">Escorpião</option>
+        <option value="Sagitário">Sagitário</option>
+        <option value="Capricórnio">Capricórnio</option>
+        <option value="Aquário">Aquário</option>
+        <option value="Peixes">Peixes</option>
+      </select>
+      <!-- localNascimento -->
+      <label for="txtLocalNascimento">Local de nascimento</label>
+      <input id="txtLocalNascimento" type="text" name="localNascimento" placeholder="Ex: Porto Alegre">
+      <!-- localTreinamento -->
+      <label for="txtLocalTreinamento">Local de treinamento</label>
+      <input id="txtLocalTreinamento" type="text" name="localTreinamento" placeholder="Ex: Alvorada">
+      <!-- Adicionar golpe -->
+      <button id="btnAdicionarGolpe" type="button">Adicionar golpe...</button>
+      <ul id="novosGolpes"></ul>
+      <!-- Adicionar imagem -->
+      <button id="btnAdicionarImg" type="button">Adicionar imagem...</button>
+      <ul id="novasImagens"></ul>
+      <button type="submit" class="btn btn-primary">Cadastrar!</button>
     </form>
     <hr>
     <div id="detalhes-cavaleiro"></div>
     <ul id="cavaleiros"></ul>
     <script type="text/javascript" src="lib/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="utilitarios.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="cadastro-cavaleiros.js"></script>
   </body>
 </html>
