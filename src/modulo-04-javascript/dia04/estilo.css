@@ -3,14 +3,17 @@
   -webkit-padding-start: 0px;
   margin: 0px;
 }
+li {
+  list-style: none;
+}
 .azul {
   background-color: blue !important;
 }
 #cavaleiros li {
-  list-style: none;
   display: inline;
   margin: 0 10px 0 10px;
 }
 #cavaleiros img {
   display: none;
+  width: 10%;
 }

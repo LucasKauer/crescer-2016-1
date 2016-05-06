@@ -13,9 +13,12 @@ $(function() {
     // console.log($frmNovoCavaleiro.serialize());
     
     var cavaleiro = converterFormParaCavaleiro($frmNovoCavaleiro);
+    cavaleiro.id = goldSaints[goldSaints.length - 1].id + 1;
     goldSaints.push(cavaleiro);
     localStorage['cavaleiros'] = JSON.stringify(goldSaints);
     renderizarCavaleiroNaTela(cavaleiro);
+
+    $frmNovoCavaleiro[0].reset();
 
     return e.preventDefault();
   });
@@ -26,8 +29,10 @@ $(function() {
   (function carregaImg(indice) {
     var $detalhesCavaleiro = $('#detalhes-cavaleiro');
     var cavaleiro = goldSaints[indice];
+    // url padrão caso não tenha foto
+    var thumb = obterThumb(cavaleiro) || { url: 'https://i.ytimg.com/vi/trKzSiBOqt4/hqdefault.jpg' };
     var imgCavaleiro = new Image();
-    imgCavaleiro.src = cavaleiro.imagens[0].url;
+    imgCavaleiro.src = thumb.url;
     imgCavaleiro.alt = cavaleiro.nome;
     imgCavaleiro.id = cavaleiro.id;
     imgCavaleiro.onload = function() {
@@ -48,7 +53,19 @@ $(function() {
       }, 5000);
       if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
     };
-  })(0);    
+  })(0);
+
+  // Adicionando campos para imagens
+  var $novasImagens = $('#novasImagens');
+
+  $('#btnAdicionarImg').click(function() {
+    var $novoLi = gerarElementoLiComInputs();
+    $novasImagens.append($novoLi);
+  });
+
+  $('#btnAdicionarGolpe').click(function() {
+    $('#novosGolpes').append(gerarElementoLiComInputTexto());
+  });
 
 });
 
@@ -56,15 +73,36 @@ function converterFormParaCavaleiro($form) {
 
   // Obtém o objeto nativo Form através da posição 0 no objeto jQuery e cria um FormData a partir dele
   var formData = new FormData($form[0]);
+  var partesData = formData.get('dataNascimento').split('/');
+
+  var novasImagens = [];
+  $('#novasImagens li').each(function(i) {
+    novasImagens.push({
+      url: $(this).find('input[name=urlImagem]').val(),
+      isThumb: $(this).find('input[name=isThumb]').is(':checked')
+    });
+  });
+
+  var novosGolpes = [];
+  $('#novosGolpes li').each(function(i) {
+    novosGolpes.push($(this).find('input[name=golpe]').val());
+  });
 
   return {
     nome: formData.get('nome'),
     // solução sem FormData:
     // tipoSanguineo: $('#slTipoSanguineo :selected').val()
     tipoSanguineo: formData.get('tipoSanguineo'),
-    imagens: [
-      { url: formData.get('urlImagem'), isThumb: true }
-    ]
+    imagens: novasImagens,
+    // partesData[1] retorna o mês
+    // Date do JavaScript usa mês com índice zero.
+    dataNascimento: new Date(partesData[2], partesData[1] - 1, partesData[0]),
+    alturaCm: parseFloat(formData.get('alturaMetros')) * 100,
+    pesoLb: parseFloat(formData.get('pesoKg')) * 2.20462262,
+    signo: formData.get('signo'),
+    localNascimento: formData.get('localNascimento'),
+    localTreinamento: formData.get('localTreinamento'),
+    golpes: novosGolpes 
   };
 
   // FormData: https://developer.mozilla.org/en/docs/Web/API/FormData
@@ -81,7 +119,32 @@ function renderizarCavaleiroNaTela(cavaleiro) {
   $('#cavaleiros')
     .append(
       $('<li>').append(
-        $('<img>').attr('src', cavaleiro.imagens[0].url).fadeIn()
+        $('<img>').attr('src', obterThumb(cavaleiro).url).fadeIn()
       )
     );
 };
+
+function gerarElementoLiComInputs() {
+  var $novoTxt = $('<input>').attr('name', 'urlImagem').attr('type', 'text').attr('placeholder', 'Ex: bit.ly/shiryu.png');
+  var $novoCheckbox =
+    // Dentro de um label para pode vincular o texto ao checkbox
+    $('<label>').append(
+      $('<input>')
+      .attr('type', 'checkbox')
+      .attr('name', 'isThumb')
+      .attr('checked', 'checked')
+    ).append('É thumbnail?');
+  return $('<li>').append($novoTxt).append($novoCheckbox);
+};
+
+function gerarElementoLiComInputTexto() {
+  var $novoTxt = $('<input>').attr('name', 'golpe').attr('type', 'text').attr('placeholder', 'Ex: Pó de diamante');
+  return $('<li>').append($novoTxt);
+};
+
+function obterThumb(cavaleiro) {
+  // Pegando a primeira imagem que é thumbnail
+  return cavaleiro.imagens.filter(function(i) {
+    return i.isThumb;
+  })[0];
+}
