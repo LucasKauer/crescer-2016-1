@@ -11,9 +11,18 @@ li {
 }
 #cavaleiros li {
   display: inline;
+  overflow: hidden;
   margin: 0 10px 0 10px;
 }
 #cavaleiros img {
   display: none;
   width: 10%;
+}
+.btn-canto-imagem {
+  position: absolute;
+  margin-left: -32px;
+  width: 30px;
+  height: 30px;
+  padding: 0px;
+  font-size: inherit;
 }

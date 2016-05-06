@@ -29,30 +29,43 @@ $(function() {
   (function carregaImg(indice) {
     var $detalhesCavaleiro = $('#detalhes-cavaleiro');
     var cavaleiro = goldSaints[indice];
-    // url padrão caso não tenha foto
-    var thumb = obterThumb(cavaleiro) || { url: 'https://i.ytimg.com/vi/trKzSiBOqt4/hqdefault.jpg' };
-    var imgCavaleiro = new Image();
-    imgCavaleiro.src = thumb.url;
-    imgCavaleiro.alt = cavaleiro.nome;
-    imgCavaleiro.id = cavaleiro.id;
-    imgCavaleiro.onload = function() {
-      var $img = $(imgCavaleiro);
-      $img.appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
-      $img.on('click mouseleave', function() {
-        var self = $(this);
-        var nome = self.attr('alt');
-        var altura = goldSaints.filter(function(elem) {
-          return elem.id === parseInt(self.attr('id'));
-        })[0].alturaCm;        
-        $detalhesCavaleiro.children().detach();
-        $detalhesCavaleiro.append($('<h3>').text( nome ));
-        $detalhesCavaleiro.append($('<h3>').text( altura / 100 ));
-      });
-      setTimeout(function() {
-        $img.off('mouseleave');
-      }, 5000);
-      if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
-    };
+    if (typeof cavaleiro !== 'undefined') {
+      // url padrão caso não tenha foto
+      var thumb = obterThumb(cavaleiro) || { url: 'https://i.ytimg.com/vi/trKzSiBOqt4/hqdefault.jpg' };
+      var imgCavaleiro = new Image();
+      imgCavaleiro.src = thumb.url;
+      imgCavaleiro.alt = cavaleiro.nome;
+      imgCavaleiro.id = cavaleiro.id;
+      imgCavaleiro.onload = function() {
+        var $img = $(imgCavaleiro);
+        $img.appendTo($('<li>').appendTo($('#cavaleiros'))).fadeIn();
+        $img.on('click mouseleave', function() {
+          var self = $(this);
+          var nome = self.attr('alt');
+          var altura = goldSaints.filter(function(elem) {
+            return elem.id === parseInt(self.attr('id'));
+          })[0].alturaCm;        
+          $detalhesCavaleiro.children().detach();
+          $detalhesCavaleiro.append($('<h3>').text( nome ));
+          $detalhesCavaleiro.append($('<h3>').text( altura / 100 ));
+        });
+        setTimeout(function() {
+          $img.off('mouseleave');
+        }, 5000);
+
+        var $btnExcluir = $('<button>')
+          // É possível criar atributos novos, sugestão: utilizar o prefixo data-*
+          // Desta forma não quebramos a especificação do HTML de informar mais de um elemento com o mesmo id
+          .attr('data-cavaleiro-id', cavaleiro.id)
+          .addClass('btn btn-small btn-danger btn-canto-imagem')
+          .text('X');
+        $btnExcluir.insertAfter($img);
+        $btnExcluir.click(excluirCavaleiro);
+
+        if (indice < goldSaints.length - 1) carregaImg(indice + 1);  
+      };  
+    }
+    
   })(0);
 
   // Adicionando campos para imagens
@@ -147,4 +160,20 @@ function obterThumb(cavaleiro) {
   return cavaleiro.imagens.filter(function(i) {
     return i.isThumb;
   })[0];
+};
+
+function excluirCavaleiro() {
+  // Descobrindo o índice do cavaleiro no array a partir do seu id.
+  var idCavaleiro = parseInt($(this).attr('data-cavaleiro-id'));
+  var indiceParaRemover;
+  goldSaints.forEach(function(elem, i) {
+    if (elem.id === idCavaleiro) {
+      indiceParaRemover = i;
+      return;
+    }
+  });
+  $('#cavaleiros li').eq(indiceParaRemover).remove();
+  // splice: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+  goldSaints.splice(indiceParaRemover, 1);
+  localStorage['cavaleiros'] = JSON.stringify(goldSaints);
 }
