@@ -13,7 +13,7 @@ namespace ExercicioMegaman
             Vida = 100;
         }
 
-        public int Vida { get; private set; }
+        public int Vida { get; protected set; }
 
         protected virtual int Ataque
         {
