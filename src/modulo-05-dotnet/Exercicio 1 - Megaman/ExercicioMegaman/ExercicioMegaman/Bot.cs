@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExercicioMegaman
 {
-    class Bot
+    public class Bot : Robo
     {
     }
 }
