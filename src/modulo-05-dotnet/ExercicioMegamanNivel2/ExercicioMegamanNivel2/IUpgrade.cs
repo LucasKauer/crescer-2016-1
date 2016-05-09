@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExercicioMegaman
+namespace ExercicioMegamanNivel2
 {
-    class Program
+    public interface IUpgrade
     {
-        static void Main(string[] args)
-        {
-        }
+        int BonusAtaque { get; }
+        int BonusDefesa { get; }
     }
 }
