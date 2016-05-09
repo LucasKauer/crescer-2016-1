@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ExercicioMegaman")]
+[assembly: AssemblyTitle("ExercicioMegamanNivel3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ExercicioMegaman")]
+[assembly: AssemblyProduct("ExercicioMegamanNivel3")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("df618cd9-f286-4c5f-ba1e-cf60cef634f4")]
+[assembly: Guid("6ddbef74-f327-435c-b081-017168502888")]
 
 // Version information for an assembly consists of the following four values:
 //
