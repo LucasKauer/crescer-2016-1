@@ -1,0 +1,45 @@
+﻿@model ExemploModels.Models.ExemploSimplesModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div> 
+        <h1>Exemplo de Model Simples</h1>
+
+        <form action="/Exemplo/SalvarCadastroSimples" method="post">        
+            @Html.LabelFor(model => model.Nome)
+            @*<label>Nome: </label>*@
+            @Html.TextBoxFor(model => model.Nome, new { id = "IDCustom", @class = ".classeTest", data_propriedade_do_fabricio = "valor" })
+            @*<input type="text" id="Nome" name="Nome" />*@
+
+            @Html.LabelFor(model => model.Idade)
+            @*<label name="Teste">Idade: </label>*@
+            @Html.TextBoxFor(model => model.Idade)
+            @Html.ValidationMessageFor(model => model.Idade)
+            @*<input type="text" name="Idade" />*@
+           
+            <button type="submit">
+                Salvar
+            </button>
+        </form>
+    </div>
+
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>
