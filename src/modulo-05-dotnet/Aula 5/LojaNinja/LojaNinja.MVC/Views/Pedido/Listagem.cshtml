@@ -5,30 +5,30 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Cadastro")
+    <a href="~/Pedido/Manter" class="btn btn-primary">Cadastrar novo Pedido</a>    
 </p>
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DataPedido)
+            Data do Pedido
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataEntregaDesejada)
+            Data Entrega Des.
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomeProduto)
+            Produto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Valor)
+            Valor
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomeCliente)
+            Cliente
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cidade)
+            Cidade
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estado)
+            Estado
         </th>
         <th></th>
     </tr>
@@ -37,30 +37,30 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DataPedido)
+                @item.DataPedido
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataEntregaDesejada)
+                @item.DataEntregaDesejada
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeProduto)
+                @item.NomeProduto
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Valor)
+                @item.Valor
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeCliente)
+                @item.NomeCliente
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
+                @item.Cidade
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                @item.Estado
             </td>
             <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Ver Detalhes", "Detalhes", new { id = item.Id }) |
-                @Html.ActionLink("Remover", "Deletar", new { id = item.Id })
+                <a href="~/Pedido/Manter/@item.Id">Editar</a>
+                <a href="~/Pedido/Detalhes/@item.Id">Detalhes</a>
+                <a href="~/Pedido/Excluir/@item.Id">Remover</a>                
             </td>
         </tr>
     }

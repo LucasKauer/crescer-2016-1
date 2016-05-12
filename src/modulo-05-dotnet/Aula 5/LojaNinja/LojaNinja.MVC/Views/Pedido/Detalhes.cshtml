@@ -1,83 +1,87 @@
 ﻿@model LojaNinja.Dominio.Pedido
 
 @{
-    ViewBag.Title = "Listagem2";
+    ViewBag.Title = "Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Listagem2</h2>
+@if (@ViewBag.MensagemSucesso != null)
+{
+    <h3 class="alert alert-success">@ViewBag.MensagemSucesso</h3>
+}
 
 <div>
-    <h4>Pedido</h4>
+    <h1>Detalhes</h1>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.DataPedido)
+            Data Pedido:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataPedido)
+            @Model.DataPedido
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DataEntregaDesejada)
+            Data Desejada:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataEntregaDesejada)
+            @Model.DataEntregaDesejada
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NomeProduto)
+            Produto:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NomeProduto)
+            @Model.NomeProduto
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Valor)
+            Valor:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Valor)
+            @Model.Valor
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NomeCliente)
+            Cliente
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NomeCliente)
+            @Model.NomeCliente
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
+            Cidade
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cidade)
+            @Model.Cidade
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Estado)
+            Estado
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Estado)
+            @Model.Estado
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PedidoUrgente)
+            Urgente
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PedidoUrgente)
+            @Model.PedidoUrgente
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="~/Pedido/Manter/@Model.Id">Editar</a>
+    <a href="~/Pedido/Listagem">Listagem</a>
 </p>

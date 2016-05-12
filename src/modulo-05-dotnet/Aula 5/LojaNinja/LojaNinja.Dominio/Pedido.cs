@@ -22,9 +22,9 @@ namespace LojaNinja.Dominio
             Estado = estado;
 
             //DateTime.Now contaria as horas, minutos e segundos, isso inviabliziaria algumas validações a seguir
-            DataPedido = DateTime.Today; 
+            DataPedido = DateTime.Now; 
 
-            var diasRestantesParaConcluirEntrega = (dataEntregaDesejada - DataPedido).TotalDays;
+            var diasRestantesParaConcluirEntrega = (dataEntregaDesejada - DateTime.Today).TotalDays;
             ValidaPossibilidadeEntrega(diasRestantesParaConcluirEntrega);
             DefineUrgenciaDoPedido(diasRestantesParaConcluirEntrega);
         }
@@ -66,6 +66,14 @@ namespace LojaNinja.Dominio
         private void DefineUrgenciaDoPedido(double diasRestantesParaConcluirEntrega)
         {
             PedidoUrgente = diasRestantesParaConcluirEntrega < 7;
+        }
+
+        public void AtualizarId(int id)
+        {
+            if (Id != 0)
+                throw new InvalidOperationException("Esse objeto já possuia Id, portanto ele já havia sido salvo no banco. Não é possível alterar esse valor.");
+
+            Id = id;
         }
     }
 }

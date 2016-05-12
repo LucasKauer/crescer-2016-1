@@ -16,7 +16,7 @@ namespace LojaNinja.MVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Cadastro", id = UrlParameter.Optional }
+                defaults: new { controller = "Pedido", action = "Listagem", id = UrlParameter.Optional }
             );
         }
     }
