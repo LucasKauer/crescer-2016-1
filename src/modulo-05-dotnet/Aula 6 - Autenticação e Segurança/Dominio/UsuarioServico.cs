@@ -30,7 +30,7 @@ namespace Dominio
             // Bem, repositórios devem apenas buscar dados e guardar dados.
             // Aqui nós temos algo a mais, temos uma CRIPTOGRAFIA!
             // Criptografia não faz parte do repositório, por isso criamos essa classe intermediária.
-            Usuario usuarioEncontrado = _usuarioRepositorio.BuscarUsuarioPorAutenticacao(email, senha);
+            Usuario usuarioEncontrado = _usuarioRepositorio.BuscarUsuarioPorAutenticacao(email, senhaCriptografada);
 
             return usuarioEncontrado;
         }
