@@ -37,7 +37,9 @@ namespace Dominio
 
 
         // Utilizamos este cara para criptografar um texto.
-        // MD5 é muito simples s poderíamos utilizar SALT e etc, mas por hora, vamos simplificar.
+        // MD5 é muito simples e poderíamos utilizar SALT e etc, mas por hora, vamos simplificar.
+        // No futuro, se precisarmos utilizar esse método em um outro lugar, devemos refatorar e
+        // separá-lo em outra classe.
         private string Criptografar(string texto)
         {
             using (MD5 md5Hash = MD5.Create())
