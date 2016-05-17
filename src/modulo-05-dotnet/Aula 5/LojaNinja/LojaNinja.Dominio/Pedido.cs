@@ -46,6 +46,16 @@ namespace LojaNinja.Dominio
             PedidoUrgente = pedidoUrgente;
         }
 
+        /// <summary>
+        /// Construtor utilizado para pedidos alterados pelo usuário.
+        /// As regras aplicadas aqui devem ser as mesmas aplicadas na criação.
+        /// </summary>
+        public Pedido(int id, DateTime dataEntregaDesejada, string nomeProduto, decimal valor, TipoPagamento tipoPagamento, string nomeCliente, string cidade, string estado) 
+            : this(dataEntregaDesejada, nomeProduto, valor, tipoPagamento, nomeCliente, cidade, estado)
+        {
+            Id = id;
+        }
+
         public int Id { get; private set; }
         public DateTime DataPedido { get; private set; }
         public DateTime DataEntregaDesejada { get; private set; }

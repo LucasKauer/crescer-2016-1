@@ -20,13 +20,16 @@ namespace LojaNinja.MVC.Controllers
                 var pedido = repositorio.ObterPedidoPorId(id.Value);
 
                 var model = new PedidoModel()
-                //{
-                //    Id = pedido.Id,
-                //    DataEntrega = pedido.DataEntregaDesejada,
-                //    NomeCliente = pedido.NomeCliente,
-                //    //...
-                //}
-                ;
+                {
+                    Id = pedido.Id,
+                    DataEntrega = pedido.DataEntregaDesejada,
+                    NomeCliente = pedido.NomeCliente,
+                    Cidade = pedido.Cidade,
+                    Estado = pedido.Estado,
+                    TipoPagamento = pedido.TipoPagamento,
+                    NomeProduto = pedido.NomeProduto,
+                    Valor = pedido.Valor
+                };
 
                 return View("Manter", model);
             }
@@ -45,12 +48,17 @@ namespace LojaNinja.MVC.Controllers
             {
                 try
                 {
-                    var pedido = new Pedido(model.DataEntrega, model.NomeProduto, model.Valor, model.TipoPagamento, model.NomeCliente, model.Cidade, model.Estado);
-
-                    //if (model.Id.HasValue)
-                    //    repositorio.AtualizarPedido(pedido);
-                    //else
+                    Pedido pedido;
+                    if (model.Id.HasValue)
+                    {
+                        pedido = new Pedido(model.Id.Value, model.DataEntrega, model.NomeProduto, model.Valor, model.TipoPagamento, model.NomeCliente, model.Cidade, model.Estado);
+                        repositorio.AtualizarPedido(pedido);
+                    }
+                    else
+                    {
+                        pedido = new Pedido(model.DataEntrega, model.NomeProduto, model.Valor, model.TipoPagamento, model.NomeCliente, model.Cidade, model.Estado);
                         repositorio.IncluirPedido(pedido);
+                    }
 
                     ViewBag.MensagemSucesso = "Pedido salvo com sucesso!";
                     return View("Detalhes", pedido);
@@ -73,7 +81,7 @@ namespace LojaNinja.MVC.Controllers
 
         public ActionResult Listagem(string cliente, string produto)
         {
-            var pedidos = repositorio.ObterPedidos();
+            var pedidos = repositorio.ObterPedidoPorFiltro(cliente, produto);
 
             return View(pedidos);
         }
