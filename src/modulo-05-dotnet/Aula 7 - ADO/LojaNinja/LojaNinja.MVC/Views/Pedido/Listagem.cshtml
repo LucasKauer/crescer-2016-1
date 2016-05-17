@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LojaNinja.Dominio.Pedido>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a href="~/Pedido/Manter" class="btn btn-primary">Cadastrar novo Pedido</a>    
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            Data do Pedido
+        </th>
+        <th>
+            Data Entrega Des.
+        </th>
+        <th>
+            Produto
+        </th>
+        <th>
+            Valor
+        </th>
+        <th>
+            Cliente
+        </th>
+        <th>
+            Cidade
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.DataPedido
+            </td>
+            <td>
+                @item.DataEntregaDesejada
+            </td>
+            <td>
+                @item.NomeProduto
+            </td>
+            <td>
+                @item.Valor
+            </td>
+            <td>
+                @item.NomeCliente
+            </td>
+            <td>
+                @item.Cidade
+            </td>
+            <td>
+                @item.Estado
+            </td>
+            <td>
+                <a href="~/Pedido/Manter/@item.Id">Editar</a>
+                <a href="~/Pedido/Detalhes/@item.Id">Detalhes</a>
+                <a href="~/Pedido/Excluir/@item.Id">Remover</a>                
+            </td>
+        </tr>
+    }
+</table>
