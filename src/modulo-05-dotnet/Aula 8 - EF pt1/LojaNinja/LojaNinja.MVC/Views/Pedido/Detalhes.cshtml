@@ -1,0 +1,86 @@
+﻿@model LojaNinja.Dominio.Pedido
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.MensagemSucesso != null)
+{
+    <h3 class="alert alert-success">@ViewBag.MensagemSucesso</h3>
+}
+
+<div>
+    <h1>Detalhes</h1>
+    <hr />    
+    <dl class="dl-horizontal">
+        <dt>
+            Data Pedido:
+        </dt>
+
+        <dd>
+            @Model.DataPedido
+        </dd>
+
+        <dt>
+            Data Desejada:
+        </dt>
+
+        <dd>
+            @Model.DataEntregaDesejada
+        </dd>
+
+        <dt>
+            Produto:
+        </dt>
+
+        <dd>
+            @Model.NomeProduto
+        </dd>
+
+        <dt>
+            Valor:
+        </dt>
+
+        <dd>
+            @Model.Valor
+        </dd>
+
+        <dt>
+            Cliente
+        </dt>
+
+        <dd>
+            @Model.NomeCliente
+        </dd>
+
+        <dt>
+            Cidade
+        </dt>
+
+        <dd>
+            @Model.Cidade
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Model.Estado
+        </dd>
+
+        <dt>
+            Urgente
+        </dt>
+
+        <dd>
+            @Model.PedidoUrgente
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="~/Pedido/Manter/@Model.Id">Editar</a>
+    <a href="~/Pedido/Listagem">Listagem</a>
+</p>
