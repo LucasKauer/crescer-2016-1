@@ -29,7 +29,7 @@ namespace CdZ.Dominio
         /// <summary>
         /// Construtor utilizado para montar cavaleiros novos
         /// </summary>
-        public Cavaleiro(string nome, double alturaCm, double pesoLb, DateTime dataNascimento, Signo signo, TipoSanguineo tipoSanguineo, Local localNascimento, Local localTreinamento, IList<string> golpes, IList<Imagem> imagens)
+        public Cavaleiro(string nome, double alturaCm, double pesoLb, DateTime dataNascimento, Signo signo, TipoSanguineo tipoSanguineo, Local localNascimento, Local localTreinamento, IList<Golpe> golpes, IList<Imagem> imagens)
             : this()
         {
             Nome = nome;
@@ -41,10 +41,7 @@ namespace CdZ.Dominio
             LocalNascimento = localNascimento;
             LocalTreinamento = localTreinamento;
             Imagens = imagens;
-            foreach (var golpe in golpes)
-            {
-                Golpes.Add(new Golpe(golpe));
-            }
+            Golpes = golpes;
         }
     }
 }

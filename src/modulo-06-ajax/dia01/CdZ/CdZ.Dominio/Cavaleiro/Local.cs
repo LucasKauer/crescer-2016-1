@@ -10,7 +10,8 @@ namespace CdZ.Dominio
         /*
          * Precisamos deste construtor vazio por causa do Entity Framework.
          */
-        private Local() { }
+        // TODO: criar (View)Model para evitar mexer no domínio por necessidades de AJAX
+        public Local() { }
 
         /// <summary>
         /// Usado na criação.

@@ -4,7 +4,7 @@ namespace CdZ.Dominio
 {
     public interface ICavaleiroRepositorio
     {
-        void Adicionar(Cavaleiro cavaleiro);
+        int Adicionar(Cavaleiro cavaleiro);
         Cavaleiro Buscar(int id);
         IEnumerable<Cavaleiro> Todos();
         void Excluir(int id);

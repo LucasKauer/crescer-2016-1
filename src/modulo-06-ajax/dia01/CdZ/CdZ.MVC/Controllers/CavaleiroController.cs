@@ -1,7 +1,7 @@
 ﻿using CdZ.Dominio;
+using CdZ.MVC.Models.Cavaleiro;
 using CdZ.MVC.Services;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CdZ.MVC.Controllers
@@ -24,6 +24,14 @@ namespace CdZ.MVC.Controllers
                 throw new HttpException(status, "Ops");
             */
             return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Post(CavaleiroViewModel cavaleiro)
+        {
+            var novoId = _cavaleiros.Adicionar(cavaleiro.ToModel());
+            Response.StatusCode = (int)HttpStatusCode.Created;
+            return Json(new { id = novoId });
         }
     }
 }

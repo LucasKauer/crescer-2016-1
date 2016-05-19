@@ -11,7 +11,7 @@ namespace CdZ.Repositorio.EF
      */
     public class CavaleiroRepositorioEF : ICavaleiroRepositorio
     {
-        public void Adicionar(Cavaleiro cavaleiro)
+        public int Adicionar(Cavaleiro cavaleiro)
         {
             using (var db = new ContextoDeDados())
             {
@@ -20,6 +20,7 @@ namespace CdZ.Repositorio.EF
                  */
                 db.Entry<Cavaleiro>(cavaleiro).State = EntityState.Added;
                 db.SaveChanges();
+                return cavaleiro.Id;
             }
         }
 
