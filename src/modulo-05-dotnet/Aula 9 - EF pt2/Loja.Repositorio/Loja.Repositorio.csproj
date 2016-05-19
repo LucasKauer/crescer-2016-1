@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A26C4A75-FB97-4D42-89D6-D3143CAF86CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Loja.Repositorio</RootNamespace>
+    <AssemblyName>Loja.Repositorio</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClienteRepositorio.cs" />
+    <Compile Include="ContextoDeDados.cs" />
+    <Compile Include="Migrations\201605181537577_Initial.cs" />
+    <Compile Include="Migrations\201605181537577_Initial.Designer.cs">
+      <DependentUpon>201605181537577_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605181545343_AdicionarClienteAoPedido.cs" />
+    <Compile Include="Migrations\201605181545343_AdicionarClienteAoPedido.Designer.cs">
+      <DependentUpon>201605181545343_AdicionarClienteAoPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605181552220_PopularBaseComClienteEProduto.cs" />
+    <Compile Include="Migrations\201605181552220_PopularBaseComClienteEProduto.Designer.cs">
+      <DependentUpon>201605181552220_PopularBaseComClienteEProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605181606013_AlterarDataFechamento.cs" />
+    <Compile Include="Migrations\201605181606013_AlterarDataFechamento.Designer.cs">
+      <DependentUpon>201605181606013_AlterarDataFechamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605181923148_AlterandoValoresDeItemPedido.cs" />
+    <Compile Include="Migrations\201605181923148_AlterandoValoresDeItemPedido.Designer.cs">
+      <DependentUpon>201605181923148_AlterandoValoresDeItemPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605192329140_AlterarMecanicaDeQuantidadeDesejadaParaItemPedido.cs" />
+    <Compile Include="Migrations\201605192329140_AlterarMecanicaDeQuantidadeDesejadaParaItemPedido.Designer.cs">
+      <DependentUpon>201605192329140_AlterarMecanicaDeQuantidadeDesejadaParaItemPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PedidoRepositorio.cs" />
+    <Compile Include="ProdutoRepositorio.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Loja.Dominio\Loja.Dominio.csproj">
+      <Project>{314e0d58-224e-47cc-9bd0-9650b92b4c50}</Project>
+      <Name>Loja.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605181537577_Initial.resx">
+      <DependentUpon>201605181537577_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605181545343_AdicionarClienteAoPedido.resx">
+      <DependentUpon>201605181545343_AdicionarClienteAoPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605181552220_PopularBaseComClienteEProduto.resx">
+      <DependentUpon>201605181552220_PopularBaseComClienteEProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605181606013_AlterarDataFechamento.resx">
+      <DependentUpon>201605181606013_AlterarDataFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605181923148_AlterandoValoresDeItemPedido.resx">
+      <DependentUpon>201605181923148_AlterandoValoresDeItemPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605192329140_AlterarMecanicaDeQuantidadeDesejadaParaItemPedido.resx">
+      <DependentUpon>201605192329140_AlterarMecanicaDeQuantidadeDesejadaParaItemPedido.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
