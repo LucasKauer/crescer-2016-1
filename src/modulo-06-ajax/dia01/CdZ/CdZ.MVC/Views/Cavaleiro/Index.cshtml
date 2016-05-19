@@ -1,6 +1,14 @@
-﻿<h3>Listagem de cavaleiros</h3>
+﻿<style>
+    .erro {
+        color: red;
+    }
+</style>
+
+<h3>Listagem de cavaleiros</h3>
 
 <ul id="cavaleiros"></ul>
+
+<div id="feedback"></div>
 
 <script>
     var urlCavaleiroGet = '@Url.Action("Get")';

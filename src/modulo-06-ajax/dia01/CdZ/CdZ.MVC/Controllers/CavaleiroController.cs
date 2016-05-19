@@ -1,5 +1,7 @@
 ﻿using CdZ.Dominio;
 using CdZ.MVC.Services;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CdZ.MVC.Controllers
@@ -17,6 +19,10 @@ namespace CdZ.MVC.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+            /* Para simular erro, descomente
+                var status = (int)HttpStatusCode.InternalServerError;
+                throw new HttpException(status, "Ops");
+            */
             return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
         }
     }
