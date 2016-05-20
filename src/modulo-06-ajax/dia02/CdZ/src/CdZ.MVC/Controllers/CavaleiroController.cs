@@ -1,4 +1,5 @@
 ﻿using CdZ.Dominio;
+using CdZ.MVC.Filters;
 using CdZ.MVC.Models.Cavaleiro;
 using CdZ.MVC.Services;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CdZ.MVC.Controllers
 {
+    [CdZAutorizador]
     public class CavaleiroController : Controller
     {
         private ICavaleiroRepositorio _cavaleiros = ServicoInjecaoDeDependecia.CriarCavaleiroRepositorio();
@@ -34,6 +36,16 @@ namespace CdZ.MVC.Controllers
             var novoId = _cavaleiros.Adicionar(cavaleiro.ToModel());
             Response.StatusCode = (int)HttpStatusCode.Created;
             return Json(new { id = novoId });
+        }
+
+        [HttpDelete]
+        public JsonResult Delete(int id)
+        {
+            _cavaleiros.Excluir(id);
+            Response.StatusCode = (int)HttpStatusCode.NoContent;
+            return Json(new { });
+            // OU retornar a lista atualizada de todos cavaleiros
+            // return Json(new { data = _cavaleiros.Todos() });
         }
     }
 }

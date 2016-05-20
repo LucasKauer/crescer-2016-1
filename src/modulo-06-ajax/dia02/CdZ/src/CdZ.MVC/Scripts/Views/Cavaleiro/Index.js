@@ -8,7 +8,7 @@ function carregarDadosNaPagina() {
             var $cavaleiros = $('#cavaleiros');
             res.data.forEach(function (cava) {
                 $cavaleiros.append(
-                    $('<li>').append(cava.Nome)
+                    criarHtmlCavaleiro(cava)
                 );
             });
         },
@@ -31,6 +31,27 @@ function carregarDadosNaPagina() {
     });
 };
 carregarDadosNaPagina();
+
+function criarHtmlCavaleiro(cava) {
+    return $('<li>')
+        .append(cava.Nome)
+        .append(
+            $('<button>')
+                .attr('data-cavaleiro-id', cava.Id)
+                .click(excluirCavaleiroNoServidor)
+                .text('Excluir')
+        );
+    // <button data-cavaleiro-id="7" onclick='excluirCavaleiroNoServidor();'>Excluir</button>
+}
+
+function excluirCavaleiroNoServidor() {
+    var cavaleiroId = parseInt($(this).attr('data-cavaleiro-id'));
+    $.ajax({
+        url: '/Cavaleiro/Delete' /*+  $.param({ id: cavaleiroId }),*/,
+        type: 'DELETE',
+        data: { id: cavaleiroId }
+    });
+};
 
 function registrarEventoDoBotao() {
     $('#btnCriar').click(function () {

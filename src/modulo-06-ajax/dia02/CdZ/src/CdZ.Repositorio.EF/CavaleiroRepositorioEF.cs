@@ -49,8 +49,15 @@ namespace CdZ.Repositorio.EF
                  * Para realizar um DELETE no banco de dados,
                  * infelizmente precisamos buscar o objeto no banco para então
                  * removê-lo.
+                 * 
+                 * Estamos utilizando Include para fazer o "Eager Load"
+                 * dos relacionamentos, e poder deletá-los em cascata.
                  */
-                Cavaleiro cavaleiroASerExcluido = db.Cavaleiro.Find(id);
+                Cavaleiro cavaleiroASerExcluido = db.Cavaleiro
+                    .Include(_ => _.Golpes)
+                    .Include(_ => _.Imagens)
+                    .SingleOrDefault(_ => _.Id == id);
+
                 db.Entry<Cavaleiro>(cavaleiroASerExcluido).State = EntityState.Deleted;
                 db.SaveChanges();
             }
