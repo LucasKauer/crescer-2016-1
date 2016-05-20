@@ -28,7 +28,16 @@ namespace CdZ.Repositorio.EF
         {
             using (var db = new ContextoDeDados())
             {
-                return db.Cavaleiro.Find(id);
+                /*
+                 * Estamos utilizando Include para fazer o "Eager Load"
+                 * dos relacionamentos, e poder deletá-los em cascata.
+                */
+                return db.Cavaleiro
+                    .Include(_ => _.LocalNascimento)
+                    .Include(_ => _.LocalTreinamento)
+                    .Include(_ => _.Golpes)
+                    .Include(_ => _.Imagens)
+                    .SingleOrDefault(_ => _.Id == id);
             }
         }
 
@@ -49,21 +58,16 @@ namespace CdZ.Repositorio.EF
                  * Para realizar um DELETE no banco de dados,
                  * infelizmente precisamos buscar o objeto no banco para então
                  * removê-lo.
-                 * 
-                 * Estamos utilizando Include para fazer o "Eager Load"
-                 * dos relacionamentos, e poder deletá-los em cascata.
                  */
-                Cavaleiro cavaleiroASerExcluido = db.Cavaleiro
-                    .Include(_ => _.Golpes)
-                    .Include(_ => _.Imagens)
-                    .SingleOrDefault(_ => _.Id == id);
 
+                var cavaleiroASerExcluido = Buscar(id);
                 db.Entry<Cavaleiro>(cavaleiroASerExcluido).State = EntityState.Deleted;
+                // TODO: exclusão em cascata
                 db.SaveChanges();
             }
         }
 
-        public void Atualizar(Cavaleiro pedido)
+        public void Atualizar(Cavaleiro cavaleiro)
         {
             /*
              * Para fazermos uma conexão com o banco via EF, precisamos
@@ -72,17 +76,22 @@ namespace CdZ.Repositorio.EF
              */
             using (var db = new ContextoDeDados())
             {
-                /*
-                 * Existem várias formas de fazer um Update de uma entidade.
-                 * Um deles é utilizando o método Entry, na qual você informa o tipo
-                 * de objeto que será feito o update (<Pedido>), passa o objeto
-                 * como parâmetro em seguida seta o stado deste objeto no banco de dados.
-                 * O EF irá saber que deve fazer um Update quando o estado for EntityState.Modified.
-                 * 
-                 * Em seguida chamaremos o método .SaveChanges(), que irá definitivamente
-                 * executar a query no banco de dados.
-                 */
-                db.Entry<Cavaleiro>(pedido).State = EntityState.Modified;
+                // Atualizamos o estado de todos os objetos envolvidos em relacionamentos com Cavaleiro.
+                // Caso Id seja diferente de 0, é atualizado. Caso seja 0, é inserido.
+                db.Entry<Local>(cavaleiro.LocalNascimento).State = cavaleiro.LocalNascimento.Id == default(int) ? EntityState.Added : EntityState.Modified;
+                db.Entry<Local>(cavaleiro.LocalTreinamento).State = cavaleiro.LocalTreinamento.Id == default(int) ? EntityState.Added : EntityState.Modified;
+
+                foreach (var golpe in cavaleiro.Golpes)
+                {
+                    db.Entry<Golpe>(golpe).State = golpe.Id == default(int) ? EntityState.Added : EntityState.Modified;
+                }
+
+                foreach (var imagem in cavaleiro.Imagens)
+                {
+                    db.Entry<Imagem>(imagem).State = imagem.Id == default(int) ? EntityState.Added : EntityState.Modified;
+                }
+
+                db.Entry<Cavaleiro>(cavaleiro).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }

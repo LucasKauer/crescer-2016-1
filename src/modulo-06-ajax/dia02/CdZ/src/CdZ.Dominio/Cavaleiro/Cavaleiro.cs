@@ -29,7 +29,7 @@ namespace CdZ.Dominio
         /// <summary>
         /// Construtor utilizado para montar cavaleiros novos
         /// </summary>
-        public Cavaleiro(string nome, double alturaCm, double pesoLb, DateTime dataNascimento, Signo signo, TipoSanguineo tipoSanguineo, Local localNascimento, Local localTreinamento, IList<Golpe> golpes, IList<Imagem> imagens)
+        public Cavaleiro(string nome, double alturaCm, double pesoLb, DateTime dataNascimento, Signo signo, TipoSanguineo tipoSanguineo, Local localNascimento, Local localTreinamento, IList<Golpe> golpes, IList<Imagem> imagens, int id = default(int))
             : this()
         {
             Nome = nome;
@@ -42,6 +42,8 @@ namespace CdZ.Dominio
             LocalTreinamento = localTreinamento;
             Imagens = imagens;
             Golpes = golpes;
+            // verificar se Id tem valor diferente do padrão. Caso tenha, é update, caso não tenha, é insert
+            Id = id == default(int) ? default(int) : id;
         }
     }
 }

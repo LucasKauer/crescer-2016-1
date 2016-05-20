@@ -15,9 +15,9 @@ namespace CdZ.MVC.Models.Cavaleiro
         public DateTime DataNascimento { get; set; }
         public Signo Signo { get; set; }
         public TipoSanguineo TipoSanguineo { get; set; }
-        public Local LocalNascimento { get; set; }
-        public Local LocalTreinamento { get; set; }
-        public IList<string> Golpes { get; set; }
+        public LocalViewModel LocalNascimento { get; set; }
+        public LocalViewModel LocalTreinamento { get; set; }
+        public IList<GolpeViewModel> Golpes { get; set; }
         public IList<ImagemViewModel> Imagens { get; set; }
         public CavaleiroViewModel()
         {
@@ -27,10 +27,10 @@ namespace CdZ.MVC.Models.Cavaleiro
 
         public Dominio.Cavaleiro ToModel()
         {
-            var golpesObj = Golpes.Select(_ => new Golpe(_)).ToList();
+            var golpesObj = Golpes.Select(_ => _.ToModel()).ToList();
             var imagensObj = Imagens.Select(_ => _.ToModel()).ToList();
 
-            return new Dominio.Cavaleiro(Nome, AlturaCm, PesoLb, DataNascimento, Signo, TipoSanguineo, LocalNascimento, LocalTreinamento, golpesObj, imagensObj);
+            return new Dominio.Cavaleiro(Nome, AlturaCm, PesoLb, DataNascimento, Signo, TipoSanguineo, LocalNascimento.ToModel(), LocalTreinamento.ToModel(), golpesObj, imagensObj, Id);
         }
     }
 }

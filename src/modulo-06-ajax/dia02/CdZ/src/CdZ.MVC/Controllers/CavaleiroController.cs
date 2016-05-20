@@ -29,6 +29,13 @@ namespace CdZ.MVC.Controllers
             return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [ActionName("GetById")]
+        public JsonResult Get(int? id)
+        {
+            return Json(new { data = _cavaleiros.Buscar(id.Value) }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult Post(CavaleiroViewModel cavaleiro)
         {
@@ -42,10 +49,22 @@ namespace CdZ.MVC.Controllers
         public JsonResult Delete(int id)
         {
             _cavaleiros.Excluir(id);
-            Response.StatusCode = (int)HttpStatusCode.NoContent;
-            return Json(new { });
+            return NoContentJsonVazio();
             // OU retornar a lista atualizada de todos cavaleiros
             // return Json(new { data = _cavaleiros.Todos() });
+        }
+
+        [HttpPut]
+        public JsonResult Put(CavaleiroViewModel cavaleiro)
+        {
+            _cavaleiros.Atualizar(cavaleiro.ToModel());
+            return NoContentJsonVazio();
+        }
+
+        private JsonResult NoContentJsonVazio()
+        {
+            Response.StatusCode = (int)HttpStatusCode.NoContent;
+            return Json(new { });
         }
     }
 }

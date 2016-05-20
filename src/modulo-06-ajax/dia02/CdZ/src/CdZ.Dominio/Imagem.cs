@@ -30,13 +30,5 @@ namespace CdZ.Dominio
         {
             Id = id;
         }
-
-        public void AtualizarId(int id)
-        {
-            if (Id != 0)
-                throw new InvalidOperationException("Esse objeto já possuia Id, portanto ele já havia sido salvo no banco. Não é possível alterar esse valor.");
-
-            Id = id;
-        }
     }
 }

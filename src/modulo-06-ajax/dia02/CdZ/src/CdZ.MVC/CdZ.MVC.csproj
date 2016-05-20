@@ -138,6 +138,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cavaleiro\CavaleiroViewModel.cs" />
+    <Compile Include="Models\Cavaleiro\GolpeViewModel.cs" />
+    <Compile Include="Models\Cavaleiro\LocalViewModel.cs" />
     <Compile Include="Models\ImagemViewModel.cs" />
     <Compile Include="Models\Login\LoginViewModel.cs" />
     <Compile Include="Models\Login\UsuarioLogadoModel.cs" />

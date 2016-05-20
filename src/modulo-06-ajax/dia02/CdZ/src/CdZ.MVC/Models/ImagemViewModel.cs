@@ -12,7 +12,7 @@ namespace CdZ.MVC.Models
 
         public Imagem ToModel()
         {
-            return new Imagem(Url, IsThumb);
+            return new Imagem(Id, Url, IsThumb);
         }
     }
 }
