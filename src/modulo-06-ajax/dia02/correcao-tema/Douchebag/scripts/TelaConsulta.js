@@ -40,9 +40,10 @@ TelaConsulta.prototype.render = function() {
               // lembram de prototype? poderíamos fazer um contains.
               // !jaAdicionados.contains(i.name)
               if (jaAdicionados.indexOf(i.name.toLowerCase()) === -1) {
+                var urlCapa = i.images && i.images[1] ? i.images[1].url : 'https://cloud.githubusercontent.com/assets/526075/15436548/ea66787e-1e98-11e6-9503-ae595c5163a3.png';
                 self.listaAlbuns.append(
                   $('<li>').append(
-                    $('<img>').attr('src', i.images[1].url)
+                    $('<img>').attr('src', urlCapa)
                   )
                 );
                 console.log(i.name);
