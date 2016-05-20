@@ -23,6 +23,7 @@ namespace CdZ.MVC.Controllers
                 var status = (int)HttpStatusCode.InternalServerError;
                 throw new HttpException(status, "Ops");
             */
+            Thread.Sleep(3000);
             return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
         }
 

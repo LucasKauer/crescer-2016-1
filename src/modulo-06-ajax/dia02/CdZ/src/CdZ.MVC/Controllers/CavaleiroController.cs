@@ -23,12 +23,14 @@ namespace CdZ.MVC.Controllers
                 var status = (int)HttpStatusCode.InternalServerError;
                 throw new HttpException(status, "Ops");
             */
+            //System.Threading.Thread.Sleep(3000);
             return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult Post(CavaleiroViewModel cavaleiro)
         {
+            //System.Threading.Thread.Sleep(3000);
             var novoId = _cavaleiros.Adicionar(cavaleiro.ToModel());
             Response.StatusCode = (int)HttpStatusCode.Created;
             return Json(new { id = novoId });

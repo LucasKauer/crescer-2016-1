@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 function carregarDadosNaPagina() {
-    $.ajax({ url: urlCavaleiroGet, type: 'GET' })
+    $.ajax({ url: urlCavaleiroGet, type: 'GET'/*, timeout: 2000 */})
     .then(
         function onSuccess(res) {
             console.log(res.data);
