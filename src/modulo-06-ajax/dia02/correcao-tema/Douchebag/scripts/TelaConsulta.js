@@ -32,30 +32,31 @@ TelaConsulta.prototype.render = function() {
           return e.preventDefault();
         }
         var idParaPesquisar = self.getIdParaBusca(response.artists.items[0].id);
-        self.spotify.obterDetalhesArtista(idParaPesquisar).done(function(response) {
-          // zerando lista de albuns antes de renderizá-la
-          self.listaAlbuns.empty();
-          response.items.forEach(function(i) {
-            // lembram de prototype? poderíamos fazer um contains.
-            // !jaAdicionados.contains(i.name)
-            if (jaAdicionados.indexOf(i.name.toLowerCase()) === -1) {
-              self.listaAlbuns.append(
-                $('<li>').append(
-                  $('<img>').attr('src', i.images[1].url)
-                )
-              );
-              console.log(i.name);
-              jaAdicionados.push(i.name.toLowerCase());
-            }
+        self.spotify.obterDetalhesArtista(idParaPesquisar)
+          .done(function(response) {
+            // zerando lista de albuns antes de renderizá-la
+            self.listaAlbuns.empty();
+            response.items.forEach(function(i) {
+              // lembram de prototype? poderíamos fazer um contains.
+              // !jaAdicionados.contains(i.name)
+              if (jaAdicionados.indexOf(i.name.toLowerCase()) === -1) {
+                self.listaAlbuns.append(
+                  $('<li>').append(
+                    $('<img>').attr('src', i.images[1].url)
+                  )
+                );
+                console.log(i.name);
+                jaAdicionados.push(i.name.toLowerCase());
+              }
+            });
+            self.progress.toggleClass('escondido');
+          })
+          .fail(function(err) {
+            self.listaAlbuns.empty();
+            var msg = String.format('Caro usuário, devido a um erro {0}, não foi possível pesquisar por {1}', err.status, artistaBusca);
+            alert(msg);
+            self.progress.toggleClass('escondido');
           });
-          self.progress.toggleClass('escondido');
-        })
-        .fail(function(err) {
-          self.listaAlbuns.empty();
-          var msg = String.format('Caro usuário, devido a um erro {0}, não foi possível pesquisar por {1}', err.status, artistaBusca);
-          alert(msg);
-          self.progress.toggleClass('escondido');
-        });
     })
     .fail(function(err) {
       if (err.status === 400) {
