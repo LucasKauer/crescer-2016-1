@@ -70,7 +70,8 @@ function editarCavaleiroNoServidor() {
             cavaleiroHardCoded.AlturaCm = 205;
             cavaleiroHardCoded.Signo = 3;
             cavaleiroHardCoded.TipoSanguineo = 2;
-            cavaleiroHardCoded.DataNascimento = new Date(2001, 0, 15);
+            // Estamos enviando a data UTC (sem timezone) para que seja corretamente armazenada e posteriormente exibida de acordo com o fuso-horário da aplicação cliente que consumir os dados
+            cavaleiroHardCoded.DataNascimento = new Date(Date.UTC(2010, 9, 10)).toISOString();
             if (cavaleiroHardCoded.Golpes.length > 0) {
                 cavaleiroHardCoded.Golpes[0] = cavaleiroHardCoded.Golpes[0] || {};
                 cavaleiroHardCoded.Golpes[0].Nome = 'Voadora do Sub-Zero Brasileiro'
@@ -102,7 +103,8 @@ var cavaleiroHardCoded = {
     AlturaCm: 187,
     Signo: 7,
     TipoSanguineo: 1,
-    DataNascimento: new Date(),
+    // Estamos enviando a data UTC (sem timezone) para que seja corretamente armazenada e posteriormente exibida de acordo com o fuso-horário da aplicação cliente que consumir os dados
+    DataNascimento: new Date(Date.UTC(2001, 1, 15)).toISOString(),
     Golpes: [{ Nome: 'Cólera do Dragão' }, { Nome: 'Cólera dos 100 dragões' }],
     LocalNascimento: {
         Texto: 'Beijing'

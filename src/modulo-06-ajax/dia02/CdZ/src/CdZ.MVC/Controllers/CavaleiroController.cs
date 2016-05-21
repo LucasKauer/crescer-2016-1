@@ -1,4 +1,5 @@
 ﻿using CdZ.Dominio;
+using CdZ.MVC.Extensions;
 using CdZ.MVC.Filters;
 using CdZ.MVC.Models.Cavaleiro;
 using CdZ.MVC.Services;
@@ -26,14 +27,14 @@ namespace CdZ.MVC.Controllers
                 throw new HttpException(status, "Ops");
             */
             //System.Threading.Thread.Sleep(3000);
-            return Json(new { data = _cavaleiros.Todos() }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = _cavaleiros.Todos().FromModel() }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         [ActionName("GetById")]
         public JsonResult Get(int? id)
         {
-            return Json(new { data = _cavaleiros.Buscar(id.Value) }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = _cavaleiros.Buscar(id.Value).FromModel() }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

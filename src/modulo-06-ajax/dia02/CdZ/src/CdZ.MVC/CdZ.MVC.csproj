@@ -132,7 +132,13 @@
     <Compile Include="Controllers\CavaleiroController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Extensions\CavaleiroExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\GolpeExtensions.cs" />
     <Compile Include="Extensions\HttpCookieExtensions.cs" />
+    <Compile Include="Extensions\ImagemExtensions.cs" />
+    <Compile Include="Extensions\LocalExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\CdZAutorizador.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
