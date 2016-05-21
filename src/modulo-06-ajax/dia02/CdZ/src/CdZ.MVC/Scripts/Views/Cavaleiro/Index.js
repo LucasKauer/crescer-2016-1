@@ -71,15 +71,23 @@ function editarCavaleiroNoServidor() {
             cavaleiroHardCoded.Signo = 3;
             cavaleiroHardCoded.TipoSanguineo = 2;
             cavaleiroHardCoded.DataNascimento = new Date(2001, 0, 15);
-            cavaleiroHardCoded.Golpes[0].Nome = 'Voadora do Sub-Zero Brasileiro'
-            cavaleiroHardCoded.Golpes[1].Nome = 'Cólera dos 42 dragões';
-            cavaleiroHardCoded.Golpes[2] = { Nome: 'Novo golpe aterrador' };
+            if (cavaleiroHardCoded.Golpes.length > 0) {
+                cavaleiroHardCoded.Golpes[0] = cavaleiroHardCoded.Golpes[0] || {};
+                cavaleiroHardCoded.Golpes[0].Nome = 'Voadora do Sub-Zero Brasileiro'
+                cavaleiroHardCoded.Golpes[1] = cavaleiroHardCoded.Golpes[1] || {};
+                cavaleiroHardCoded.Golpes[1].Nome = 'Cólera dos 42 dragões';
+                cavaleiroHardCoded.Golpes[2] = { Nome: 'Novo golpe aterrador' };
+            }
             cavaleiroHardCoded.LocalNascimento.Texto = 'Porto Alegre';
             cavaleiroHardCoded.LocalTreinamento.Texto = 'Alvorada';
-            cavaleiroHardCoded.Imagens[0].Url = 'https://cloud.githubusercontent.com/assets/526075/15443404/5c97dde6-1ebe-11e6-8ae6-83372051dda7.png';
-            cavaleiroHardCoded.Imagens[0].IsThumb = true;
-            cavaleiroHardCoded.Imagens[1].Url = 'https://cloud.githubusercontent.com/assets/526075/15443410/6e9ba586-1ebe-11e6-8b90-64aca9e18a32.png';
-            cavaleiroHardCoded.Imagens[1].IsThumb = false;
+            if (cavaleiroHardCoded.Imagens.length > 0) {
+                cavaleiroHardCoded.Imagens[0] = cavaleiroHardCoded.Imagens[0] || {};
+                cavaleiroHardCoded.Imagens[0].Url = 'https://cloud.githubusercontent.com/assets/526075/15443404/5c97dde6-1ebe-11e6-8ae6-83372051dda7.png';
+                cavaleiroHardCoded.Imagens[0].IsThumb = true;
+                cavaleiroHardCoded.Imagens[1] = cavaleiroHardCoded.Imagens[1] || {};
+                cavaleiroHardCoded.Imagens[1].Url = 'https://cloud.githubusercontent.com/assets/526075/15443410/6e9ba586-1ebe-11e6-8b90-64aca9e18a32.png';
+                cavaleiroHardCoded.Imagens[1].IsThumb = false;
+            }
 
             $.ajax({
                 url: '/Cavaleiro/Put',
