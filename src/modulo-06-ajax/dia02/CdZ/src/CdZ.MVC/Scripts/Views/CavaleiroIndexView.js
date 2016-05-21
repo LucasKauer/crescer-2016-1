@@ -72,7 +72,7 @@ CavaleiroIndexView.prototype.excluirCavaleiroNoServidor = function (e) {
     // dispensamos o uso do atributo 'data-cavaleiro-id' utilizando event.data:
     // pirou? rtfm => http://api.jquery.com/event.data/
     var self = e.data.self;
-    e.data.self.cavaleiros.excluir(e.data.id)
+    self.cavaleiros.excluir(e.data.id)
         .done(function (res) {
             self.successToast.show('Excluído com sucesso!');
         });
