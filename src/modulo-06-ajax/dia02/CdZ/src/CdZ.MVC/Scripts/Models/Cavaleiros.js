@@ -18,11 +18,7 @@ Cavaleiros.prototype.buscar = function (idCavaleiro) {
 };
 
 Cavaleiros.prototype.inserir = function (cavaleiro) {
-    return $.ajax({
-        url: this.urlPost,
-        type: 'POST',
-        data: cavaleiro
-    });
+    return $.post(this.urlPost, cavaleiro);
 };
 
 Cavaleiros.prototype.excluir = function (idCavaleiro) {
