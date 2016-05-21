@@ -113,6 +113,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Components\FeedbackToast.js" />
     <Content Include="Scripts\Custom\overrides-validacao.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -124,7 +125,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Views\Cavaleiro\Index.js" />
+    <Content Include="Scripts\Models\Cavaleiros.js" />
+    <Content Include="Scripts\Views\CavaleiroIndexView.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -12,3 +12,7 @@
     height: 100%;
     background: rgba(0,0,0,.5) url(http://i.imgur.com/Q3obLBL.gif) center center no-repeat;
 }
+
+.erro {
+    color: red;
+}
