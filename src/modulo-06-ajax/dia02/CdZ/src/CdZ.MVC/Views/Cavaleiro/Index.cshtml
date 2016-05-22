@@ -92,6 +92,8 @@
             urlCavaleiroPost: '@Url.Action("Post")',
             urlCavaleiroDelete: '@Url.Action("Delete")',
             urlCavaleiroPut: '@Url.Action("Put")',
+            // lendo configuração do appsettings, desta forma podemos deixar dinâmico na UI e alterar no servidor a qualquer momento
+            intervaloPolling: @Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["UI:IntervaloMsPollingCavaleiros"])
         }).render();
     </script>
 }
