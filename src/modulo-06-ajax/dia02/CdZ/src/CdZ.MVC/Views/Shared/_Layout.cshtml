@@ -32,13 +32,16 @@
     }
 
     <h1 class="site-title">Dakishimeta kokoro no kosumo</h1>
-    <div class="container"> 
+    <div class="container">
         @RenderBody()
     </div>
     <script>
         $(document)
-            .ajaxSend(function () {
-                $('#spinner').show();
+            .ajaxSend(function (event, jqxhr, settings) {
+                var showSpinner = !settings.withoutSpinner;
+                if (showSpinner) {
+                    $('#spinner').show();
+                }
             })
             .ajaxComplete(function () {
                 $('#spinner').hide();
@@ -54,6 +57,6 @@
     </script>
     <script src="~/Scripts/Components/FeedbackToast.js"></script>
     <script src="~/Scripts/Components/CustomNotification.js"></script>
-    @RenderSection("scripts", false)   
+    @RenderSection("scripts", false)
 </body>
 </html>

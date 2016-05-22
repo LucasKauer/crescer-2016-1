@@ -36,7 +36,7 @@ CavaleiroIndexView.prototype.render = function () {
     // Disparar "timer" que consultará servidor a cada X tempo.
     // Se quisermos evitar fazer o bind(this) em todas chamadas internas, podemos tirar a selfie, lembram?
     setInterval(function () {
-        this.cavaleiros.todos()
+        this.cavaleiros.todos(/* semSpinner? */true)
             .done(function (res) {
                 var qtdNovosCavaleiros = 0;
                 res.data.forEach(function (cava) {

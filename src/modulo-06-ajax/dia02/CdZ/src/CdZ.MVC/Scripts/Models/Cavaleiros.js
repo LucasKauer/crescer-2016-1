@@ -9,8 +9,8 @@ function Cavaleiros(options) {
     this.urlPut = options.urlPut || '/Cavaleiro/Put';
 };
 
-Cavaleiros.prototype.todos = function () {
-    return $.get(this.urlGet);
+Cavaleiros.prototype.todos = function (semSpinner) {
+    return $.get({ url: this.urlGet, withoutSpinner: semSpinner });
 };
 
 Cavaleiros.prototype.buscar = function (idCavaleiro) {
