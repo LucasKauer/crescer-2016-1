@@ -27,32 +27,13 @@ namespace CdZ.Repositorio.EF
         public Cavaleiro Buscar(int id)
         {
             using (var db = new ContextoDeDados())
-            {
-                /*
-                 * Estamos utilizando Include para fazer o "Eager Load"
-                 * dos relacionamentos, e poder deletá-los em cascata.
-                */
-                return db.Cavaleiro
-                    .Include(_ => _.LocalNascimento)
-                    .Include(_ => _.LocalTreinamento)
-                    .Include(_ => _.Golpes)
-                    .Include(_ => _.Imagens)
-                    .SingleOrDefault(_ => _.Id == id);
-            }
+                return CavaleiroComSeusRelacionamentos(db).SingleOrDefault(_ => _.Id == id);
         }
 
         public IEnumerable<Cavaleiro> Todos()
         {
             using (var db = new ContextoDeDados())
-            {
-                //TODO: paginar
-                return db.Cavaleiro
-                    .Include(_ => _.Golpes)
-                    .Include(_ => _.Imagens)
-                    .Include(_ => _.LocalNascimento)
-                    .Include(_ => _.LocalTreinamento)
-                    .ToList();
-            }
+                return CavaleiroComSeusRelacionamentos(db).ToList();
         }
 
         public void Excluir(int id)
@@ -102,6 +83,19 @@ namespace CdZ.Repositorio.EF
                 db.Entry<Cavaleiro>(cavaleiro).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+
+        private IQueryable<Cavaleiro> CavaleiroComSeusRelacionamentos(ContextoDeDados db)
+        {
+            /*
+            * Estamos utilizando Include para fazer o "Eager Load"
+            * dos relacionamentos, e poder deletá-los em cascata.
+            */
+            return db.Cavaleiro
+               .Include(_ => _.Golpes)
+               .Include(_ => _.Imagens)
+               .Include(_ => _.LocalNascimento)
+               .Include(_ => _.LocalTreinamento);
         }
     }
 }
