@@ -60,9 +60,9 @@ namespace CdZ.Repositorio.EF
                  * removê-lo.
                  */
 
-                var cavaleiroASerExcluido = Buscar(id);
-                db.Entry<Cavaleiro>(cavaleiroASerExcluido).State = EntityState.Deleted;
+                var cavaleiroASerExcluido = db.Cavaleiro.Find(id);
                 // TODO: exclusão em cascata
+                db.Cavaleiro.Remove(cavaleiroASerExcluido);
                 db.SaveChanges();
             }
         }

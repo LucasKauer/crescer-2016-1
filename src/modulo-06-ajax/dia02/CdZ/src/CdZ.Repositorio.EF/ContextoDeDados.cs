@@ -43,6 +43,10 @@ namespace CdZ.Repositorio.EF
              * por padrão as tabelas no plural.
              */
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Cavaleiro>().HasMany(_ => _.Golpes).WithRequired();
+            modelBuilder.Entity<Cavaleiro>().HasMany(_ => _.Imagens).WithRequired();
+            //modelBuilder.Entity<Cavaleiro>().HasRequired(_ => _.LocalNascimento).WithRequiredPrincipal().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Cavaleiro>().HasRequired(_ => _.LocalTreinamento);
             base.OnModelCreating(modelBuilder);
         }
 
