@@ -38,18 +38,27 @@ CavaleiroIndexView.prototype.render = function () {
     setInterval(function () {
         this.cavaleiros.todos(/* semSpinner? */true)
             .done(function (res) {
-                var qtdNovosCavaleiros = 0;
+                var novosCavaleiros = [];
                 res.data.forEach(function (cava) {
                     // $.inArray https://api.jquery.com/jQuery.inArray/
                     if ($.inArray(cava.Id, this.idsCavaleirosJaRenderizados) === -1) {
-                        this.renderizarCavaleiroNaTela(cava, /* é novo? */ true);
-                        qtdNovosCavaleiros++;
+                        novosCavaleiros.push(cava);
                     }
                 }.bind(this));
-                if (qtdNovosCavaleiros > 0) {
+                // Caso haja novos cavaleiros:
+                // 1 - Tira o indicativo de "Novo" no últimos adicionados (caso existam)
+                // 2 - Renderiza cada novo cavaleiro na tela
+                // 3 - Envia notificação com o total de novos cavaleiros que foram adicionados.
+                if (novosCavaleiros.length > 0) {
+                    if (res.data.length > 0) {
+                        $('[data-adicionado-por-ultimo]').remove();
+                    }
+                    novosCavaleiros.forEach(function (cava) {
+                        this.renderizarCavaleiroNaTela(cava, /* é novo? */ true);
+                    }.bind(this));
                     this.notification.send(
-                        qtdNovosCavaleiros === 1 ? '1 novo cavaleiro foi adicionado!' :
-                        qtdNovosCavaleiros + ' novos cavaleiros foram adicionados!'
+                        novosCavaleiros.length === 1 ? '1 novo cavaleiro foi adicionado!' :
+                        novosCavaleiros.length + ' novos cavaleiros foram adicionados!'
                     );
                 }
             }.bind(this));
@@ -102,7 +111,11 @@ CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava, novo) {
         );
 
     if (novo) {
-        $li.append($('<img>').attr('src', 'http://code.divshot.com/geo-bootstrap/img/test/new2.gif'));
+        $li.append(
+            $('<img>')
+                .attr('src', 'http://code.divshot.com/geo-bootstrap/img/test/new2.gif')
+                .attr('data-adicionado-por-ultimo', '')
+        );
     }
 
     return $li;
