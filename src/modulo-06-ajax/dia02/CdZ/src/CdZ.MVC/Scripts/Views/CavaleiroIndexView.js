@@ -12,25 +12,48 @@ function CavaleiroIndexView(options) {
         urlDelete: options.urlCavaleiroDelete,
         urlPut: options.urlCavaleiroPut
     });
+    this.intervaloPolling = options.intervaloPolling || 5000;
+    this.idsCavaleirosJaRenderizados = [];
+    this.notification = new CustomNotification();
 };
 
 CavaleiroIndexView.prototype.render = function () {
     var self = this;
 
-    // 1 - Carregar lista de cavaleiros na tela
+    // 1 - Carregar inicialmente lista de cavaleiros na tela
     this.cavaleiros.todos()
         .then(
             function onSuccess(res) {
                 res.data.forEach(function (cava) {
-                    self.cavaleirosUi.append(
-                        self.criarHtmlCavaleiro(cava)
-                    );
+                    self.renderizarCavaleiroNaTela(cava);
                 });
             },
             function onError(res) {
                 self.errorToast.show(res.status + ' - ' + res.statusText);
             }
         );
+
+    // Disparar "timer" que consultará servidor a cada X tempo.
+    // Se quisermos evitar fazer o bind(this) em todas chamadas internas, podemos tirar a selfie, lembram?
+    setInterval(function () {
+        this.cavaleiros.todos()
+            .done(function (res) {
+                var qtdNovosCavaleiros = 0;
+                res.data.forEach(function (cava) {
+                    // $.inArray https://api.jquery.com/jQuery.inArray/
+                    if ($.inArray(cava.Id, this.idsCavaleirosJaRenderizados) === -1) {
+                        this.renderizarCavaleiroNaTela(cava);
+                        qtdNovosCavaleiros++;
+                    }
+                }.bind(this));
+                if (qtdNovosCavaleiros > 0) {
+                    this.notification.send(
+                        qtdNovosCavaleiros === 1 ? '1 novo cavaleiro foi adicionado!' :
+                        qtdNovosCavaleiros + ' novos cavaleiros foram adicionados!'
+                    );
+                }
+            }.bind(this));
+    }.bind(this), this.intervaloPolling);
 
     // 2 - Registra evento de clique para inserção do cavaleiro fake
     // TODO - remover quando colocar o bind dos campos do formulário
@@ -45,6 +68,11 @@ CavaleiroIndexView.prototype.render = function () {
                 });
         });
     });
+};
+
+CavaleiroIndexView.prototype.renderizarCavaleiroNaTela = function (cava) {
+    this.cavaleirosUi.append(this.criarHtmlCavaleiro(cava));
+    this.idsCavaleirosJaRenderizados.push(cava.Id);
 };
 
 CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava) {
@@ -78,7 +106,7 @@ CavaleiroIndexView.prototype.excluirCavaleiroNoServidor = function (e) {
         });
 };
 
-CavaleiroIndexView.prototype.editarCavaleiroNoServidor = function(e) {
+CavaleiroIndexView.prototype.editarCavaleiroNoServidor = function (e) {
     var cavaleiroId = e.data.id;
     var self = e.data.self;
     self.cavaleiros.buscar(cavaleiroId)

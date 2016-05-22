@@ -114,6 +114,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Components\FeedbackToast.js" />
+    <Content Include="Scripts\Components\CustomNotification.js" />
     <Content Include="Scripts\Custom\overrides-validacao.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
