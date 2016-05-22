@@ -71,12 +71,9 @@
 <div id="detalhes-cavaleiro"></div>
 <ul id="cavaleiros"></ul>
 
-<script>
-    var urlCavaleiroPost = '@Url.Action("Post")';
-</script>
-
 @section scripts {
     <script src="~/Scripts/Models/Cavaleiros.js"></script>
+    <script src="~/Scripts/Models/Cavaleiro.js"></script>
     <script src="~/Scripts/Views/CavaleiroIndexView.js"></script>
     <script>
         new CavaleiroIndexView({
@@ -94,6 +91,6 @@
             urlCavaleiroPut: '@Url.Action("Put")',
             // lendo configuração do appsettings, desta forma podemos deixar dinâmico na UI e alterar no servidor a qualquer momento
             intervaloPolling: @Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["UI:IntervaloMsPollingCavaleiros"])
-        }).render();
+            }).render();
     </script>
 }

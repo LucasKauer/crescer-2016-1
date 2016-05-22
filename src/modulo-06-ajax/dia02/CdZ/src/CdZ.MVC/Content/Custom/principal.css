@@ -16,3 +16,12 @@
 .erro {
     color: red;
 }
+
+li {
+    list-style: none;
+}
+
+.cavaleiro-thumb {
+    width: 100px;
+    height: 100px;
+}

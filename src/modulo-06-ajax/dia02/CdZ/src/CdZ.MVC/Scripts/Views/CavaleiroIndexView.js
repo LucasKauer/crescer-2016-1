@@ -42,7 +42,7 @@ CavaleiroIndexView.prototype.render = function () {
                 res.data.forEach(function (cava) {
                     // $.inArray https://api.jquery.com/jQuery.inArray/
                     if ($.inArray(cava.Id, this.idsCavaleirosJaRenderizados) === -1) {
-                        this.renderizarCavaleiroNaTela(cava);
+                        this.renderizarCavaleiroNaTela(cava, /* é novo? */ true);
                         qtdNovosCavaleiros++;
                     }
                 }.bind(this));
@@ -70,13 +70,19 @@ CavaleiroIndexView.prototype.render = function () {
     });
 };
 
-CavaleiroIndexView.prototype.renderizarCavaleiroNaTela = function (cava) {
-    this.cavaleirosUi.append(this.criarHtmlCavaleiro(cava));
+CavaleiroIndexView.prototype.renderizarCavaleiroNaTela = function (cava, novo) {
+    this.cavaleirosUi.append(this.criarHtmlCavaleiro(cava, novo));
     this.idsCavaleirosJaRenderizados.push(cava.Id);
 };
 
-CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava) {
-    return $('<li>')
+CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava, novo) {
+
+    var cavaleiro = new Cavaleiro(cava);
+
+    var $li = $('<li>')
+        .append(
+            $('<img>').attr('src', cavaleiro.obterThumb().Url).addClass('cavaleiro-thumb')
+        )
         .append(cava.Nome)
         .append(
             $('<button>')
@@ -94,6 +100,12 @@ CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava) {
                 .on('click', { id: cava.Id, self: this }, this.excluirCavaleiroNoServidor)
                 .text('Excluir')
         );
+
+    if (novo) {
+        $li.append($('<img>').attr('src', 'http://code.divshot.com/geo-bootstrap/img/test/new2.gif'));
+    }
+
+    return $li;
 };
 
 CavaleiroIndexView.prototype.excluirCavaleiroNoServidor = function (e) {
