@@ -20,14 +20,15 @@ namespace CdZ.MVC.Controllers
         }
 
         [HttpGet]
-        public JsonResult Get()
+        public JsonResult Get(int? tamanhoPagina, int? pagina)
         {
             /* Para simular erro, descomente
                 var status = (int)HttpStatusCode.InternalServerError;
                 throw new HttpException(status, "Ops");
             */
             //System.Threading.Thread.Sleep(3000);
-            return Json(new { data = _cavaleiros.Todos().FromModel() }, JsonRequestBehavior.AllowGet);
+            var paginados = _cavaleiros.Todos(tamanhoPagina ?? 5, pagina ?? 1);
+            return Json(new { data = paginados.FromModel() }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

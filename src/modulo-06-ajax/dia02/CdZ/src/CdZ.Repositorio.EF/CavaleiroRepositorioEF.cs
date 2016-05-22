@@ -30,10 +30,21 @@ namespace CdZ.Repositorio.EF
                 return CavaleiroComSeusRelacionamentos(db).SingleOrDefault(_ => _.Id == id);
         }
 
-        public IEnumerable<Cavaleiro> Todos()
+        public IEnumerable<Cavaleiro> Todos(int tamanhoPagina, int pagina)
         {
+            /*
+            * Sobre o Skip, assumamos tamanho = 5
+            *   skip(1) = tamanho * (1-1) = 0
+            *   skip(2) = tamanho * (2-1) = 5
+            *   skip(3) = tamanho * (3-1) = 10
+            *   skip(4) = tamanho * (4-1) = 15
+            */
             using (var db = new ContextoDeDados())
-                return CavaleiroComSeusRelacionamentos(db).ToList();
+                return CavaleiroComSeusRelacionamentos(db)
+                    .OrderBy(_ => _.Nome)
+                    .Skip(tamanhoPagina * (pagina - 1))
+                    .Take(tamanhoPagina)
+                    .ToList();
         }
 
         public void Excluir(int id)
