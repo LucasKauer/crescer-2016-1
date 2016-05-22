@@ -100,8 +100,12 @@ CavaleiroIndexView.prototype.excluirCavaleiroNoServidor = function (e) {
     // dispensamos o uso do atributo 'data-cavaleiro-id' utilizando event.data:
     // pirou? rtfm => http://api.jquery.com/event.data/
     var self = e.data.self;
+    // $(this) retorna o <button> que foi clicado na UI.
+    var $button = $(this);
     self.cavaleiros.excluir(e.data.id)
         .done(function (res) {
+            // remover da UI: parent() retorna a respectiva <li> do cavaleiro.
+            $button.parent().remove();
             self.successToast.show('Excluído com sucesso!');
         });
 };
