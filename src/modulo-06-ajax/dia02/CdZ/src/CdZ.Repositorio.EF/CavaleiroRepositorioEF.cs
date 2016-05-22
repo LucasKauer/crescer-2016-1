@@ -59,10 +59,13 @@ namespace CdZ.Repositorio.EF
                  * infelizmente precisamos buscar o objeto no banco para então
                  * removê-lo.
                  */
-
                 var cavaleiroASerExcluido = db.Cavaleiro.Find(id);
-                // TODO: exclusão em cascata
+                var localNascimento = db.Cavaleiro.Include(_ => _.LocalNascimento).Single(_ => _.Id == id).LocalNascimento;
+                var localTreinamento = db.Cavaleiro.Include(_ => _.LocalTreinamento).Single(_ => _.Id == id).LocalTreinamento;
+                // devido à FK partindo de cavaleiro para local primeiro removemos cavaleiro
                 db.Cavaleiro.Remove(cavaleiroASerExcluido);
+                db.Local.Remove(localNascimento);
+                db.Local.Remove(localTreinamento);
                 db.SaveChanges();
             }
         }
