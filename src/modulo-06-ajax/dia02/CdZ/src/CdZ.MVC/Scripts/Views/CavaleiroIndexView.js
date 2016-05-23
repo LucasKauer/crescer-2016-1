@@ -154,6 +154,7 @@ CavaleiroIndexView.prototype.editarCavaleiroNoServidor = function (e) {
 var cavaleiroHardCoded = {
     Nome: 'Xiru ' + new Date().getTime(),
     AlturaCm: 187,
+    PesoLb: 220.462262,
     Signo: 7,
     TipoSanguineo: 1,
     // Estamos enviando a data UTC (sem timezone) para que seja corretamente armazenada e posteriormente exibida de acordo com o fuso-horário da aplicação cliente que consumir os dados
