@@ -25,3 +25,7 @@ li {
     width: 100px;
     height: 100px;
 }
+
+.btn-desabilitado {
+    cursor: auto;
+}

@@ -3,6 +3,7 @@ using CdZ.MVC.Extensions;
 using CdZ.MVC.Filters;
 using CdZ.MVC.Models.Cavaleiro;
 using CdZ.MVC.Services;
+using System;
 using System.Net;
 using System.Web.Mvc;
 
@@ -22,13 +23,13 @@ namespace CdZ.MVC.Controllers
         [HttpGet]
         public JsonResult Get(int? tamanhoPagina, int? pagina)
         {
-            /* Para simular erro, descomente
-                var status = (int)HttpStatusCode.InternalServerError;
-                throw new HttpException(status, "Ops");
-            */
-            //System.Threading.Thread.Sleep(3000);
-            var paginados = _cavaleiros.Todos(tamanhoPagina ?? 5, pagina ?? 1);
-            return Json(new { data = paginados.FromModel() }, JsonRequestBehavior.AllowGet);
+            tamanhoPagina = tamanhoPagina ?? 5;
+            var paginados = _cavaleiros.Todos(tamanhoPagina.Value, pagina ?? 1);
+            return Json(new
+            {
+                data = paginados.FromModel(),
+                totalPaginas = Math.Ceiling(_cavaleiros.TotalCavaleiros() / (double)tamanhoPagina)
+            }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

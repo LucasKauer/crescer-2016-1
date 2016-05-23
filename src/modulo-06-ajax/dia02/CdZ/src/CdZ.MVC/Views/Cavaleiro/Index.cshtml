@@ -70,6 +70,8 @@
 <button id="btnCriar">Criar fake!</button>
 <div id="detalhes-cavaleiro"></div>
 <ul id="cavaleiros"></ul>
+<button id="btnPaginaAnterior"><< Anterior</button>
+<button id="btnPaginaProx">Próxima >></button>
 
 @section scripts {
     <script src="~/Scripts/Models/Cavaleiros.js"></script>
@@ -84,6 +86,8 @@
                 element: $('#toastSucesso')
             }),
             cavaleirosUi: $('#cavaleiros'),
+            botaoPaginaAnterior: $('#btnPaginaAnterior'),
+            botaoProximaPagina: $('#btnPaginaProx'),
             urlCavaleiroGet: '@Url.Action("Get")',
             urlCavaleiroGetById: '@Url.Action("GetById")',
             urlCavaleiroPost: '@Url.Action("Post")',

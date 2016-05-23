@@ -30,6 +30,12 @@ namespace CdZ.Repositorio.EF
                 return CavaleiroComSeusRelacionamentos(db).SingleOrDefault(_ => _.Id == id);
         }
 
+        public int TotalCavaleiros()
+        {
+            using (var db = new ContextoDeDados())
+                return db.Cavaleiro.Count();
+        }
+
         public IEnumerable<Cavaleiro> Todos(int tamanhoPagina, int pagina)
         {
             /*

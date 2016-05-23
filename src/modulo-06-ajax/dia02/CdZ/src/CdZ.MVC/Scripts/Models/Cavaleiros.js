@@ -9,8 +9,13 @@ function Cavaleiros(options) {
     this.urlPut = options.urlPut || '/Cavaleiro/Put';
 };
 
-Cavaleiros.prototype.todos = function (semSpinner) {
-    return $.get({ url: this.urlGet, withoutSpinner: semSpinner });
+Cavaleiros.prototype.todos = function (options) {
+    options = options || {};
+    return $.get({
+        url: this.urlGet,
+        data: { pagina: options.pagina },
+        withoutSpinner: options.semSpinner
+    });
 };
 
 Cavaleiros.prototype.buscar = function (idCavaleiro) {
