@@ -145,6 +145,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="CustomModelBinders\DoubleModelBinder.cs" />
     <Compile Include="Models\Cavaleiro\CavaleiroViewModel.cs" />
     <Compile Include="Models\Cavaleiro\GolpeViewModel.cs" />
     <Compile Include="Models\Cavaleiro\LocalViewModel.cs" />
