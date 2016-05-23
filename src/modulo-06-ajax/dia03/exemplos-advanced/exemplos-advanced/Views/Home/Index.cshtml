@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<button id="btnDetalhesSeiya">Obter detalhes da Partial View</button>
+<div id="conteudoDetalheCavaleiro"></div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('#btnDetalhesSeiya').click(function () {
+                $.get('@Url.Action("Detalhe", new { @id = 1 })')
+                    .done(function (res) {
+                        $('#conteudoDetalheCavaleiro').html(res);
+                    });
+            });
+
+        });
+    </script>
+}
