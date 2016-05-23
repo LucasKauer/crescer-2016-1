@@ -1,0 +1,24 @@
+﻿@model exemplos_advanced.Models.Cavaleiro
+
+<div>
+    <h4>Cavaleiro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+    </dl>
+    <h4>Golpes:</h4>
+    <p>
+        <ul>
+            @foreach (var golpe in Model.Golpes)
+            {
+                <li>@golpe</li>
+            }
+        </ul>
+    </p>
+</div>
