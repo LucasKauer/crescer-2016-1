@@ -2,10 +2,29 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    #comparacao div {
+        display: inline-block;
+        width: 50%;
+    }
+    #detalhesSerial {
+        float: left;
+    }
+</style>
 <h2>Index</h2>
 <button id="btnDetalhesSeiya">Obter detalhes da Partial View</button>
 <div id="conteudoDetalheCavaleiro"></div>
+<hr />
+<button id="btnWhenAll">Comparação entre requests seriais e paralelas</button>
+<div id="comparacao">
+    <div id="detalhesSerial">
+        <h3>Serial</h3>
+    </div>
+    <div id="detalhesParalelo">
+        <h3>Paralelo</h3>
+    </div>
+</div>
+
 
 @section scripts {
     <script>
@@ -15,6 +34,29 @@
                     .done(function (res) {
                         $('#conteudoDetalheCavaleiro').html(res);
                     });
+            });
+
+            $('#btnWhenAll').click(function () {
+
+                var $detalhesSerial = $('#detalhesSerial');
+                $.get('@Url.Action("DetalheComLentidao", new { @id = 1 })')
+                    .done(function (res) {
+                        $detalhesSerial.append(res);
+                        $.get('@Url.Action("DetalheComLentidao", new { @id = 2 })')
+                            .done(function (res2) {
+                                $detalhesSerial.append(res2);
+                            });
+                    });
+
+                var $detalhesParalelo = $('#detalhesParalelo');
+                var request1 = $.get('@Url.Action("DetalheComLentidao", new { @id = 1 })');
+                var request2 = $.get('@Url.Action("DetalheComLentidao", new { @id = 2 })');
+                // https://api.jquery.com/jquery.when/
+                $.when(request1, request2).done(function (v1, v2) {
+                    $detalhesParalelo.append(v1);
+                    $detalhesParalelo.append(v2);
+                });
+
             });
 
         });
