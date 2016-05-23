@@ -18,6 +18,7 @@ function CavaleiroIndexView(options) {
     this.botaoPaginaAnterior = options.botaoPaginaAnterior;
     this.botaoProximaPagina = options.botaoProximaPagina;
     this.paginaAtual = 1;
+    this.tamanhoPagina = 5;
 };
 
 CavaleiroIndexView.prototype.render = function () {
@@ -31,68 +32,39 @@ CavaleiroIndexView.prototype.render = function () {
                 res.data.forEach(function (cava) {
                     self.renderizarCavaleiroNaTela(cava);
                 });
+                // 2 - Verifica se os botões de paginação devem ser atualizados.
+                // call - https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+                // Aqui o call é utilizado com o efeito parecido do bind(this), porém em tempo de execução (o bind funciona em tempo de definição da função).
+                // Também seria possível utilizar .apply(this)
+                // Surtou? Pegue um café e dê uma lidinha sobre as diferenças entre call e apply
+                // Ânimo, se você chegou até esse comentário é pq vc já foi muito mais longe que a maioria dos devs JS.
+                // Viu como JS é muito mais que alert? :-D
+                CavaleiroIndexView.atualizarBotoesPaginacao.call(self);
             },
             function onError(res) {
                 self.errorToast.show(res.status + ' - ' + res.statusText);
             }
         );
 
-    // 2 - Disparar "timer" que consultará servidor a cada X tempo.
+    // 3 - Disparar "timer" que consultará servidor a cada X tempo.
     // Se quisermos evitar fazer o bind(this) em todas chamadas internas, podemos tirar a selfie, lembram?
     setInterval(function () {
         this.cavaleiros.todos({ semSpinner: true })
             .done(function (res) {
-                var novosCavaleiros = [];
-                res.data.forEach(function (cava) {
-                    // $.inArray https://api.jquery.com/jQuery.inArray/
-                    if ($.inArray(cava.Id, this.idsCavaleirosJaRenderizados) === -1) {
-                        novosCavaleiros.push(cava);
-                    }
-                }.bind(this));
-                // Caso haja novos cavaleiros:
-                // 1 - Tira o indicativo de "Novo" no últimos adicionados (caso existam)
-                // 2 - Renderiza cada novo cavaleiro na tela
-                // 3 - Envia notificação com o total de novos cavaleiros que foram adicionados.
-                if (novosCavaleiros.length > 0) {
-                    if (res.data.length > 0) {
-                        $('[data-adicionado-por-ultimo]').remove();
-                    }
-                    novosCavaleiros.forEach(function (cava) {
-                        this.renderizarCavaleiroNaTela(cava, /* é novo? */ true);
-                    }.bind(this));
-                    this.notification.send(
-                        novosCavaleiros.length === 1 ? '1 novo cavaleiro foi adicionado!' :
-                        novosCavaleiros.length + ' novos cavaleiros foram adicionados!'
-                    );
-                }
+                this.atualizarPaginaAtual({ limparListaAtual: false, enviarNotificacoes: true, exibirBadgeNovo: true });
             }.bind(this));
     }.bind(this), this.intervaloPolling);
 
-    // 3 - Registrando cliques na paginação.
+    // 4 - Registrando cliques na paginação.
     // aqui usamos o seletor "and" para registrar o mesmo click aos dois botões
     // desta forma geramos o seguinte seletor exemplo, que atende aos dois botões:
     // $('#btnUm, #btnDois')
     $(this.botaoPaginaAnterior.selector + ',' + this.botaoProximaPagina.selector).click(function (e) {
         var sentidoPaginacao = this.botaoProximaPagina.is(e.target) ? 1 : -1;
         this.paginaAtual += sentidoPaginacao;
-        this.cavaleiros.todos({ pagina: this.paginaAtual })
-            .done(function (res) {
-                this.cavaleirosUi.empty();
-                res.data.forEach(function (cava) {
-                    self.renderizarCavaleiroNaTela(cava);
-                });
-                CavaleiroIndexView.atualizarBotoesPaginacao.call(this);
-            }.bind(this));
+        this.idsCavaleirosJaRenderizados = [];
+        this.atualizarPaginaAtual();
     }.bind(this));
-
-    // 4 - Verifica se os botões de paginação devem ser atualizados.
-    // call - https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Function/call
-    // Aqui o call é utilizado com o efeito parecido do bind(this), porém em tempo de execução (o bind funciona em tempo de definição da função).
-    // Também seria possível utilizar .apply(this)
-    // Surtou? Pegue um café e dê uma lidinha sobre as diferenças entre call e apply
-    // Ânimo, se você chegou até esse comentário é pq vc já foi muito mais longe que a maioria dos devs JS.
-    // Viu como JS é muito mais que alert? :-D
-    CavaleiroIndexView.atualizarBotoesPaginacao.call(this);
 
     // 5 - Registra evento de clique para inserção do cavaleiro fake
     // TODO - remover quando colocar o bind dos campos do formulário
@@ -104,7 +76,8 @@ CavaleiroIndexView.prototype.render = function () {
             self.cavaleiros.buscar(res.id)
                 .done(function (detalhe) {
                     cavaleiroHardCoded = detalhe.data;
-                });
+                    self.atualizarPaginaAtual({ limparListaAtual: false });
+                }.bind(self));
         });
     });
 };
@@ -113,15 +86,17 @@ CavaleiroIndexView.prototype.render = function () {
 // Note que esta function não é "anexada" ao prototype do tipo CavaleiroIndexView, logo não vale para todos objetos criados com o construtor CavaleiroIndexView.
 // Tendo então o efeito de um "método estático", vide a forma como ela é chamada no trecho acima.
 CavaleiroIndexView.atualizarBotoesPaginacao = function () {
+
+    var classBtnDesabilitado = 'btn-desabilitado';
+    [this.botaoPaginaAnterior, this.botaoProximaPagina].forEach(function (btn) {
+        // removeAttr - https://api.jquery.com/removeAttr/
+        btn.removeAttr('disabled').removeClass(classBtnDesabilitado);
+    });
+
     if (this.paginaAtual === 1) {
-        this.botaoPaginaAnterior.attr('disabled', 'disabled').addClass('btn-desabilitado');
-    } else if (this.paginaAtual === this.totalPaginas) {
-        this.botaoProximaPagina.attr('disabled', 'disabled').addClass('btn-desabilitado');
-    } else {
-        [this.botaoPaginaAnterior, this.botaoProximaPagina].forEach(function (btn) {
-            // removeAttr - https://api.jquery.com/removeAttr/
-            btn.removeAttr('disabled');
-        });
+        this.botaoPaginaAnterior.attr('disabled', 'disabled').addClass(classBtnDesabilitado);
+    } if (this.paginaAtual === this.totalPaginas) {
+        this.botaoProximaPagina.attr('disabled', 'disabled').addClass(classBtnDesabilitado);
     }
 };
 
@@ -154,7 +129,11 @@ CavaleiroIndexView.prototype.criarHtmlCavaleiro = function (cava, novo) {
                 // estamos enviando o valor de this pois o contexto é perdido (eventos são assíncronos)
                 .on('click', { id: cava.Id, self: this }, this.excluirCavaleiroNoServidor)
                 .text('Excluir')
-        );
+        )
+        // lembram do .attr('data-cavaleiro-id', cava.Id') ? https://api.jquery.com/data/
+        // .data('sortByValue', cava.Nome') gerará => <li data-sort-by-value="Seiya">
+        // Aqui no futuro poderíamos fazer uma ordenação dinâmica, de acordo com a coluna que o usuário clicar na tela, etc.
+        .data('sortByValue', cava.Nome);
 
     if (novo) {
         $li.append(
@@ -177,6 +156,7 @@ CavaleiroIndexView.prototype.excluirCavaleiroNoServidor = function (e) {
         .done(function (res) {
             // remover da UI: parent() retorna a respectiva <li> do cavaleiro.
             $button.parent().remove();
+            self.atualizarPaginaAtual({ limparListaAtual: false });
             self.successToast.show('Excluído com sucesso!');
         });
 };
@@ -191,9 +171,57 @@ CavaleiroIndexView.prototype.editarCavaleiroNoServidor = function (e) {
             simularAtualizacaoHardCoded();
             self.cavaleiros.editar(cavaleiroHardCoded)
                 .done(function (res) {
+                    self.atualizarPaginaAtual({ limparListaAtual: false });
                     self.successToast.show('Cavaleiro atualizado com sucesso!');
                 });
         });
+};
+
+CavaleiroIndexView.prototype.atualizarPaginaAtual = function (options) {
+
+    options = options || { limparListaAtual: true, enviarNotificacoes: false, exibirBadgeNovo: false };
+
+    this.cavaleiros.todos({ pagina: this.paginaAtual })
+        .done(function (res) {
+            this.totalPaginas = res.totalPaginas;
+            var novosCavaleiros = [];
+            res.data.forEach(function (cava) {
+                // $.inArray https://api.jquery.com/jQuery.inArray/
+                if ($.inArray(cava.Id, this.idsCavaleirosJaRenderizados) === -1) {
+                    novosCavaleiros.push(cava);
+                }
+            }.bind(this));
+            // Caso haja novos cavaleiros:
+            // 1 - Tira o indicativo de "Novo" no últimos adicionados (caso existam)
+            // 2 - Renderiza cada novo cavaleiro na tela
+            // 3 - Envia notificação com o total de novos cavaleiros que foram adicionados.
+            if (novosCavaleiros.length > 0) {
+                if (res.data.length > 0) {
+                    $('[data-adicionado-por-ultimo]').remove();
+                }
+                if (options.limparListaAtual) {
+                    this.cavaleirosUi.empty();
+                }
+                novosCavaleiros.forEach(function (cava) {
+                    if (this.cavaleirosUi.size() < this.tamanhoPagina) {
+                        this.renderizarCavaleiroNaTela(cava, /* é novo? */ options.exibirBadgeNovo);
+                    }
+                }.bind(this));
+                if (options.enviarNotificacoes) {
+                    this.notification.send(
+                        novosCavaleiros.length === 1 ? '1 novo cavaleiro foi adicionado!' :
+                        novosCavaleiros.length + ' novos cavaleiros foram adicionados!'
+                    );
+                }
+            }
+
+            // ordenando apenas na UI.
+            this.cavaleirosUi.find('li').sort(function (a, b) {
+                return ($(b).data('sortByValue')) < ($(a).data('sortByValue')) ? 1 : -1;
+            }).appendTo(this.cavaleirosUi);
+
+            CavaleiroIndexView.atualizarBotoesPaginacao.call(this);
+        }.bind(this));
 };
 
 // TODO: remover cavaleiro hard-coded quando fizer bind do formulário.
