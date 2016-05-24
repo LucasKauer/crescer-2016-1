@@ -1,0 +1,7 @@
+﻿@model IList<AulaReforcoAuth.Models.ProdutoModel>
+<ul>
+    @foreach (var produto in Model)
+    {
+        <li>@produto.Id - @produto.Nome</li>
+    }
+</ul>

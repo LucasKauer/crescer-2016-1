@@ -11,17 +11,28 @@ namespace Loja.Repositorio
     {
         public Pedido BuscarPedidoPorId(int id)
         {
-            throw new NotImplementedException();
+            using (var db = new ContextoDeDados())
+            {
+                return db.Pedido.FirstOrDefault(p => p.Id == id);
+            }
         }
 
         public IList<Pedido> BuscarPedidosDoCliente(int idCliente)
         {
-            throw new NotImplementedException();
+            using (var db = new ContextoDeDados())
+            {
+                return db.Pedido.Where(p => p.Cliente.Id == idCliente)
+                                .ToList();
+            }
         }
 
         public IList<Pedido> BuscarPedidosDoCliente(int idCliente, StatusPedido statusPedido)
         {
-            throw new NotImplementedException();
+            using (var db = new ContextoDeDados())
+            {
+                return db.Pedido.Where(p => p.Cliente.Id == idCliente && p.StatusPedido == statusPedido)
+                                .ToList();
+            }
         }
 
         public void SalvarPedido(Pedido pedido)
